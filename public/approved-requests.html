@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TAAMARA CO-LIVE - Approved Requests Audit Log</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            gold: {
+              50: '#fdfbf7',
+              100: '#fbf2da',
+              200: '#f5e5ba',
+              300: '#edd18e',
+              400: '#e1cb8f',
+              500: '#d4a838',
+              600: '#c59b27',
+              700: '#a6801e',
+              800: '#876717',
+              900: '#6d5212',
+            },
+            brand: {
+              gold: '#c59b27',
+              goldLight: '#fef8ea',
+              goldDark: '#a6801e',
+              border: '#ede4d5',
+            },
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.15); }
+    }
+    .live-dot {
+      animation: pulse-slow 2s infinite ease-in-out;
+    }
+    .font-serif-luxury { font-family: 'Playfair Display', Georgia, serif; }
+  </style>
+</head>
+<body class="bg-[#faf6f0] text-[#1c1917] antialiased min-h-screen flex flex-col font-sans select-none overflow-x-hidden">
+
+  <!-- Mobile Frame Container (430px wide standard, centered on desktop) -->
+  <div class="w-full max-w-5xl mx-auto space-y-6 pb-12">
+
+    <!-- Toast Notification Banner -->
+    <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-2.5 rounded-2xl bg-slate-900 text-white text-xs font-semibold shadow-xl items-center gap-2 transition duration-300">
+      <span id="toast-text">Operation completed</span>
+    </div>
+
+    <!-- 1. Top Header & Navigation -->
+    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-[#ede5d8] px-4 pt-4 pb-3">
+      <div class="flex items-center justify-between">
+        
+        <!-- Back Button -->
+        <a 
+          href="/requests.html" 
+          id="btn-back"
+          class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 transition cursor-pointer"
+          title="Back to Requests Console"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </a>
+
+        <!-- Center Branding & Title -->
+        <div class="text-center">
+          <div class="text-[10px] font-extrabold text-[#c59b27] tracking-wider uppercase">
+            TAAMARA CO-LIVE
+          </div>
+          <h1 class="text-sm font-extrabold text-slate-900 leading-tight font-serif-luxury">
+            Requests Hub
+          </h1>
+        </div>
+
+        <!-- Notification Bell Icon -->
+        <button 
+          id="btn-bell"
+          type="button" 
+          class="w-9 h-9 rounded-full bg-[#fdfbf7] hover:bg-[#fbf2da] text-[#c59b27] flex items-center justify-center transition cursor-pointer relative"
+          title="Audit Notifications"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+          <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-emerald-500 rounded-full ring-2 ring-white"></span>
+        </button>
+      </div>
+
+      <!-- Breadcrumbs Path -->
+      <div class="flex items-center gap-1.5 mt-2.5 text-[11px] text-slate-500">
+        <!-- Shield / Check Icon -->
+        <svg class="w-3.5 h-3.5 text-[#c59b27] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <polyline points="9 12 11 14 15 10"/>
+        </svg>
+        <span class="font-bold text-slate-600 uppercase text-[10px] tracking-wider">REQUESTS & APPROVALS</span>
+        <span class="text-slate-400">›</span>
+        <span class="font-black text-slate-900 uppercase text-[10px] tracking-wider">APPROVED ARCHIVE</span>
+      </div>
+    </header>
+
+    <!-- Main Scrollable Area -->
+    <main class="p-4 space-y-4">
+
+      <!-- 2. Subscreen Header & Badge Counter -->
+      <section class="flex items-center justify-between">
+        <div>
+          <h2 class="text-xl font-black text-slate-900 tracking-tight font-serif-luxury">Approved Requests</h2>
+          <p class="text-[11px] text-slate-500 font-medium">Permanent audit log & security gate records</p>
+        </div>
+
+        <span id="badge-total-approved" class="w-8 h-8 rounded-full bg-[#fbf2da] text-[#a6801e] font-extrabold text-xs flex items-center justify-center border border-[#e3d5be]">
+          28
+        </span>
+      </section>
+
+      <!-- 3. Month & Summary Info Banner with Export Button -->
+      <section class="bg-[#fdfbf7] rounded-2xl p-3.5 border border-[#ede4d5]/80 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-[#fbf2da] text-[#c59b27] flex items-center justify-center shrink-0">
+            <!-- Calendar Icon -->
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-xs font-black text-slate-900 leading-tight">October 2024</h3>
+            <p class="text-[11px] text-slate-600 mt-0.5">
+              <span>28 Approved</span> • <span class="font-extrabold text-emerald-600">0 Violations Logged</span>
+            </p>
+          </div>
+        </div>
+
+        <button 
+          type="button" 
+          id="btn-export-log"
+          class="bg-white hover:bg-slate-50 border border-[#e3d5be] text-[#a6801e] text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-2xs transition cursor-pointer"
+        >
+          <svg class="w-3.5 h-3.5 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          <span>Export</span>
+        </button>
+      </section>
+
+      <!-- 4. Search Bar with Barcode Scanner Icon -->
+      <section>
+        <div class="relative flex items-center bg-white rounded-2xl border border-[#ede5d8]/90 shadow-2xs px-3.5 py-2.5 focus-within:border-[#c59b27] focus-within:ring-2 focus-within:ring-[#f5e5ba] transition">
+          <svg class="w-4 h-4 text-slate-400 shrink-0 mr-2.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input 
+            type="text" 
+            id="archive-search" 
+            placeholder="Search resident, room, or pass ID..." 
+            class="w-full text-xs text-slate-800 placeholder-slate-400 bg-transparent outline-none pr-8 font-medium"
+          >
+          <button type="button" id="btn-scan-qr" class="text-slate-400 hover:text-[#c59b27] cursor-pointer" title="Scan Pass QR/Barcode">
+            <!-- Scan / Barcode Icon -->
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- 5. Horizontal Filter Pills -->
+      <section>
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
+          <button 
+            type="button" 
+            data-filter="all"
+            class="archive-filter-pill active shrink-0 px-3.5 py-1.5 rounded-full bg-[#180d19] text-white text-xs font-bold shadow-xs transition cursor-pointer"
+          >
+            All Approved (28)
+          </button>
+          <button 
+            type="button" 
+            data-filter="night"
+            class="archive-filter-pill shrink-0 px-3.5 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 text-xs font-bold transition cursor-pointer"
+          >
+            Night Passes (18)
+          </button>
+          <button 
+            type="button" 
+            data-filter="room"
+            class="archive-filter-pill shrink-0 px-3.5 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 text-xs font-bold transition cursor-pointer"
+          >
+            Room Changes (6)
+          </button>
+          <button 
+            type="button" 
+            data-filter="leave"
+            class="archive-filter-pill shrink-0 px-3.5 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 text-xs font-bold transition cursor-pointer"
+          >
+            Home Leaves (4)
+          </button>
+        </div>
+      </section>
+
+      <!-- 6. Approved Request Cards Stream -->
+      <div id="approved-cards-container" class="space-y-3.5">
+
+        <!-- CARD 1: Rohan Varma (Active Today) -->
+        <article class="approved-card bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-sm space-y-3" data-category="night" data-name="rohan varma" data-room="201-a">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-2.5">
+              <div class="w-10 h-10 rounded-full bg-[#fbf2da] text-[#a6801e] font-extrabold text-xs flex items-center justify-center shrink-0">
+                RV
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-slate-900 leading-tight">Rohan Varma</h3>
+                  <svg class="w-3.5 h-3.5 text-[#c59b27] shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <p class="text-xs text-slate-500 font-semibold mt-0.5">Room 201-A • Bed 02</p>
+              </div>
+            </div>
+
+            <span class="px-2.5 py-0.5 rounded-full bg-[#fbf2da] text-[#a6801e] text-[10px] font-bold">
+              • Active Today
+            </span>
+          </div>
+
+          <!-- Pass Details Box -->
+          <div class="bg-[#fdfbf7]/60 rounded-2xl p-3 border border-[#ede4d5]/70 space-y-2 text-xs">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1.5 font-extrabold text-slate-900">
+                <svg class="w-3.5 h-3.5 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+                <span>Night Out Pass</span>
+              </div>
+              <span class="font-extrabold text-slate-800 text-[11px]">Curfew: 11:30 PM</span>
+            </div>
+
+            <p class="text-[11px] text-slate-600 leading-relaxed font-medium">
+              Late Robotics Lab Project for national college robotics competition.
+            </p>
+
+            <div class="pt-1 space-y-1 text-[11px]">
+              <div class="flex items-center gap-1.5 text-emerald-700 font-bold">
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                <span>Approved by Warden Sunil (16:45)</span>
+              </div>
+              <div class="flex items-center gap-1.5 text-slate-500 font-medium">
+                <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+                <span>Parent SMS Dispatched</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="grid grid-cols-3 gap-2 pt-0.5">
+            <button 
+              type="button" 
+              class="btn-view-pass col-span-2 bg-[#180d19] hover:bg-[#281424] hover:bg-[#c59b27] text-white font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 transition cursor-pointer shadow-xs"
+              data-name="Rohan Varma"
+              data-pass="NO-2024-8819"
+              data-curfew="11:30 PM"
+              data-room="201-A"
+            >
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="16" rx="2"/>
+                <line x1="7" y1="8" x2="17" y2="8"/>
+                <line x1="7" y1="12" x2="13" y2="12"/>
+              </svg>
+              <span>View Digital Pass</span>
+            </button>
+
+            <button 
+              type="button" 
+              class="btn-revoke-pass bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1 border border-rose-200/70 transition cursor-pointer"
+              data-name="Rohan Varma"
+            >
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="15" y1="9" x2="9" y2="15"/>
+                <line x1="9" y1="9" x2="15" y2="15"/>
+              </svg>
+              <span>Revoke</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- CARD 2: Kabir Singh (Completed) -->
+        <article class="approved-card bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-sm space-y-3" data-category="night" data-name="kabir singh" data-room="202-a">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-2.5">
+              <div class="w-10 h-10 rounded-full bg-slate-100 text-slate-700 font-extrabold text-xs flex items-center justify-center shrink-0">
+                KS
+              </div>
+              <div>
+                <h3 class="text-sm font-extrabold text-slate-900 leading-tight">Kabir Singh</h3>
+                <p class="text-xs text-slate-500 font-semibold mt-0.5">Room 202-A • Bed 01</p>
+              </div>
+            </div>
+
+            <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold">
+              • Completed
+            </span>
+          </div>
+
+          <!-- Real-Time Sync Strip (Dark) -->
+          <div class="bg-[#180d19] rounded-xl px-3 py-2 flex items-center justify-between text-white text-[11px]">
+            <div class="flex items-center gap-2 font-medium">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 live-dot"></span>
+              <span>Turnstile gate biometrics synced in real-time</span>
+            </div>
+            <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="23 4 23 10 17 10"/>
+              <polyline points="1 20 1 14 7 14"/>
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+            </svg>
+          </div>
+
+          <!-- Visitor Details Box -->
+          <div class="bg-slate-50 rounded-2xl p-3 border border-[#ede5d8] space-y-2 text-xs">
+            <p class="text-[11px] text-slate-700 font-medium">
+              Parents visiting: <strong>Mr. Mukesh Singh</strong>. Window: 14:00 - 18:00.
+            </p>
+            <div class="flex items-center justify-between pt-1">
+              <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-md">
+                Gate Departure Logged: 17:52
+              </span>
+              <span class="text-[10px] text-slate-400 font-semibold">Archived</span>
+            </div>
+          </div>
+
+          <!-- Bottom Status Line -->
+          <div class="flex items-center justify-between text-xs pt-1 border-t border-[#f3ece2]">
+            <span class="text-[11px] text-slate-500 font-medium">Turnstile ID checked • Biometric cleared</span>
+            <button type="button" class="btn-audit-details text-xs font-bold text-[#c59b27] hover:text-[#a6801e] flex items-center gap-1 cursor-pointer" data-student="Kabir Singh">
+              <span>Audit Details</span>
+              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </article>
+
+        <!-- CARD 3: Priya Nair (Key Handover Pending) -->
+        <article class="approved-card bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-sm space-y-3" data-category="room" data-name="priya nair" data-room="102-d">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-2.5">
+              <div class="w-10 h-10 rounded-full bg-[#fbf2da] text-[#a6801e] font-extrabold text-xs flex items-center justify-center shrink-0">
+                PN
+              </div>
+              <div>
+                <h3 class="text-sm font-extrabold text-slate-900 leading-tight">Priya Nair</h3>
+                <p class="text-xs font-bold text-slate-600 mt-0.5">Transfer: 102-D → 204-A</p>
+              </div>
+            </div>
+
+            <span class="px-2.5 py-0.5 rounded-full bg-[#fbf2da] text-[#876717] text-[10px] font-bold flex items-center gap-1">
+              <span class="w-1.5 h-1.5 bg-[#c59b27] rounded-xs"></span>
+              <span>Key Handover Pending</span>
+            </span>
+          </div>
+
+          <!-- Relocation Box -->
+          <div class="bg-[#fdfbf7]/60 rounded-2xl p-3 border border-[#ede4d5]/70 space-y-2 text-xs">
+            <div class="flex items-center justify-between font-extrabold text-slate-900">
+              <div class="flex items-center gap-1.5 text-[#a6801e]">
+                <!-- Swap Arrows -->
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h16"/>
+                </svg>
+                <span>Internal Room Relocation</span>
+              </div>
+              <span class="text-[#c59b27] text-[11px]">Oct 26</span>
+            </div>
+
+            <p class="text-[11px] text-slate-600 leading-relaxed font-medium">
+              Approved medical mutual room change due to ground-floor quiet hours clearance.
+            </p>
+
+            <div class="flex items-center gap-1.5 text-[#a6801e] font-bold text-[11px] pt-1">
+              <svg class="w-3.5 h-3.5 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+              </svg>
+              <span>Inventory verification completed • Cleaning ready</span>
+            </div>
+          </div>
+
+          <!-- Action Button: Confirm Key Handover -->
+          <button 
+            type="button" 
+            id="btn-confirm-handover"
+            class="w-full bg-[#180d19] hover:bg-slate-800 text-white font-extrabold text-xs py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition cursor-pointer shadow-md"
+          >
+            <!-- Key / Swap Icon -->
+            <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="7.5" cy="15.5" r="5.5"/>
+              <path d="m21 2-9.6 9.6"/>
+              <path d="m15.5 7.5 3 3L22 7l-3-3"/>
+            </svg>
+            <span id="btn-handover-text">Confirm Key Handover</span>
+          </button>
+        </article>
+
+        <!-- CARD 4: Aryan Sharma (Upcoming) -->
+        <article class="approved-card bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-sm space-y-3" data-category="leave" data-name="aryan sharma" data-room="203-b">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-2.5">
+              <div class="w-10 h-10 rounded-full bg-slate-100 text-slate-700 font-extrabold text-xs flex items-center justify-center shrink-0">
+                AS
+              </div>
+              <div>
+                <h3 class="text-sm font-extrabold text-slate-900 leading-tight">Aryan Sharma</h3>
+                <p class="text-xs text-slate-500 font-semibold mt-0.5">Room 203-B • Bed 01</p>
+              </div>
+            </div>
+
+            <span class="px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold">
+              • Upcoming
+            </span>
+          </div>
+
+          <!-- Leave Details Box -->
+          <div class="bg-[#fdfbf7]/60 rounded-2xl p-3 border border-[#ede4d5]/70 space-y-2 text-xs">
+            <div class="flex items-center justify-between font-extrabold text-slate-900">
+              <div class="flex items-center gap-1.5 text-[#a6801e]">
+                <!-- Home / Luggage Icon -->
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                  <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+                <span>Weekend Home Leave</span>
+              </div>
+              <span class="text-slate-700 text-[11px] font-bold">Oct 25 - Oct 27</span>
+            </div>
+
+            <p class="text-[11px] text-slate-600 leading-relaxed font-medium">
+              Traveling to parent residence (Indore). Registered emergency guardian contact verified.
+            </p>
+
+            <div class="flex items-center gap-1.5 text-emerald-700 font-bold text-[11px] pt-1">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              <span>Permanent Address & Parent Consent Verified</span>
+            </div>
+          </div>
+
+          <!-- Bottom Status Line -->
+          <div class="flex items-center justify-between text-xs pt-1 border-t border-[#f3ece2]">
+            <span class="text-[11px] text-slate-500 font-medium">Gate Turnstile Sync Scheduled</span>
+            <button type="button" class="btn-travel-form text-xs font-bold text-[#c59b27] hover:text-[#a6801e] flex items-center gap-1 cursor-pointer" data-student="Aryan Sharma">
+              <span>View Travel Form</span>
+              <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </article>
+
+      </div>
+
+    </main>
+
+    <!-- 7. Sticky Bottom Navigation Bar -->
+    <nav class="hidden" style="display: none !important;">
+      
+      <!-- Tab 1: Dashboard -->
+      <a href="/dashboard.html" class="nav-tab flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+          <rect width="7" height="7" x="3" y="3" rx="1.5"/>
+          <rect width="7" height="7" x="14" y="3" rx="1.5"/>
+          <rect width="7" height="7" x="14" y="14" rx="1.5"/>
+          <rect width="7" height="7" x="3" y="14" rx="1.5"/>
+        </svg>
+        <span class="text-[10px] font-medium">Dashboard</span>
+      </a>
+
+      <!-- Tab 2: Rooms -->
+      <a href="/block-a.html" class="nav-tab flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        <span class="text-[10px] font-medium">Rooms</span>
+      </a>
+
+      <!-- Tab 3: Requests (Active with Red Dot) -->
+      <a href="/requests.html" class="nav-tab flex flex-col items-center gap-1 py-1 text-[#c59b27] transition cursor-pointer relative">
+        <div class="relative">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/>
+            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+            <path d="M12 11h4M12 16h4M8 11h.01M8 16h.01"/>
+          </svg>
+          <span class="w-2 h-2 rounded-full bg-rose-500 absolute -top-0.5 -right-1"></span>
+        </div>
+        <span class="text-[10px] font-bold">Requests</span>
+      </a>
+
+      <!-- Tab 4: Tenants -->
+      <a href="/tenants.html" class="nav-tab flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <span class="text-[10px] font-medium">Tenants</span>
+      </a>
+
+    </nav>
+
+    <!-- ==================== MODALS ==================== -->
+
+    <!-- Modal 1: Digital Gate Pass Modal -->
+    <div id="modal-digital-pass" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+      <div class="bg-white w-full max-w-[380px] rounded-3xl p-5 shadow-2xl border border-[#ede5d8] text-center space-y-4">
+        <div class="flex items-center justify-between border-b border-[#f3ece2] pb-2.5">
+          <span class="text-[10px] font-extrabold text-[#c59b27] uppercase tracking-wider">TAAMARA SECURITY PASS</span>
+          <button type="button" id="btn-close-pass" class="text-slate-400 hover:text-slate-600 text-lg font-bold">✕</button>
+        </div>
+
+        <div class="bg-[#fdfbf7] rounded-2xl p-4 border border-[#ede4d5]/80 space-y-2">
+          <div class="w-28 h-28 bg-white mx-auto p-2 rounded-xl border border-[#ede5d8] flex items-center justify-center shadow-xs">
+            <!-- Simulated QR Code SVG -->
+            <svg class="w-full h-full text-slate-900" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3 3h6v6H3V3zm2 2v2h2V5H5zm8-2h6v6h-6V3zm2 2v2h2V5h-2zM3 13h6v6H3v-6zm2 2v2h2v-2H5zm13-2h3v2h-3v-2zm-5 0h2v3h-2v-3zm3 3h3v3h-3v-3zm-3 2h2v1h-2v-1zm5 1h1v1h-1v-1zm-2 1h2v1h-2v-1z"/>
+            </svg>
+          </div>
+          <div class="font-black text-sm text-slate-900 mt-2" id="pass-student-name">Rohan Varma</div>
+          <div class="text-[11px] text-slate-500 font-semibold" id="pass-id-text">Pass #NO-2024-8819 • Room 201-A</div>
+          <div class="inline-block px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-black">
+            Curfew: 11:30 PM Tonight
+          </div>
+        </div>
+
+        <button type="button" id="btn-dismiss-pass" class="w-full bg-[#180d19] hover:bg-slate-800 text-white font-bold text-xs py-3 rounded-xl transition cursor-pointer">
+          Done / Close Pass
+        </button>
+      </div>
+    </div>
+
+    <!-- Modal 2: Audit Details Modal -->
+    <div id="modal-audit" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+      <div class="bg-white w-full max-w-[380px] rounded-3xl p-5 shadow-2xl border border-[#ede5d8] space-y-3.5">
+        <div class="flex items-center justify-between border-b border-[#f3ece2] pb-2.5">
+          <h3 class="text-sm font-extrabold text-slate-900">Security Gate Log: Kabir Singh</h3>
+          <button type="button" id="btn-close-audit" class="text-slate-400 hover:text-slate-600 text-lg font-bold">✕</button>
+        </div>
+
+        <div class="text-xs space-y-2 text-slate-700">
+          <div class="flex justify-between py-1 border-b border-[#f3ece2]">
+            <span>Pass Type</span><span class="font-bold">Visitor Entry (Parents)</span>
+          </div>
+          <div class="flex justify-between py-1 border-b border-[#f3ece2]">
+            <span>Visitor Name</span><span class="font-bold">Mr. Mukesh Singh</span>
+          </div>
+          <div class="flex justify-between py-1 border-b border-[#f3ece2]">
+            <span>Gate Arrival Check-In</span><span class="font-bold text-slate-900">14:08 IST (Turnstile 01)</span>
+          </div>
+          <div class="flex justify-between py-1 border-b border-[#f3ece2]">
+            <span>Gate Departure Logged</span><span class="font-bold text-emerald-600">17:52 IST (Turnstile 02)</span>
+          </div>
+          <div class="flex justify-between py-1 border-b border-[#f3ece2]">
+            <span>Biometric Badge Cleared</span><span class="font-bold text-emerald-600">Yes (Auto-revoked)</span>
+          </div>
+        </div>
+
+        <button type="button" id="btn-dismiss-audit" class="w-full bg-[#180d19] hover:bg-[#281424] text-white font-bold text-xs py-2.5 rounded-xl transition cursor-pointer">
+          Dismiss Audit Log
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Client-side Logic Script -->
+  <script src="/js/approved-requests.js"></script>
+</body>
+</html>
+

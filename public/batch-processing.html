@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>TAAMARA CO-LIVE — Batch Processing Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .font-serif-luxury { font-family: 'Playfair Display', Georgia, serif; }
+  </style>
+</head>
+<body class="bg-[#faf6f0] text-[#1c1917] antialiased min-h-screen flex flex-col font-sans select-none overflow-x-hidden">
+
+  <!-- Mobile Frame Container (Max 430px) -->
+  <div class="w-full max-w-5xl mx-auto space-y-6 pb-12">
+
+    <!-- 1. Header (Sticky Top) -->
+    <header class="bg-white/95 backdrop-blur-md px-4 py-3 border-b border-[#f3ece2] flex items-center justify-between sticky top-0 z-30">
+      <a
+        href="/requests.html"
+        id="btn-back"
+        class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 transition cursor-pointer"
+        title="Back to Requests"
+      >
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </a>
+
+      <div class="text-center">
+        <h1 class="text-xs font-black text-slate-900 leading-tight font-serif-luxury">Requests Hub</h1>
+      </div>
+
+      <button
+        type="button"
+        id="btn-bell"
+        class="w-8 h-8 rounded-full bg-[#fdfbf7] text-[#c59b27] flex items-center justify-center relative hover:bg-[#fbf2da] transition cursor-pointer"
+        title="Notifications"
+      >
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+        <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-[#c59b27] rounded-full"></span>
+      </button>
+    </header>
+
+    <!-- Main Content Stream -->
+    <main class="flex-1 px-4 pt-3 space-y-3.5 text-xs">
+
+      <!-- 2. Fast Lane Operations Tag & Title -->
+      <section class="space-y-1">
+        <span class="px-2.5 py-0.5 rounded-full bg-[#fdfbf7] text-[#a6801e] border border-[#e3d5be]/70 font-extrabold text-[9px] tracking-wide uppercase inline-flex items-center gap-1">
+          <span>⚡</span>
+          <span>FAST LANE OPERATIONS</span>
+        </span>
+        <h2 class="text-lg font-black text-slate-900 tracking-tight font-serif-luxury">Batch Processing Hub</h2>
+        <p class="text-[11px] text-slate-500 font-medium leading-tight">
+          Bulk review &amp; 1-tap approve verified student requests
+        </p>
+      </section>
+
+      <!-- 3. KPI Metric Cards (3 Columns) -->
+      <section class="grid grid-cols-3 gap-2">
+        <!-- Queue -->
+        <div class="bg-white rounded-2xl p-3 border border-[#f3ece2] shadow-2xs space-y-0.5">
+          <div class="text-[10px] font-bold text-slate-400 flex items-center gap-1">
+            <span>📋</span>
+            <span>Queue</span>
+          </div>
+          <div id="stat-queue" class="text-lg font-black text-slate-900 leading-tight">5</div>
+          <div class="text-[9px] text-slate-400 font-medium">Pending Total</div>
+        </div>
+
+        <!-- Verified -->
+        <div class="bg-white rounded-2xl p-3 border border-[#f3ece2] shadow-2xs space-y-0.5">
+          <div class="text-[10px] font-bold text-emerald-600 flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+            <span>Verified</span>
+          </div>
+          <div class="text-lg font-black text-emerald-600 leading-tight">
+            <span id="stat-verified">4</span> <span class="text-[10px] font-bold">passed</span>
+          </div>
+          <div class="text-[9px] text-slate-400 font-medium">Ready to sync</div>
+        </div>
+
+        <!-- Alert -->
+        <div class="bg-white rounded-2xl p-3 border border-[#f3ece2] shadow-2xs space-y-0.5">
+          <div class="text-[10px] font-bold text-rose-600 flex items-center gap-1">
+            <span>🚩</span>
+            <span>Alert</span>
+          </div>
+          <div id="stat-alert" class="text-lg font-black text-rose-600 leading-tight">1</div>
+          <div class="text-[9px] text-slate-400 font-medium">Manual review</div>
+        </div>
+      </section>
+
+      <!-- 4. Select All Verified Row -->
+      <section class="flex items-center justify-between bg-white px-3.5 py-2.5 rounded-2xl border border-[#f3ece2] shadow-2xs">
+        <label class="flex items-center gap-2.5 cursor-pointer select-none">
+          <input
+            type="checkbox"
+            id="checkbox-select-all"
+            checked
+            class="w-4 h-4 rounded text-[#c59b27] focus:ring-[#c59b27] border-slate-300 cursor-pointer accent-[#c59b27]"
+          />
+          <span class="font-black text-slate-900 text-xs">
+            Select All (<span id="count-selected-label">4</span>) Verified Requests
+          </span>
+        </label>
+        <span class="px-2 py-0.5 rounded-full bg-[#fdfbf7] text-[#a6801e] text-[9px] font-extrabold border border-[#ede4d5]">
+          1 Excluded
+        </span>
+      </section>
+
+      <!-- 5. Filter Pills -->
+      <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+        <button
+          type="button"
+          data-filter="all"
+          class="batch-filter-pill px-3 py-1 rounded-full bg-[#180d19] text-white font-bold text-[10px] shadow-xs cursor-pointer transition"
+        >
+          All 5
+        </button>
+        <button
+          type="button"
+          data-filter="night"
+          class="batch-filter-pill px-3 py-1 rounded-full bg-white border border-[#ede5d8] text-slate-700 font-semibold text-[10px] cursor-pointer hover:bg-slate-50 transition"
+        >
+          Night Out 3
+        </button>
+        <button
+          type="button"
+          data-filter="guest"
+          class="batch-filter-pill px-3 py-1 rounded-full bg-white border border-[#ede5d8] text-slate-700 font-semibold text-[10px] cursor-pointer hover:bg-slate-50 transition"
+        >
+          Guest Visits 2
+        </button>
+      </div>
+
+      <!-- 6. Batch Requests List -->
+      <div id="batch-card-list" class="space-y-2.5">
+
+        <!-- Card 1: Rohan Varma -->
+        <div
+          class="batch-card bg-white rounded-2xl p-3 border border-[#f3ece2] shadow-2xs space-y-2 transition"
+          data-type="night"
+          data-verified="true"
+        >
+          <div class="flex items-start gap-2.5">
+            <input
+              type="checkbox"
+              checked
+              data-id="req-batch-01"
+              data-name="Rohan Varma"
+              class="batch-item-checkbox w-4 h-4 mt-0.5 rounded text-[#c59b27] border-slate-300 cursor-pointer accent-[#c59b27]"
+            />
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5">
+                  <h4 class="font-black text-slate-900 text-xs">Rohan Varma</h4>
+                  <span class="bg-slate-100 text-slate-700 text-[9px] font-bold px-1.5 py-0.2 rounded">R-204</span>
+                </div>
+                <span class="px-2 py-0.5 bg-[#fdfbf7] text-[#a6801e] text-[9px] font-extrabold rounded-full">
+                  Night Out
+                </span>
+              </div>
+              <p class="text-[10px] text-slate-500 mt-0.5">24 Oct • 23:30 Return Expected</p>
+            </div>
+          </div>
+
+          <!-- Verification Banner -->
+          <div class="bg-emerald-50/70 p-2 rounded-xl border border-emerald-100 flex items-center justify-between text-[10px] text-emerald-800 font-bold">
+            <div class="flex items-center gap-1.5">
+              <span>🛡️</span>
+              <span>Parent Confirmed • 0 Red Flags</span>
+            </div>
+            <span class="text-slate-400 text-xs">›</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Karan Patel -->
+        <div
+          class="batch-card bg-white rounded-2xl p-3 border border-[#f3ece2] shadow-2xs space-y-2 transition"
+          data-type="guest"
+          data-verified="true"
+        >
+          <div class="flex items-start gap-2.5">
+            <input
+              type="checkbox"
+              checked
+              data-id="req-batch-02"
+              data-name="Karan Patel"
+              class="batch-item-checkbox w-4 h-4 mt-0.5 rounded text-[#c59b27] border-slate-300 cursor-pointer accent-[#c59b27]"
+            />
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5">
+                  <h4 class="font-black text-slate-900 text-xs">Karan Patel</h4>
+                  <span class="bg-slate-100 text-slate-700 text-[9px] font-bold px-1.5 py-0.2 rounded">R-108</span>
+                </div>
+                <span class="px-2 py-0.5 bg-[#fdfbf7] text-[#a6801e] text-[9px] font-extrabold rounded-full">
+                  Day Pass
+                </span>
+              </div>
+              <p class="text-[10px] text-slate-500 mt-0.5">Parents Visiting • 14:00 - 18:00 Today</p>
+            </div>
+          </div>
+
+          <!-- Verification Banner -->
+          <div class="bg-emerald-50/70 p-2 rounded-xl border border-emerald-100 flex items-center justify-between text-[10px] text-emerald-800 font-bold">
+            <div class="flex items-center gap-1.5">
+              <span>🪪</span>
+              <span>ID Proof Uploaded • Lounge Reserved</span>
+            </div>
+            <span class="text-slate-400 text-xs">›</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Sneha Reddy -->
+        <div
+          class="batch-card bg-white rounded-2xl p-3 border border-[#f3ece2] shadow-2xs space-y-2 transition"
+          data-type="night"
+          data-verified="true"
+        >
+          <div class="flex items-start gap-2.5">
+            <input
+              type="checkbox"
+              checked
+              data-id="req-batch-03"
+              data-name="Sneha Reddy"
+              class="batch-item-checkbox w-4 h-4 mt-0.5 rounded text-[#c59b27] border-slate-300 cursor-pointer accent-[#c59b27]"
+            />
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5">
+                  <h4 class="font-black text-slate-900 text-xs">Sneha Reddy</h4>
+                  <span class="bg-slate-100 text-slate-700 text-[9px] font-bold px-1.5 py-0.2 rounded">R-114</span>
+                </div>
+                <span class="px-2 py-0.5 bg-[#fdfbf7] text-[#a6801e] text-[9px] font-extrabold rounded-full">
+                  Library Pass
+                </span>
+              </div>
+              <p class="text-[10px] text-slate-500 mt-0.5">Extended Library Access • Till 00:00</p>
+            </div>
+          </div>
+
+          <!-- Verification Banner -->
+          <div class="bg-emerald-50/70 p-2 rounded-xl border border-emerald-100 flex items-center justify-between text-[10px] text-emerald-800 font-bold">
+            <div class="flex items-center gap-1.5">
+              <span>📋</span>
+              <span>HOD Sign-off Validated</span>
+            </div>
+            <span class="text-slate-400 text-xs">›</span>
+          </div>
+        </div>
+
+        <!-- Card 4: Amit Kumar -->
+        <div
+          class="batch-card bg-white rounded-2xl p-3 border border-[#f3ece2] shadow-2xs space-y-2 transition"
+          data-type="night"
+          data-verified="true"
+        >
+          <div class="flex items-start gap-2.5">
+            <input
+              type="checkbox"
+              checked
+              data-id="req-batch-04"
+              data-name="Amit Kumar"
+              class="batch-item-checkbox w-4 h-4 mt-0.5 rounded text-[#c59b27] border-slate-300 cursor-pointer accent-[#c59b27]"
+            />
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5">
+                  <h4 class="font-black text-slate-900 text-xs">Amit Kumar</h4>
+                  <span class="bg-slate-100 text-slate-700 text-[9px] font-bold px-1.5 py-0.2 rounded">R-210</span>
+                </div>
+                <span class="px-2 py-0.5 bg-[#fdfbf7] text-[#a6801e] text-[9px] font-extrabold rounded-full">
+                  Home Leave
+                </span>
+              </div>
+              <p class="text-[10px] text-slate-500 mt-0.5">Weekend Trip • 25-27 Oct</p>
+            </div>
+          </div>
+
+          <!-- Verification Banner -->
+          <div class="bg-emerald-50/70 p-2 rounded-xl border border-emerald-100 flex items-center justify-between text-[10px] text-emerald-800 font-bold">
+            <div class="flex items-center gap-1.5">
+              <span>💬</span>
+              <span>Train ticket attached • Parent SMS verified</span>
+            </div>
+            <span class="text-slate-400 text-xs">›</span>
+          </div>
+        </div>
+
+        <!-- Card 5 (Excluded / Alert): Ananya Iyer -->
+        <div
+          class="batch-card bg-white rounded-2xl p-3 border border-rose-200 shadow-2xs space-y-2 transition opacity-90"
+          data-type="guest"
+          data-verified="false"
+        >
+          <div class="flex items-start gap-2.5">
+            <input
+              type="checkbox"
+              data-id="req-batch-05"
+              data-name="Ananya Iyer"
+              class="batch-item-checkbox w-4 h-4 mt-0.5 rounded text-[#c59b27] border-slate-300 cursor-pointer accent-[#c59b27]"
+            />
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-1.5">
+                  <h4 class="font-black text-slate-900 text-xs">Ananya Iyer</h4>
+                  <span class="bg-slate-100 text-slate-700 text-[9px] font-bold px-1.5 py-0.2 rounded">305-B</span>
+                </div>
+                <span class="px-2 py-0.5 bg-slate-100 text-slate-600 text-[9px] font-bold rounded-full">
+                  Room Transfer
+                </span>
+              </div>
+              <p class="text-[10px] text-slate-500 mt-0.5">Transfer to 203-B Requested</p>
+            </div>
+          </div>
+
+          <!-- Alert Banner with Open link -->
+          <div class="bg-rose-50 p-2 rounded-xl border border-rose-100 flex items-center justify-between text-[10px] text-rose-700 font-bold">
+            <div class="flex items-center gap-1.5">
+              <span>⚠️</span>
+              <span>Manual Room Assignment Required</span>
+            </div>
+            <a href="/room-change.html" class="text-[#c59b27] font-black hover:underline cursor-pointer">
+              Open
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 7. Safety Checklist Policy Toggle -->
+      <section class="bg-[#fdfbf7]/60 rounded-2xl p-3 border border-[#ede4d5] flex items-center justify-between gap-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-full bg-[#fbf2da] text-[#c59b27] flex items-center justify-center shrink-0">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <p class="text-[11px] text-slate-700 font-medium leading-snug">
+            Apply standard safety checklist rules to selected (<span id="safety-count">4</span>) requests
+          </p>
+        </div>
+        <!-- Toggle Switch -->
+        <label class="relative inline-flex items-center cursor-pointer shrink-0">
+          <input type="checkbox" id="toggle-safety" checked class="sr-only peer">
+          <div class="w-9 h-5 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#c59b27]"></div>
+        </label>
+      </section>
+
+      <!-- 8. Actions (Approve & Reject) -->
+      <section class="space-y-2 pt-1">
+        <button
+          type="button"
+          id="btn-approve-batch"
+          class="w-full py-3.5 bg-[#180d19] hover:bg-[#281424] hover:bg-[#c59b27] text-white font-black text-xs sm:text-sm rounded-xl shadow-md shadow-[#c59b27]/20 flex items-center justify-center gap-2 transition cursor-pointer"
+        >
+          <span>✓</span>
+          <span>Approve Selected (<span id="btn-approve-count">4</span>) Requests Now</span>
+        </button>
+
+        <button
+          type="button"
+          id="btn-reject-batch"
+          class="w-full py-2.5 text-rose-600 hover:bg-rose-50 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition cursor-pointer"
+        >
+          <span>🚫</span>
+          <span>Reject Selected</span>
+        </button>
+      </section>
+
+    </main>
+
+    <!-- 9. Sticky Bottom Navigation Bar -->
+    <nav class="hidden" style="display: none !important;">
+      <a href="/dashboard.html" class="flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><rect width="7" height="7" x="3" y="3" rx="1.5"/><rect width="7" height="7" x="14" y="3" rx="1.5"/><rect width="7" height="7" x="14" y="14" rx="1.5"/><rect width="7" height="7" x="3" y="14" rx="1.5"/></svg>
+        <span class="text-[10px] font-medium">Dashboard</span>
+      </a>
+      <a href="/block-a.html" class="flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>
+        <span class="text-[10px] font-medium">Rooms</span>
+      </a>
+      <a href="/requests.html" class="flex flex-col items-center gap-1 py-1 text-[#c59b27] cursor-pointer relative">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <span class="text-[10px] font-bold">Requests</span>
+        <span class="absolute top-0 right-2 w-2 h-2 rounded-full bg-rose-500"></span>
+      </a>
+      <a href="/tenants.html" class="flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span class="text-[10px] font-medium">Tenants</span>
+      </a>
+    </nav>
+
+    <!-- Modal: Batch Approved Success -->
+    <div id="modal-batch-success" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 hidden">
+      <div class="bg-white rounded-3xl max-w-sm w-full p-5 space-y-4 shadow-2xl border border-[#f3ece2] text-center animate-in fade-in zoom-in duration-200">
+        <div class="w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto text-2xl font-black shadow-inner">
+          ✓
+        </div>
+        <div>
+          <h3 class="text-base font-black text-slate-900">Batch Processing Certified!</h3>
+          <p id="modal-success-desc" class="text-xs text-slate-500 mt-1">
+            4 student requests approved in fast-lane mode.
+          </p>
+        </div>
+
+        <div class="bg-slate-50 p-3 rounded-2xl border border-[#f3ece2] text-left text-xs space-y-2">
+          <div class="flex justify-between items-center text-slate-600">
+            <span>Gate Turnstiles:</span>
+            <span class="text-emerald-700 font-bold">Synchronized in Real-Time ✓</span>
+          </div>
+          <div class="flex justify-between items-center text-slate-600">
+            <span>Parent SMS Dispatch:</span>
+            <span class="font-bold text-slate-800">4 Delivered</span>
+          </div>
+          <div class="flex justify-between items-center text-slate-600">
+            <span>Audit Trail Log:</span>
+            <span class="font-mono font-bold text-slate-900">#BATCH-2024-OCT-09</span>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          id="btn-modal-success-close"
+          class="w-full py-3 bg-[#180d19] hover:bg-[#281424] text-white font-black text-xs rounded-xl cursor-pointer shadow-xs"
+        >
+          Done &amp; Return to Requests Console
+        </button>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div
+      id="toast"
+      class="fixed bottom-20 left-1/2 -translate-x-1/2 max-w-[380px] w-auto bg-[#180d19] text-white px-4 py-3 rounded-2xl shadow-2xl text-xs font-bold flex items-center gap-2.5 z-50 hidden transition-all duration-300"
+    >
+      <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+      <span id="toast-text">Action completed successfully</span>
+    </div>
+
+  </div>
+
+  <script src="/js/batch-requests.js"></script>
+</body>
+</html>
+

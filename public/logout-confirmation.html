@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>TAAMARA CO-LIVE — Logout Confirmation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .font-serif-luxury { font-family: 'Playfair Display', Georgia, serif; }
+  </style>
+</head>
+<body class="bg-[#faf6f0] text-[#1c1917] antialiased min-h-screen flex flex-col font-sans select-none overflow-x-hidden">
+
+  <!-- Mobile Frame Container (Max 430px) -->
+  <div class="min-h-screen flex flex-col lg:flex-row w-full bg-[#faf6f0]">
+
+  <!-- Left Sidebar Navigation (Desktop Persistent lg:flex) -->
+    <!-- Left Sidebar Navigation (Desktop Persistent lg:flex) -->
+  <aside id="app-sidebar" class="hidden lg:flex lg:flex-col lg:w-72 lg:fixed lg:inset-y-0 lg:z-40 bg-[#180d19] text-white border-r border-[#261324] shadow-2xl transition-all duration-300">
+    <!-- Brand Header -->
+    <div class="h-20 flex items-center justify-between px-6 border-b border-[#261324] bg-[#140b15]">
+      <a href="/dashboard.html" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#eab308] to-[#b45309] flex items-center justify-center shadow-lg shadow-amber-900/30 border border-amber-300/40 relative">
+          <span class="text-xl font-black font-serif-luxury text-[#180d19]">T</span>
+          <span class="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 border-2 border-[#180d19] rounded-full live-dot"></span>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-base font-bold font-serif-luxury tracking-wide text-white">TAAMARA CO-LIVE</span>
+          </div>
+          <p class="text-[10px] font-semibold text-[#c099b9] tracking-wider uppercase">NANAKRAMGUDA, HYD</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- Live Telemetry / Gate Status Capsule -->
+    <div class="px-4 py-2.5 mx-4 my-3 rounded-2xl bg-[#241223] border border-[#351b33] flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 live-dot"></span>
+        <span class="text-xs font-semibold text-[#f5e6f2]">Biometric Gate Live</span>
+      </div>
+      <span class="px-2 py-0.5 rounded-lg text-[10px] font-bold bg-[#3b1d38] text-[#f5c5e8] border border-[#52294e]">
+        Admin PMS
+      </span>
+    </div>
+
+    <!-- Navigation Menu Items -->
+    <div class="flex-1 overflow-y-auto px-4 py-2 space-y-6 no-scrollbar">
+      <div>
+        <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-[#9d7897] mb-2 font-sans">MANAGEMENT</p>
+        <nav class="space-y-1">
+          <a href="/dashboard.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold text-white bg-[#2d1729] border border-[#5c304f] shadow-md transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-[#eab308]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              <span>Dashboard Overview</span>
+            </div>
+            <span class="text-[10px] font-bold text-[#eab308]">Active</span>
+          </a>
+
+          <a href="/tenants.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span>Residents Directory</span>
+            </div>
+            <span class="text-[10px] px-2 py-0.5 rounded-md bg-[#251221] text-[#e5d5e2] font-bold">68</span>
+          </a>
+
+          <div class="space-y-1">
+            <a href="/occupancy.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+              <div class="flex items-center gap-3">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                <span>Rooms &amp; Sharing</span>
+              </div>
+              <span class="text-[10px] px-2 py-0.5 rounded-md bg-[#064e3b] text-[#34d399] font-bold">7 Beds Free</span>
+            </a>
+            <div class="hidden" style="display: none !important;">
+              <div class="flex items-center justify-between py-1 px-2 rounded-lg hover:bg-[#251221] cursor-pointer">
+                <span>› Floor 1 (Ground)</span>
+                <span class="px-1.5 py-0.2 rounded bg-[#351b31] text-[#e0cfdd] font-semibold text-[10px]">86%</span>
+              </div>
+              <div class="flex items-center justify-between py-1 px-2 rounded-lg hover:bg-[#251221] cursor-pointer">
+                <span>› Floor 2 (Premium)</span>
+                <span class="px-1.5 py-0.2 rounded bg-[#064e3b] text-[#34d399] font-semibold text-[10px]">5 Free</span>
+              </div>
+              <div class="flex items-center justify-between py-1 px-2 rounded-lg hover:bg-[#251221] cursor-pointer">
+                <span>› Floor 3 (Penthouse)</span>
+                <span class="px-1.5 py-0.2 rounded bg-[#064e3b] text-[#34d399] font-semibold text-[10px]">7 Free</span>
+              </div>
+              <a href="/occupancy.html" class="block py-1 px-2 text-[#eab308] hover:underline font-bold text-[11px] cursor-pointer">
+                + Add New Room
+              </a>
+            </div>
+          </div>
+
+          <a href="/operations.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+              <span>Operations Control</span>
+            </div>
+          </a>
+
+          <a href="/requests.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4M12 16h4M8 11h.01M8 16h.01"/></svg>
+              <span>Requests Desk</span>
+            </div>
+            <span class="text-[10px] px-2 py-0.5 rounded-md bg-[#991b1b] text-white font-extrabold">3 Active</span>
+          </a>
+        </nav>
+      </div>
+
+      <div>
+        <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-[#9d7897] mb-2 font-sans">COMMS &amp; SAFETY</p>
+        <nav class="space-y-1">
+          <a href="/broadcast.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-[#eab308]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+              <span>Broadcast Notice</span>
+            </div>
+          </a>
+
+          <a href="/notifications.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-purple-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+              <span>Notifications</span>
+            </div>
+            <span class="text-[10px] px-2 py-0.5 rounded-md bg-[#701a75] text-[#fae8ff] font-extrabold">4</span>
+          </a>
+
+          <a href="/security-permissions.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <span>Security &amp; Roles</span>
+            </div>
+          </a>
+
+          <a href="/help-support.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-amber-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>Help &amp; Support</span>
+            </div>
+          </a>
+
+          <a href="/more.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><circle cx="4" cy="4" r="2"/><circle cx="12" cy="4" r="2"/><circle cx="20" cy="4" r="2"/><circle cx="4" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="20" cy="12" r="2"/><circle cx="4" cy="20" r="2"/><circle cx="12" cy="20" r="2"/><circle cx="20" cy="20" r="2"/></svg>
+              <span>More &amp; Governance</span>
+            </div>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Campus Wings -->
+      <div class="pt-2 border-t border-[#261324]">
+        <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-[#9d7897] mb-2 font-sans">CAMPUS WINGS</p>
+        <div class="grid grid-cols-2 gap-2">
+          <a href="/block-a.html" class="py-2 px-2.5 rounded-xl bg-[#251222] border border-[#381c34] text-[11px] font-bold text-[#d4b8cf] hover:text-white hover:bg-[#341830] text-center transition cursor-pointer">
+            Block A (96) &rarr;
+          </a>
+          <a href="/block-b.html" class="py-2 px-2.5 rounded-xl bg-[#251222] border border-[#381c34] text-[11px] font-bold text-[#d4b8cf] hover:text-white hover:bg-[#341830] text-center transition cursor-pointer">
+            Block B (80) &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Manager Profile Footer -->
+    <div class="p-4 border-t border-[#261324] bg-[#140b15]">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-[#f59e0b] text-[#180d19] font-serif-luxury font-black text-sm flex items-center justify-center border-2 border-[#b45309] shadow-sm">
+            AM
+          </div>
+          <div class="truncate">
+            <p class="text-xs font-bold text-white truncate">Alex Morgan</p>
+            <p class="text-[10px] text-[#c099b9] font-medium">Super Admin • Sunrise</p>
+            <p class="text-[9px] text-[#865d80]">TAAMARA Admin Portal</p>
+          </div>
+        </div>
+        <a href="/logout-confirmation.html" class="p-2 rounded-lg text-[#ad8caa] hover:text-rose-400 hover:bg-[#281424] transition cursor-pointer" title="Sign Out">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </a>
+      </div>
+    </div>
+  </aside>
+  
+  <div class="flex-1 flex flex-col lg:pl-72 min-w-0 bg-[#faf6f0] min-h-screen">
+    <div class="w-full max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex-1 space-y-6">
+
+    <!-- 1. Header (Sticky Top / Behind backdrop) -->
+    <header class="bg-[#faf6f0] px-4 py-3 border-b border-[#ede5d8] flex items-center justify-between sticky top-0 z-10 shrink-0">
+      <div class="w-8"></div>
+      <div class="text-center">
+        <h1 class="text-xs font-black text-slate-900 tracking-tight font-serif-luxury">More Hub</h1>
+      </div>
+      <button
+        type="button"
+        id="btn-bell"
+        class="w-8 h-8 rounded-full bg-slate-200/60 hover:bg-slate-300 text-slate-700 flex items-center justify-center transition cursor-pointer"
+        title="Notifications"
+      >
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+      </button>
+    </header>
+
+    <!-- 2. Darkened Backdrop Overlay behind Sheet -->
+    <div class="flex-1 flex flex-col justify-end bg-slate-900/40 backdrop-blur-2xs pb-20 pt-4">
+
+      <!-- 3. Floating Bottom Sheet / Logout Confirmation Card -->
+      <div class="bg-white rounded-t-[32px] sm:rounded-3xl p-5 sm:p-6 shadow-2xl space-y-4 text-left border-t sm:border border-[#f3ece2] mx-0 sm:mx-2 animate-in fade-in slide-in-from-bottom-6 duration-200">
+        
+        <!-- Red Circular Logout Icon -->
+        <div class="w-16 h-16 rounded-full bg-rose-100/70 border border-rose-200/50 flex items-center justify-center mx-auto text-rose-600 shadow-xs">
+          <svg class="w-7 h-7 text-rose-600 ml-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+        </div>
+
+        <!-- Heading & User Context -->
+        <div class="text-center space-y-1">
+          <h2 class="text-xl font-black text-slate-900 tracking-tight font-serif-luxury">
+            Log Out of Manager Session?
+          </h2>
+          <p class="text-xs text-slate-600 font-medium leading-relaxed max-w-[340px] mx-auto">
+            You are signed in as <span class="font-bold text-slate-900">Alex Morgan</span> (Lead Property Manager) on terminal
+            <span class="inline-block px-1.5 py-0.5 rounded-md bg-[#fbf2da] text-[#a6801e] font-extrabold text-[11px] align-baseline">HF-9022</span>.
+          </p>
+        </div>
+
+        <!-- Warning Alert Box: Active Shifts & Priority Alerts -->
+        <div class="bg-[#fef8ea] rounded-2xl p-4 border border-[#ede4d5]/80 space-y-2.5 text-xs">
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-rose-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            <h3 class="text-xs font-black text-rose-700 tracking-tight">
+              Active Shifts &amp; Priority Alerts
+            </h3>
+          </div>
+
+          <div class="space-y-2 text-[11px] text-slate-700 leading-snug pl-1">
+            <div class="flex items-start gap-2.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0 mt-1.5"></span>
+              <p>Evening Roll Call is currently active (Curfew portal auto-closes at <strong class="font-extrabold text-slate-900">22:30</strong>).</p>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#c59b27] shrink-0 mt-1.5"></span>
+              <p>3 open maintenance tickets pending managerial sign-off before shift close.</p>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 mt-1.5"></span>
+              <p>Turnstile tailgating alerts will route to Warden Sunil Deshmukh (Duty Room 102).</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Checkbox Options -->
+        <div class="space-y-2.5">
+          <!-- Option 1: Keep biometrics / FaceID saved -->
+          <label class="bg-[#faf6f0] hover:bg-slate-100/70 border border-[#f3ece2] rounded-2xl p-3.5 flex items-start gap-3 transition cursor-pointer select-none">
+            <input
+              type="checkbox"
+              id="check-keep-biometrics"
+              checked
+              class="w-5 h-5 rounded-md text-[#c59b27] accent-[#c59b27] focus:ring-0 cursor-pointer mt-0.5 shrink-0"
+            />
+            <div class="min-w-0">
+              <h4 class="text-xs font-black text-slate-900 leading-tight">Keep biometrics / FaceID saved</h4>
+              <p class="text-[10px] text-slate-500 font-medium leading-relaxed mt-0.5">
+                Bypass full SMS OTP on HF-9022 for the next 12 hours
+              </p>
+            </div>
+          </label>
+
+          <!-- Option 2: Hand over shift to Relief Warden -->
+          <label class="bg-[#faf6f0] hover:bg-slate-100/70 border border-[#f3ece2] rounded-2xl p-3.5 flex items-start gap-3 transition cursor-pointer select-none">
+            <input
+              type="checkbox"
+              id="check-handover-shift"
+              class="w-5 h-5 rounded-md text-[#c59b27] accent-[#c59b27] focus:ring-0 cursor-pointer mt-0.5 shrink-0"
+            />
+            <div class="min-w-0">
+              <h4 class="text-xs font-black text-slate-900 leading-tight">Hand over shift to Relief Warden</h4>
+              <p class="text-[10px] text-slate-500 font-medium leading-relaxed mt-0.5">
+                Sends digital signoff ping to Warden Sunil Deshmukh
+              </p>
+            </div>
+          </label>
+        </div>
+
+        <!-- Primary Action: Confirm & Log Out -->
+        <div class="pt-1 space-y-2.5">
+          <button
+            type="button"
+            id="btn-confirm-logout"
+            class="w-full py-3.5 px-4 bg-[#b91c1c] hover:bg-red-800 text-white font-black text-xs sm:text-sm rounded-2xl flex items-center justify-center gap-2 shadow-lg shadow-red-900/15 transition duration-150 cursor-pointer"
+          >
+            <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+              <line x1="12" y1="2" x2="12" y2="12"></line>
+            </svg>
+            <span>Confirm &amp; Log Out</span>
+          </button>
+
+          <!-- Secondary Action: Cancel & Stay Signed In -->
+          <a
+            href="/more.html"
+            id="btn-cancel-logout"
+            class="w-full py-3.5 px-4 bg-[#fbf2da] hover:bg-[#fbf2da] text-slate-800 font-black text-xs sm:text-sm rounded-2xl flex items-center justify-center gap-2 transition duration-150 cursor-pointer border border-[#e3d5be]/60"
+          >
+            <svg class="w-4 h-4 text-slate-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            <span>Cancel &amp; Stay Signed In</span>
+          </a>
+        </div>
+
+        <!-- Emergency Dial Helper Note -->
+        <p class="text-[10px] text-slate-400 font-medium text-center truncate pt-1">
+          For emergency lockouts or physical pass issues, dial Central Warden Desk: <span class="font-bold text-slate-500">+91 98402 11029</span>
+        </p>
+
+      </div>
+    </div>
+
+    <!-- 4. Sticky Bottom Navigation Bar (5 Tabs, More active) -->
+    <nav class="hidden" style="display: none !important;">
+      <a href="/dashboard.html" class="flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect width="7" height="7" x="3" y="3" rx="1.5"/><rect width="7" height="7" x="14" y="3" rx="1.5"/><rect width="7" height="7" x="14" y="14" rx="1.5"/><rect width="7" height="7" x="3" y="14" rx="1.5"/>
+        </svg>
+        <span class="text-[10px] font-medium">Dashboard</span>
+      </a>
+      <a href="/block-a.html" class="flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/>
+        </svg>
+        <span class="text-[10px] font-medium">Rooms</span>
+      </a>
+      <a href="/requests.html" class="flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer">
+        <div class="relative">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4M12 16h4M8 11h.01M8 16h.01"/>
+          </svg>
+          <span class="w-3.5 h-3.5 rounded-full bg-rose-500 text-white text-[9px] font-bold flex items-center justify-center absolute -top-1 -right-2">3</span>
+        </div>
+        <span class="text-[10px] font-medium">Requests</span>
+      </a>
+      <a href="/tenants.html" class="flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <span class="text-[10px] font-medium">Tenants</span>
+      </a>
+      <a href="/more.html" class="flex flex-col items-center gap-1 py-1 text-[#c59b27] font-bold cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/><circle cx="5" cy="12" r="1.5"/>
+        </svg>
+        <span class="text-[10px]">More</span>
+      </a>
+    </nav>
+
+    <!-- Toast Notification -->
+    <div
+      id="toast"
+      class="fixed bottom-24 left-1/2 -translate-x-1/2 max-w-[380px] w-auto bg-[#180d19] text-white px-4 py-3 rounded-2xl shadow-2xl text-xs font-bold flex items-center gap-2.5 z-50 hidden transition-all duration-300"
+    >
+      <span class="w-2 h-2 rounded-full bg-rose-400"></span>
+      <span id="toast-text">Signed out of manager session</span>
+    </div>
+
+  </div>
+    </div>
+  </div>
+
+  <script src="/js/logout-confirmation.js"></script>
+</body>
+</html>
+

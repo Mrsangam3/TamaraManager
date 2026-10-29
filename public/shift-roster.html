@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TAAMARA CO-LIVE - Staff Duty Roster & Shifts</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            gold: {
+              50: '#fdfbf7',
+              100: '#fbf2da',
+              200: '#f5e5ba',
+              300: '#edd18e',
+              400: '#e1cb8f',
+              500: '#d4a838',
+              600: '#c59b27',
+              700: '#a6801e',
+              800: '#876717',
+              900: '#6d5212',
+            },
+            brand: {
+              gold: '#c59b27',
+              goldLight: '#fef8ea',
+              goldDark: '#a6801e',
+              border: '#ede4d5',
+            },
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.15); }
+    }
+    .live-dot {
+      animation: pulse-slow 2s infinite ease-in-out;
+    }
+    @keyframes ripple {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.1); opacity: 0.4; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+    .ripple-effect {
+      animation: ripple 1.8s infinite ease-in-out;
+    }
+    .font-serif-luxury { font-family: 'Playfair Display', Georgia, serif; }
+  </style>
+</head>
+<body class="bg-[#faf6f0] text-[#1c1917] antialiased min-h-screen flex flex-col font-sans select-none overflow-x-hidden">
+
+  <!-- Mobile Frame Container (430px wide standard, centered on desktop) -->
+  <div class="w-full max-w-5xl mx-auto space-y-6 pb-12">
+
+    <!-- Toast Notification Banner -->
+    <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-2.5 rounded-2xl bg-slate-900 text-white text-xs font-semibold shadow-xl items-center gap-2 transition duration-300">
+      <span id="toast-text">Operation completed</span>
+    </div>
+
+    <!-- 1. Top Header & Navigation -->
+    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-[#ede5d8] px-4 pt-4 pb-3">
+      <div class="flex items-center justify-between">
+        
+        <!-- Back Button -->
+        <a 
+          href="/operations.html" 
+          id="btn-back"
+          class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 transition cursor-pointer"
+          title="Back to Operations Hub"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </a>
+
+        <!-- Center Branding & Title -->
+        <div class="text-center">
+          <div class="text-[10px] font-extrabold text-[#c59b27] tracking-wider uppercase">
+            TAAMARA HUB
+          </div>
+          <h1 class="text-sm font-extrabold text-slate-900 leading-tight font-serif-luxury">
+            Staff Roster
+          </h1>
+        </div>
+
+        <!-- Notification Bell Icon -->
+        <button 
+          id="btn-bell"
+          type="button" 
+          class="w-9 h-9 rounded-full bg-[#fdfbf7] hover:bg-[#fbf2da] text-[#c59b27] flex items-center justify-center transition cursor-pointer relative"
+          title="Shift Alerts"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+          <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-white"></span>
+        </button>
+      </div>
+
+      <!-- Breadcrumbs Path -->
+      <div class="flex items-center gap-1.5 mt-2.5 text-[11px] text-slate-500">
+        <svg class="w-3.5 h-3.5 text-[#c59b27] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+        </svg>
+        <span class="font-medium text-slate-600">Operations Hub</span>
+        <span class="text-slate-400">›</span>
+        <span class="font-bold text-slate-800">Staff Roster & Shifts</span>
+      </div>
+    </header>
+
+    <!-- Main Scrollable Area -->
+    <main class="p-4 space-y-4">
+
+      <!-- 2. Active Shift Overview Card -->
+      <section class="bg-white rounded-3xl p-4 sm:p-5 border border-[#f3ece2] shadow-sm relative overflow-hidden">
+        
+        <!-- Header row of card -->
+        <div class="flex items-center justify-between">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#c59b27] text-white shadow-xs">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 live-dot"></span>
+            <span class="text-[10px] font-extrabold uppercase tracking-wide">SHIFT #2 ACTIVE</span>
+          </div>
+
+          <div class="px-2.5 py-1 rounded-full bg-[#fdfbf7] border border-[#e3d5be]/60 text-[#a6801e] text-xs font-extrabold flex items-center gap-1">
+            <span class="text-[10px] text-slate-500 font-medium">Handover In</span>
+            <span id="handover-time">3h 15m</span>
+          </div>
+        </div>
+
+        <!-- Shift Title & Time -->
+        <div class="mt-3">
+          <h2 class="text-xl font-black text-slate-900 tracking-tight font-serif-luxury">Evening Shift</h2>
+          <div class="flex items-center gap-1.5 text-xs text-slate-500 font-semibold mt-0.5">
+            <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <span>14:00 - 22:00</span>
+          </div>
+        </div>
+
+        <!-- 2 Stat Boxes Side-by-Side -->
+        <div class="grid grid-cols-2 gap-3 mt-4">
+          
+          <!-- Box 1: On Duty Active -->
+          <div class="bg-[#fdfbf7] rounded-2xl p-3 border border-[#ede4d5]/70 flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-[#fbf2da] flex items-center justify-center text-[#c59b27] shrink-0">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <div>
+              <div class="text-base font-extrabold text-slate-900 leading-tight">6 Staff</div>
+              <div class="text-[11px] text-slate-500 font-medium">On Duty Active</div>
+            </div>
+          </div>
+
+          <!-- Box 2: On Leave -->
+          <div class="bg-[#fff1f2] rounded-2xl p-3 border border-rose-100/70 flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-rose-100 flex items-center justify-center text-rose-600 shrink-0">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+                <line x1="10" y1="14" x2="14" y2="18"/>
+                <line x1="14" y1="14" x2="10" y2="18"/>
+              </svg>
+            </div>
+            <div>
+              <div class="text-base font-extrabold text-slate-900 leading-tight">1 Leave</div>
+              <div class="text-[11px] text-slate-500 font-medium">Approved Med</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Card Bottom Strip: Biometrics Synced -->
+        <div class="mt-3 bg-[#fdfbf7]/70 rounded-xl px-3 py-2 border border-[#ede4d5]/60 flex items-center justify-between text-xs">
+          <div class="flex items-center gap-1.5 text-slate-700 font-semibold">
+            <!-- Biometric / Fingerprint icon -->
+            <svg class="w-3.5 h-3.5 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 11c0 2 1.5 3.5 3.5 3.5a3.5 3.5 0 0 0 3.5-3.5c0-3.87-3.13-7-7-7s-7 3.13-7 7c0 1.93.78 3.68 2.05 4.95"/>
+              <path d="M12 7c-2.21 0-4 1.79-4 4 0 1.1.45 2.1 1.17 2.83"/>
+              <path d="M9 18.5a9 9 0 0 0 6 0"/>
+            </svg>
+            <span class="text-[11px]">Biometrics Synced 13:58</span>
+          </div>
+          <span class="text-[11px] font-bold text-[#c59b27]">100% Turnout Target</span>
+        </div>
+
+      </section>
+
+      <!-- 3. Horizontal Category Filters -->
+      <section>
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+          <button 
+            type="button" 
+            data-category="all"
+            class="filter-pill active shrink-0 px-3.5 py-1.5 rounded-full bg-[#180d19] text-white text-xs font-bold shadow-xs transition cursor-pointer"
+          >
+            All Staff (7)
+          </button>
+          <button 
+            type="button" 
+            data-category="wardens"
+            class="filter-pill shrink-0 px-3.5 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 text-xs font-bold transition cursor-pointer"
+          >
+            Wardens (2)
+          </button>
+          <button 
+            type="button" 
+            data-category="security"
+            class="filter-pill shrink-0 px-3.5 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 text-xs font-bold transition cursor-pointer"
+          >
+            Security (2)
+          </button>
+          <button 
+            type="button" 
+            data-category="housekeeping"
+            class="filter-pill shrink-0 px-3.5 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 text-xs font-bold transition cursor-pointer"
+          >
+            Housekeeping (2)
+          </button>
+          <button 
+            type="button" 
+            data-category="kitchen"
+            class="filter-pill shrink-0 px-3.5 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 text-xs font-bold transition cursor-pointer"
+          >
+            Kitchen (1)
+          </button>
+        </div>
+      </section>
+
+      <!-- 4. Staff Member Cards List -->
+      <div id="staff-cards-container" class="space-y-3.5">
+
+        <!-- Staff Card 1: Sunil Deshmukh (Warden) -->
+        <article class="staff-card bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-sm transition hover:border-[#e3d5be]" data-cat="wardens">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0"></span>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-slate-900">Sunil Deshmukh</h3>
+                  <!-- Verified Checkmark Badge -->
+                  <svg class="w-4 h-4 text-[#c59b27] shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <p class="text-xs font-bold text-[#c59b27] mt-0.5">Chief Warden (North Wing)</p>
+              </div>
+            </div>
+
+            <span class="px-2 py-0.5 rounded-lg bg-slate-50 border border-[#ede5d8] text-slate-700 text-[10px] font-bold">
+              Post: 2A
+            </span>
+          </div>
+
+          <!-- Metadata Rows -->
+          <div class="mt-3.5 space-y-2 border-t border-[#f3ece2] pt-3">
+            <div class="flex items-center justify-between text-xs">
+              <div class="flex items-center gap-1.5 text-slate-500 font-medium">
+                <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M13.8 12H3"/>
+                </svg>
+                <span>Turnstile Check-In</span>
+              </div>
+              <span class="font-extrabold text-slate-900">13:50 IST</span>
+            </div>
+
+            <div class="flex items-center justify-between text-xs">
+              <div class="flex items-center gap-1.5 text-slate-500 font-medium">
+                <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                  <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+                <span>Sector Coverage</span>
+              </div>
+              <span class="font-extrabold text-slate-900">Block A & Block B</span>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="grid grid-cols-2 gap-2 mt-4 pt-1">
+            <button 
+              type="button" 
+              class="btn-call-staff bg-white hover:bg-slate-50 border border-[#e3d5be]/80 text-[#a6801e] font-bold text-xs py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 transition cursor-pointer shadow-2xs"
+              data-name="Sunil Deshmukh"
+              data-phone="+91 98234 11029"
+            >
+              <svg class="w-3.5 h-3.5 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              <span>Call (+91 98234)</span>
+            </button>
+
+            <button 
+              type="button" 
+              class="btn-assign-task bg-[#180d19] hover:bg-slate-800 text-white font-bold text-xs py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 transition cursor-pointer shadow-xs"
+              data-name="Sunil Deshmukh"
+              data-role="Chief Warden"
+            >
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14M5 12h14"/>
+              </svg>
+              <span>Assign Task</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- Staff Card 2: Maria Santos (Housekeeping Lead) -->
+        <article class="staff-card bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-sm transition hover:border-[#e3d5be]" data-cat="housekeeping">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0"></span>
+              <div>
+                <h3 class="text-sm font-extrabold text-slate-900">Maria Santos</h3>
+                <p class="text-xs font-bold text-[#c59b27] mt-0.5">Housekeeping Lead</p>
+              </div>
+            </div>
+
+            <span class="px-2 py-0.5 rounded-full bg-[#fbf2da] text-[#a6801e] text-[10px] font-bold">
+              Active Now
+            </span>
+          </div>
+
+          <!-- Metadata Rows -->
+          <div class="mt-3.5 space-y-2 border-t border-[#f3ece2] pt-3">
+            <div class="flex items-center justify-between text-xs">
+              <div class="flex items-center gap-1.5 text-slate-500 font-medium">
+                <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+                </svg>
+                <span>Current Mission</span>
+              </div>
+              <span class="font-extrabold text-slate-900">Floor 3 Deep Inspection</span>
+            </div>
+
+            <div class="flex items-center justify-between text-xs">
+              <div class="flex items-center gap-1.5 text-slate-500 font-medium">
+                <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+                <span>Coverage Zone</span>
+              </div>
+              <span class="font-extrabold text-slate-900">Floors 1 - 4 (Common Areas)</span>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex items-center gap-2 mt-4 pt-1">
+            <button 
+              type="button" 
+              class="btn-call-staff shrink-0 w-16 bg-white hover:bg-slate-50 border border-[#e3d5be]/80 text-[#a6801e] font-bold text-xs py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 transition cursor-pointer shadow-2xs"
+              data-name="Maria Santos"
+              data-phone="+91 98402 11029"
+            >
+              <svg class="w-3.5 h-3.5 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              <span>Call</span>
+            </button>
+
+            <button 
+              type="button" 
+              id="btn-view-housekeeping-tasks"
+              class="flex-1 bg-[#180d19] hover:bg-[#281424] hover:bg-[#c59b27] text-white font-bold text-xs py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 transition cursor-pointer shadow-xs"
+            >
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="8" y1="6" x2="21" y2="6"/>
+                <line x1="8" y1="12" x2="21" y2="12"/>
+                <line x1="8" y1="18" x2="21" y2="18"/>
+                <line x1="3" y1="6" x2="3.01" y2="6"/>
+                <line x1="3" y1="12" x2="3.01" y2="12"/>
+                <line x1="3" y1="18" x2="3.01" y2="18"/>
+              </svg>
+              <span>View 4 Active Tasks</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- Staff Card 3: Rajesh Patel (Main Gate Head Guard) -->
+        <article class="staff-card bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-sm transition hover:border-[#e3d5be]" data-cat="security">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0"></span>
+              <div>
+                <h3 class="text-sm font-extrabold text-slate-900">Rajesh Patel</h3>
+                <p class="text-xs font-bold text-[#c59b27] mt-0.5">Main Gate Head Guard</p>
+              </div>
+            </div>
+
+            <span class="px-2 py-0.5 rounded-full bg-emerald-900 text-emerald-300 text-[10px] font-bold">
+              • Post 01
+            </span>
+          </div>
+
+          <!-- Metadata Rows -->
+          <div class="mt-3.5 space-y-2 border-t border-[#f3ece2] pt-3">
+            <div class="flex items-center justify-between text-xs">
+              <div class="flex items-center gap-1.5 text-slate-500 font-medium">
+                <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                <span>Security Zone</span>
+              </div>
+              <span class="font-extrabold text-slate-900">Campus Entry & Boom Barrier</span>
+            </div>
+
+            <div class="flex items-center justify-between text-xs">
+              <div class="flex items-center gap-1.5 text-slate-500 font-medium">
+                <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 11c0 2 1.5 3.5 3.5 3.5a3.5 3.5 0 0 0 3.5-3.5c0-3.87-3.13-7-7-7s-7 3.13-7 7c0 1.93.78 3.68 2.05 4.95"/>
+                </svg>
+                <span>Biometric Gate</span>
+              </div>
+              <span class="font-extrabold text-slate-900">Lane 1 & 2 Active</span>
+            </div>
+          </div>
+
+          <!-- Action Button: Intercom Guardpost -->
+          <div class="mt-4 pt-1">
+            <button 
+              type="button" 
+              id="btn-intercom-guardpost"
+              class="w-full bg-[#fdfbf7] hover:bg-[#fbf2da]/70 border border-[#e3d5be]/60 text-[#a6801e] font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-2 transition cursor-pointer shadow-2xs"
+            >
+              <svg class="w-4 h-4 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+                <polygon points="11 6 15 10 11 14 11 6"/>
+              </svg>
+              <span>Intercom Guardpost</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- Staff Card 4: Vikram Singh (On Leave) -->
+        <article class="staff-card bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-sm transition hover:border-[#e3d5be]" data-cat="security">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-rose-500 shrink-0"></span>
+              <div>
+                <h3 class="text-sm font-extrabold text-slate-900">Vikram Singh</h3>
+                <p class="text-xs font-medium text-slate-500 mt-0.5">Night Security Guard</p>
+              </div>
+            </div>
+
+            <span class="px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700 text-[10px] font-bold">
+              On Leave (Medical)
+            </span>
+          </div>
+
+          <!-- Roster Substitution Box -->
+          <div class="mt-3.5 bg-slate-50 rounded-2xl p-3 border border-[#ede5d8]">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-slate-800">Roster Substitution</span>
+              <span class="px-2 py-0.5 rounded-full bg-emerald-800 text-emerald-100 text-[10px] font-bold">
+                Covered
+              </span>
+            </div>
+
+            <div class="flex items-center gap-2.5 bg-white rounded-xl p-2.5 border border-[#f3ece2] shadow-2xs">
+              <div class="w-8 h-8 rounded-full bg-[#fbf2da] text-[#a6801e] font-extrabold text-xs flex items-center justify-center shrink-0">
+                HK
+              </div>
+              <div class="min-w-0 flex-1">
+                <div class="text-xs font-extrabold text-slate-900 truncate">Sub-Guard Hemant K.</div>
+                <div class="text-[11px] text-slate-500 font-medium truncate">Shift Accepted & Verified</div>
+              </div>
+              <svg class="w-4 h-4 text-emerald-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+            </div>
+          </div>
+        </article>
+
+        <!-- Staff Card 5: Ram Prasad (Head Mess Cook) -->
+        <article class="staff-card bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-sm transition hover:border-[#e3d5be]" data-cat="kitchen">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0"></span>
+              <div>
+                <h3 class="text-sm font-extrabold text-slate-900">Ram Prasad</h3>
+                <p class="text-xs font-bold text-[#c59b27] mt-0.5">Head Mess Cook</p>
+              </div>
+            </div>
+
+            <span class="px-2.5 py-0.5 rounded-full bg-indigo-100 text-indigo-700 text-[10px] font-bold">
+              Kitchen Live
+            </span>
+          </div>
+
+          <!-- Metadata Rows -->
+          <div class="mt-3.5 space-y-2 border-t border-[#f3ece2] pt-3">
+            <div class="flex items-center justify-between text-xs">
+              <div class="flex items-center gap-1.5 text-slate-500 font-medium">
+                <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 2v6a3 3 0 0 1-3 3 3 3 0 0 1-3-3V2"/>
+                  <path d="M15 11v11"/>
+                  <path d="M6 2v20"/>
+                  <path d="M9 2v4a3 3 0 0 1-3 3"/>
+                </svg>
+                <span>Current Station</span>
+              </div>
+              <span class="font-extrabold text-slate-900">Central Mess (Dinner Prep)</span>
+            </div>
+
+            <div class="flex items-center justify-between text-xs">
+              <div class="flex items-center gap-1.5 text-slate-500 font-medium">
+                <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12 6 12 12 16 14"/>
+                </svg>
+                <span>Serving Schedule</span>
+              </div>
+              <span class="font-extrabold text-slate-900">20:00 - 22:30 (320 Residents)</span>
+            </div>
+          </div>
+
+          <!-- Action Button: View Menu Log -->
+          <div class="mt-4 pt-1">
+            <button 
+              type="button" 
+              id="btn-view-menu-log"
+              class="w-full bg-[#fdfbf7] hover:bg-[#fbf2da]/70 border border-[#e3d5be]/60 text-[#a6801e] font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-2 transition cursor-pointer shadow-2xs"
+            >
+              <svg class="w-4 h-4 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+              </svg>
+              <span>View Menu Log</span>
+            </button>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- 5. Upcoming Rotation Card -->
+      <section class="bg-gradient-to-r from-[#fdfbf7] to-[#fef8ea] rounded-3xl p-4 border border-[#ede4d5] shadow-sm relative overflow-hidden">
+        
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-1.5 text-[#a6801e]">
+            <!-- Moon Icon -->
+            <svg class="w-3.5 h-3.5 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+            <span class="text-[10px] font-extrabold uppercase tracking-wider">UPCOMING ROTATION</span>
+          </div>
+
+          <span class="text-xs font-bold text-slate-600">Starts 22:00</span>
+        </div>
+
+        <div class="mt-2.5">
+          <h3 class="text-sm font-black text-slate-900">Shift #3 • Night Watch</h3>
+          <p class="text-xs text-slate-500 font-medium">22:00 - 06:00 (Tomorrow Morning)</p>
+        </div>
+
+        <div class="mt-3.5 pt-3 border-t border-[#e3d5be]/60 flex items-center justify-between text-xs font-bold">
+          <div class="flex items-center gap-1.5 text-slate-700">
+            <svg class="w-3.5 h-3.5 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <span>4 Guards</span>
+          </div>
+
+          <div class="flex items-center gap-1.5 text-slate-700">
+            <svg class="w-3.5 h-3.5 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            <span>1 Night Warden</span>
+          </div>
+
+          <span class="text-emerald-700 font-extrabold text-[11px]">Lineup Confirmed</span>
+        </div>
+
+      </section>
+
+      <!-- 6. Sticky Floating Bottom Action Bar -->
+      <div class="pt-2">
+        <div class="flex items-center gap-2">
+          <!-- Main Action: Temp / Swap Shift -->
+          <button 
+            type="button" 
+            id="btn-swap-shift-open"
+            class="flex-1 bg-[#180d19] hover:bg-slate-800 text-white font-extrabold text-xs py-3 px-4 rounded-2xl flex items-center justify-center gap-2 transition cursor-pointer shadow-md"
+          >
+            <!-- Swap / Arrows icon -->
+            <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="m16 3 4 4-4 4"/>
+              <path d="M20 7H4"/>
+              <path d="m8 21-4-4 4-4"/>
+              <path d="M4 17h16"/>
+            </svg>
+            <span>Temp / Swap Shift</span>
+          </button>
+
+          <!-- Secondary Action: Export / Print Roster -->
+          <button 
+            type="button" 
+            id="btn-print-roster"
+            class="w-12 h-11 bg-white hover:bg-slate-50 border border-[#ede5d8] text-slate-700 font-bold text-xs rounded-2xl flex items-center justify-center transition cursor-pointer shadow-2xs"
+            title="Download/Export Shift Roster"
+          >
+            <svg class="w-4 h-4 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- 7. Sticky Bottom Navigation Bar -->
+    <nav class="hidden" style="display: none !important;">
+      
+      <!-- Tab 1: Overview -->
+      <a href="/dashboard.html" class="nav-tab flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+          <rect width="7" height="7" x="3" y="3" rx="1.5"/>
+          <rect width="7" height="7" x="14" y="3" rx="1.5"/>
+          <rect width="7" height="7" x="14" y="14" rx="1.5"/>
+          <rect width="7" height="7" x="3" y="14" rx="1.5"/>
+        </svg>
+        <span class="text-[10px] font-medium">Overview</span>
+      </a>
+
+      <!-- Tab 2: Rooms -->
+      <a href="/block-a.html" class="nav-tab flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        <span class="text-[10px] font-medium">Rooms</span>
+      </a>
+
+      <!-- Tab 3: Requests -->
+      <a href="/requests.html" class="nav-tab flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+        </svg>
+        <span class="text-[10px] font-medium">Requests</span>
+      </a>
+
+      <!-- Tab 4: Tenants (Active / Highlighted) -->
+      <a href="/tenants.html" class="nav-tab flex flex-col items-center gap-1 py-1 text-[#c59b27] transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <span class="text-[10px] font-bold">Tenants</span>
+      </a>
+
+    </nav>
+
+    <!-- ==================== MODALS ==================== -->
+
+    <!-- Modal 1: Temp / Swap Shift Modal -->
+    <div id="modal-swap-shift" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+      <div class="bg-white w-full max-w-[420px] rounded-t-3xl sm:rounded-3xl p-5 shadow-2xl border border-[#ede5d8] space-y-4">
+        
+        <div class="flex items-center justify-between border-b border-[#f3ece2] pb-3">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-[#fbf2da] text-[#c59b27] flex items-center justify-center">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h16"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-sm font-extrabold text-slate-900">Temporary Shift Swap</h3>
+              <p class="text-[11px] text-slate-500 font-medium">Reassign active roster duty with substitute</p>
+            </div>
+          </div>
+          <button type="button" id="btn-close-swap-modal" class="text-slate-400 hover:text-slate-600 text-lg font-bold">✕</button>
+        </div>
+
+        <form id="form-swap-shift" class="space-y-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Outgoing Staff Member</label>
+            <select id="swap-outgoing" class="w-full text-xs font-medium border border-[#ede5d8] rounded-xl px-3 py-2 bg-slate-50">
+              <option value="Sunil Deshmukh">Sunil Deshmukh (Chief Warden)</option>
+              <option value="Maria Santos">Maria Santos (Housekeeping Lead)</option>
+              <option value="Rajesh Patel">Rajesh Patel (Head Guard)</option>
+              <option value="Vikram Singh" selected>Vikram Singh (Night Security)</option>
+              <option value="Ram Prasad">Ram Prasad (Head Cook)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Assigned Substitute Staff</label>
+            <select id="swap-incoming" class="w-full text-xs font-medium border border-[#ede5d8] rounded-xl px-3 py-2 bg-slate-50">
+              <option value="Hemant K.">Sub-Guard Hemant K. (Verified Roster Reserve)</option>
+              <option value="Amit Varma">Amit Varma (Assistant Warden)</option>
+              <option value="Sanjay Roy">Sanjay Roy (Housekeeping Reserve)</option>
+              <option value="Kavita S.">Kavita S. (Kitchen Lead Relief)</option>
+            </select>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Effective Shift</label>
+              <select id="swap-shift-type" class="w-full text-xs font-medium border border-[#ede5d8] rounded-xl px-3 py-2 bg-slate-50">
+                <option value="shift2">Shift #2 (Evening 14:00-22:00)</option>
+                <option value="shift3" selected>Shift #3 (Night Watch 22:00-06:00)</option>
+                <option value="shift1">Shift #1 (Morning 06:00-14:00)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Handover Date</label>
+              <input type="date" id="swap-date" class="w-full text-xs font-medium border border-[#ede5d8] rounded-xl px-3 py-2 bg-slate-50" value="2026-10-29">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Supervisor Authorization Reason</label>
+            <textarea id="swap-reason" rows="2" class="w-full text-xs font-medium border border-[#ede5d8] rounded-xl p-2.5 bg-slate-50 focus:outline-[#c59b27]" placeholder="e.g. Medical emergency leave sanctioned with biometric handover protocol.">Medical leave coverage approved per Hostel Ops standard.</textarea>
+          </div>
+
+          <div class="pt-2">
+            <button type="submit" class="w-full bg-[#180d19] hover:bg-[#281424] hover:bg-[#c59b27] text-white font-bold text-xs py-3 rounded-xl transition cursor-pointer shadow-md">
+              Confirm & Dispatch Shift Swap
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+    <!-- Modal 2: Assign Task Modal -->
+    <div id="modal-assign-task" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+      <div class="bg-white w-full max-w-[420px] rounded-t-3xl sm:rounded-3xl p-5 shadow-2xl border border-[#ede5d8] space-y-4">
+        
+        <div class="flex items-center justify-between border-b border-[#f3ece2] pb-3">
+          <div>
+            <h3 class="text-sm font-extrabold text-slate-900">Direct Task Assignment</h3>
+            <p id="assign-staff-subtitle" class="text-[11px] text-[#c59b27] font-bold">Assign to Sunil Deshmukh</p>
+          </div>
+          <button type="button" id="btn-close-assign-modal" class="text-slate-400 hover:text-slate-600 text-lg font-bold">✕</button>
+        </div>
+
+        <form id="form-assign-task" class="space-y-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Operational Task Title</label>
+            <input type="text" id="task-title" class="w-full text-xs font-medium border border-[#ede5d8] rounded-xl px-3 py-2 bg-slate-50 focus:outline-[#c59b27]" value="Room 304 AC Water Leakage Visual Verification">
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Priority SLA</label>
+              <select id="task-priority" class="w-full text-xs font-medium border border-[#ede5d8] rounded-xl px-3 py-2 bg-slate-50">
+                <option value="Critical">Immediate (< 30 min)</option>
+                <option value="High" selected>High Priority (1 hr)</option>
+                <option value="Normal">Routine (Today)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">Sector / Floor</label>
+              <input type="text" id="task-sector" class="w-full text-xs font-medium border border-[#ede5d8] rounded-xl px-3 py-2 bg-slate-50" value="Block A - Floor 3">
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Instructions & Note</label>
+            <textarea id="task-instructions" rows="2" class="w-full text-xs font-medium border border-[#ede5d8] rounded-xl p-2.5 bg-slate-50 focus:outline-[#c59b27]">Coordinate with HVAC vendor tech arriving at 14:00. Ensure power isolation.</textarea>
+          </div>
+
+          <div class="pt-2">
+            <button type="submit" class="w-full bg-[#180d19] hover:bg-slate-800 text-white font-bold text-xs py-3 rounded-xl transition cursor-pointer shadow-md">
+              Dispatch Task via SMS & App Notification
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+    <!-- Modal 3: Intercom Guardpost Call Modal -->
+    <div id="modal-intercom" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+      <div class="bg-white w-full max-w-[360px] rounded-3xl p-6 shadow-2xl border border-[#ede5d8] text-center space-y-4">
+        
+        <div class="w-16 h-16 rounded-full bg-[#fbf2da] text-[#c59b27] mx-auto flex items-center justify-center relative">
+          <span class="absolute inset-0 rounded-full border-2 border-[#c59b27] ripple-effect"></span>
+          <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+            <polygon points="11 6 15 10 11 14 11 6"/>
+          </svg>
+        </div>
+
+        <div>
+          <h3 class="text-base font-extrabold text-slate-900">Intercom: Main Gate Post 01</h3>
+          <p class="text-xs text-[#c59b27] font-bold mt-0.5">Connecting to Guard Rajesh Patel...</p>
+          <p class="text-[11px] text-slate-500 mt-2">VoIP Secure Channel • Bitrate: 64kbps HD Audio</p>
+        </div>
+
+        <div class="pt-2 flex items-center justify-center gap-3">
+          <button type="button" id="btn-intercom-mute" class="w-11 h-11 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center font-bold">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="1" y1="1" x2="23" y2="23"/>
+              <path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V4a3 3 0 0 0-5.94-.6"/>
+              <path d="M17 16.95A7 7 0 0 1 5 12v-2m14 0v2a7 7 0 0 1-.11 1.23"/>
+              <line x1="12" y1="19" x2="12" y2="23"/>
+              <line x1="8" y1="23" x2="16" y2="23"/>
+            </svg>
+          </button>
+          <button type="button" id="btn-close-intercom" class="px-6 py-2.5 rounded-full bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold transition shadow-md">
+            End Call
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Modal 4: Housekeeping Active Tasks -->
+    <div id="modal-housekeeping" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+      <div class="bg-white w-full max-w-[420px] rounded-t-3xl sm:rounded-3xl p-5 shadow-2xl border border-[#ede5d8] space-y-4">
+        
+        <div class="flex items-center justify-between border-b border-[#f3ece2] pb-3">
+          <div>
+            <h3 class="text-sm font-extrabold text-slate-900">Maria Santos — 4 Active Missions</h3>
+            <p class="text-[11px] text-slate-500 font-medium">Housekeeping Shift #2 Live Queue</p>
+          </div>
+          <button type="button" id="btn-close-hk-modal" class="text-slate-400 hover:text-slate-600 text-lg font-bold">✕</button>
+        </div>
+
+        <div class="space-y-2.5 text-xs max-h-60 overflow-y-auto pr-1">
+          <div class="p-3 bg-[#fdfbf7]/70 border border-[#e3d5be]/70 rounded-xl">
+            <div class="flex items-center justify-between font-bold text-slate-900">
+              <span>1. Floor 3 Deep Inspection</span>
+              <span class="text-[#c59b27] text-[10px]">In Progress</span>
+            </div>
+            <p class="text-[11px] text-slate-600 mt-1">Audit Rooms 301, 302, 304 and verify dust filter sanitization.</p>
+          </div>
+
+          <div class="p-3 bg-slate-50 border border-[#ede5d8]/70 rounded-xl">
+            <div class="flex items-center justify-between font-bold text-slate-900">
+              <span>2. Common Restroom 3B Evening Prep</span>
+              <span class="text-amber-600 text-[10px]">Scheduled 15:30</span>
+            </div>
+            <p class="text-[11px] text-slate-600 mt-1">Disinfectant wash, refill liquid handsoap and trash liner reset.</p>
+          </div>
+
+          <div class="p-3 bg-slate-50 border border-[#ede5d8]/70 rounded-xl">
+            <div class="flex items-center justify-between font-bold text-slate-900">
+              <span>3. Ground Floor Reception Area Polishing</span>
+              <span class="text-slate-500 text-[10px]">Queue 17:00</span>
+            </div>
+            <p class="text-[11px] text-slate-600 mt-1">Floor buffer machine run before visitor evening roll call.</p>
+          </div>
+
+          <div class="p-3 bg-slate-50 border border-[#ede5d8]/70 rounded-xl">
+            <div class="flex items-center justify-between font-bold text-slate-900">
+              <span>4. Linen Stock Replenishment (Block B)</span>
+              <span class="text-slate-500 text-[10px]">Queue 19:00</span>
+            </div>
+            <p class="text-[11px] text-slate-600 mt-1">Transfer 45 laundered sheet pairs to Floor 2 supply depot.</p>
+          </div>
+        </div>
+
+        <button type="button" id="btn-close-hk-done" class="w-full bg-[#180d19] hover:bg-[#281424] hover:bg-[#c59b27] text-white font-bold text-xs py-2.5 rounded-xl transition cursor-pointer">
+          Dismiss Task Overview
+        </button>
+
+      </div>
+    </div>
+
+    <!-- Modal 5: Mess Menu Log -->
+    <div id="modal-menu-log" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
+      <div class="bg-white w-full max-w-[420px] rounded-t-3xl sm:rounded-3xl p-5 shadow-2xl border border-[#ede5d8] space-y-4">
+        
+        <div class="flex items-center justify-between border-b border-[#f3ece2] pb-3">
+          <div>
+            <h3 class="text-sm font-extrabold text-slate-900">Mess Hall Live Kitchen Log</h3>
+            <p class="text-[11px] text-slate-500 font-medium">Head Cook: Ram Prasad • Dinner Roster</p>
+          </div>
+          <button type="button" id="btn-close-menu-modal" class="text-slate-400 hover:text-slate-600 text-lg font-bold">✕</button>
+        </div>
+
+        <div class="space-y-3 text-xs">
+          <div class="bg-[#fdfbf7] p-3 rounded-xl border border-[#ede4d5]">
+            <div class="font-bold text-slate-900 mb-1">Tonight's Dinner Service (20:00 - 22:30)</div>
+            <ul class="list-disc list-inside text-slate-600 space-y-1">
+              <li>Fresh Chapati & Steamed Basmati Rice</li>
+              <li>Shahi Paneer Curry & Dal Tadka</li>
+              <li>Mixed Vegetable Poriyal</li>
+              <li>Vegetable Sweet Corn Soup</li>
+              <li>Gulab Jamun (1 pc per resident)</li>
+            </ul>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 text-center">
+            <div class="bg-slate-50 p-2.5 rounded-xl border border-[#ede5d8]">
+              <span class="text-[10px] text-slate-500 font-medium">Target Portions</span>
+              <div class="text-sm font-extrabold text-slate-900 mt-0.5">320 Meals</div>
+            </div>
+            <div class="bg-slate-50 p-2.5 rounded-xl border border-[#ede5d8]">
+              <span class="text-[10px] text-slate-500 font-medium">Pre-Prep Status</span>
+              <div class="text-sm font-extrabold text-emerald-600 mt-0.5">85% Complete</div>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" id="btn-close-menu-done" class="w-full bg-[#180d19] hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-xl transition cursor-pointer">
+          Close Kitchen Log
+        </button>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Client-side Logic Script -->
+  <script src="/js/shift-roster.js"></script>
+</body>
+</html>
+

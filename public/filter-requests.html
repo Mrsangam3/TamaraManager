@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>TAAMARA CO-LIVE — Filter Requests</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .font-serif-luxury { font-family: 'Playfair Display', Georgia, serif; }
+  </style>
+</head>
+<body class="bg-[#faf6f0] text-[#1c1917] antialiased min-h-screen flex flex-col font-sans select-none overflow-x-hidden">
+
+  <!-- Mobile Frame Container (Max 430px) -->
+  <div class="w-full max-w-5xl mx-auto space-y-6 pb-12">
+
+    <!-- 1. Header (Sticky Top) -->
+    <header class="bg-white/95 backdrop-blur-md px-4 py-3 border-b border-[#f3ece2] flex items-center justify-between sticky top-0 z-30">
+      <div class="w-8"></div>
+      <div class="text-center">
+        <h1 class="text-xs font-black text-slate-900 leading-tight font-serif-luxury">Requests Hub</h1>
+      </div>
+      <button
+        type="button"
+        id="btn-bell"
+        class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center relative transition cursor-pointer"
+        title="Notifications"
+      >
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+      </button>
+    </header>
+
+    <!-- Main Content Stream -->
+    <main class="flex-1 px-4 pt-3 space-y-4 text-xs">
+
+      <!-- 2. Sub-header (Back + Filter Title + Active Count + Reset All) -->
+      <section class="flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <a
+            href="/requests.html"
+            id="btn-back"
+            class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 transition cursor-pointer"
+            title="Back to Requests"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </a>
+          <div>
+            <h2 class="text-sm font-black text-slate-900 leading-tight font-serif-luxury">Filter Requests</h2>
+            <div class="flex items-center gap-1.5 mt-0.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#c59b27]"></span>
+              <span id="active-filters-count" class="text-[10px] font-bold text-[#c59b27]">3 filters active</span>
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          id="btn-reset-all"
+          class="px-3 py-1.5 rounded-full bg-[#fdfbf7] text-[#a6801e] hover:bg-[#fbf2da] font-extrabold text-xs transition cursor-pointer"
+        >
+          Reset All
+        </button>
+      </section>
+
+      <!-- 3. Search Bar -->
+      <section class="space-y-1">
+        <div class="relative flex items-center bg-white rounded-2xl border border-[#ede5d8]/90 shadow-2xs px-3.5 py-2.5 transition focus-within:border-[#c59b27] focus-within:ring-2 focus-within:ring-[#f5e5ba]">
+          <svg class="w-4 h-4 text-slate-400 shrink-0 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input
+            type="text"
+            id="filter-search-input"
+            value="201"
+            placeholder="Search by student, room, or pass..."
+            class="w-full text-xs font-bold text-slate-900 placeholder-slate-400 bg-transparent outline-none pr-6"
+          />
+          <button
+            type="button"
+            id="btn-clear-search"
+            class="absolute right-3 text-slate-400 hover:text-slate-600 transition cursor-pointer"
+            title="Clear Search"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"/>
+            </svg>
+          </button>
+        </div>
+        <div class="flex justify-between items-center text-[10px] px-1">
+          <span class="text-slate-400 font-medium">Searching across 38 requests</span>
+          <span class="font-black text-[#c59b27]">Matched: <span id="matched-count">3</span></span>
+        </div>
+      </section>
+
+      <!-- 4. Category: STATUS -->
+      <section class="space-y-1.5">
+        <div class="flex items-center justify-between text-[10px]">
+          <span class="font-black text-slate-400 uppercase tracking-wider">STATUS</span>
+          <span class="font-bold text-slate-400">Multi-select</span>
+        </div>
+        <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+          <button
+            type="button"
+            data-filter-group="status"
+            data-value="pending"
+            class="filter-pill active px-3.5 py-1.5 rounded-full bg-[#180d19] text-white font-extrabold text-[11px] shadow-xs cursor-pointer flex items-center gap-1.5 transition"
+          >
+            <span>✓</span>
+            <span>Pending</span>
+            <span class="bg-slate-700 text-white text-[9px] px-1.5 py-0.2 rounded-full">5</span>
+          </button>
+          <button
+            type="button"
+            data-filter-group="status"
+            data-value="approved"
+            class="filter-pill px-3.5 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 font-bold text-[11px] cursor-pointer flex items-center gap-1.5 transition"
+          >
+            <span>Approved</span>
+            <span class="bg-slate-100 text-slate-600 text-[9px] px-1.5 py-0.2 rounded-full">28</span>
+          </button>
+          <button
+            type="button"
+            data-filter-group="status"
+            data-value="rejected"
+            class="filter-pill px-3.5 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 font-bold text-[11px] cursor-pointer flex items-center gap-1.5 transition"
+          >
+            <span>Rejected</span>
+            <span class="bg-slate-100 text-slate-600 text-[9px] px-1.5 py-0.2 rounded-full">4</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- 5. Category: REQUEST TYPE -->
+      <section class="space-y-1.5">
+        <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider">REQUEST TYPE</span>
+        <div class="flex flex-wrap gap-1.5">
+          <button
+            type="button"
+            data-filter-group="type"
+            data-value="all"
+            class="filter-pill px-3 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 font-bold text-[11px] cursor-pointer transition"
+          >
+            All Types
+          </button>
+          <button
+            type="button"
+            data-filter-group="type"
+            data-value="night"
+            class="filter-pill active px-3 py-1.5 rounded-full bg-[#180d19] text-white font-extrabold text-[11px] shadow-xs cursor-pointer flex items-center gap-1.5 transition"
+          >
+            <span>🌙</span>
+            <span>Night Pass</span>
+          </button>
+          <button
+            type="button"
+            data-filter-group="type"
+            data-value="room"
+            class="filter-pill px-3 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 font-bold text-[11px] cursor-pointer flex items-center gap-1.5 transition"
+          >
+            <span>⇄</span>
+            <span>Room Change</span>
+          </button>
+          <button
+            type="button"
+            data-filter-group="type"
+            data-value="guest"
+            class="filter-pill px-3 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 font-bold text-[11px] cursor-pointer flex items-center gap-1.5 transition"
+          >
+            <span>🧳</span>
+            <span>Guest Entry</span>
+          </button>
+          <button
+            type="button"
+            data-filter-group="type"
+            data-value="maintenance"
+            class="filter-pill px-3 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 font-bold text-[11px] cursor-pointer flex items-center gap-1.5 transition"
+          >
+            <span>🔧</span>
+            <span>Maintenance</span>
+          </button>
+          <button
+            type="button"
+            data-filter-group="type"
+            data-value="vacation"
+            class="filter-pill px-3 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 font-bold text-[11px] cursor-pointer flex items-center gap-1.5 transition"
+          >
+            <span>✈️</span>
+            <span>Vacation / Leave</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- 6. Category: TIME RANGE -->
+      <section class="space-y-1.5">
+        <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider">TIME RANGE</span>
+        <div class="grid grid-cols-2 gap-2">
+          <button
+            type="button"
+            data-filter-group="time"
+            data-value="today"
+            class="filter-pill active py-2.5 px-3 rounded-2xl bg-[#180d19] text-white font-extrabold text-xs shadow-xs cursor-pointer flex items-center justify-center gap-1.5 transition"
+          >
+            <span>📅</span>
+            <span>Today</span>
+          </button>
+          <button
+            type="button"
+            data-filter-group="time"
+            data-value="week"
+            class="filter-pill py-2.5 px-3 rounded-2xl bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 font-bold text-xs cursor-pointer flex items-center justify-center gap-1.5 transition"
+          >
+            <span>📅</span>
+            <span>This Week</span>
+          </button>
+          <button
+            type="button"
+            data-filter-group="time"
+            data-value="weekend"
+            class="filter-pill py-2.5 px-3 rounded-2xl bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 font-bold text-xs cursor-pointer flex items-center justify-center gap-1.5 transition"
+          >
+            <span>🛋️</span>
+            <span>Upcoming Wknd</span>
+          </button>
+          <button
+            type="button"
+            data-filter-group="time"
+            data-value="custom"
+            class="filter-pill py-2.5 px-3 rounded-2xl bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 font-bold text-xs cursor-pointer flex items-center justify-center gap-1.5 transition"
+          >
+            <span>🗓️</span>
+            <span>Custom Picker</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- 7. Category: WING / BLOCK -->
+      <section class="space-y-1.5">
+        <span class="text-[10px] font-black text-slate-400 uppercase tracking-wider">WING / BLOCK</span>
+        <div class="grid grid-cols-4 gap-1.5">
+          <button
+            type="button"
+            data-filter-group="wing"
+            data-value="all"
+            class="filter-pill py-2 rounded-xl bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 font-bold text-xs cursor-pointer transition text-center"
+          >
+            All
+          </button>
+          <button
+            type="button"
+            data-filter-group="wing"
+            data-value="A"
+            class="filter-pill active py-2 rounded-xl bg-[#180d19] text-white font-extrabold text-xs shadow-xs cursor-pointer transition text-center"
+          >
+            Blk A
+          </button>
+          <button
+            type="button"
+            data-filter-group="wing"
+            data-value="B"
+            class="filter-pill py-2 rounded-xl bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 font-bold text-xs cursor-pointer transition text-center"
+          >
+            Blk B
+          </button>
+          <button
+            type="button"
+            data-filter-group="wing"
+            data-value="C"
+            class="filter-pill py-2 rounded-xl bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 font-bold text-xs cursor-pointer transition text-center"
+          >
+            Blk C
+          </button>
+        </div>
+      </section>
+
+      <!-- 8. Category: SLA & VERIFICATION -->
+      <section class="space-y-1.5">
+        <div class="flex items-center justify-between text-[10px]">
+          <span class="font-black text-slate-400 uppercase tracking-wider">SLA &amp; VERIFICATION</span>
+          <span class="font-bold text-rose-600 flex items-center gap-1">
+            <span>⚠</span>
+            <span>High priority</span>
+          </span>
+        </div>
+        <div class="flex flex-wrap gap-1.5">
+          <button
+            type="button"
+            data-filter-group="sla"
+            data-value="critical"
+            class="filter-pill active px-3 py-1.5 rounded-full bg-rose-100 text-rose-700 border border-rose-200 font-extrabold text-[11px] shadow-xs cursor-pointer flex items-center gap-1.5 transition"
+          >
+            <span>•</span>
+            <span>Critical SLA (&lt;1h)</span>
+          </button>
+          <button
+            type="button"
+            data-filter-group="sla"
+            data-value="confirmed"
+            class="filter-pill active px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-extrabold text-[11px] shadow-xs cursor-pointer flex items-center gap-1.5 transition"
+          >
+            <span>✓</span>
+            <span>Parent Confirmed</span>
+          </button>
+          <button
+            type="button"
+            data-filter-group="sla"
+            data-value="unverified"
+            class="filter-pill px-3 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 font-bold text-[11px] cursor-pointer flex items-center gap-1.5 transition"
+          >
+            <span>📋</span>
+            <span>Unverified</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- 9. Preview Results Section -->
+      <section class="space-y-2 pt-1">
+        <div class="flex items-center justify-between text-[10px]">
+          <div class="flex items-center gap-1.5">
+            <h3 class="font-black text-slate-900 text-xs">Preview Results</h3>
+            <span id="preview-results-badge" class="w-4 h-4 rounded-full bg-[#c59b27] text-white font-black text-[9px] flex items-center justify-center">
+              3
+            </span>
+          </div>
+          <span class="font-bold text-slate-400">Live updated</span>
+        </div>
+
+        <div id="preview-cards-container" class="space-y-2.5">
+          <!-- Card 1: Rohan Varma -->
+          <div class="preview-result-card bg-white rounded-2xl p-3 border border-[#f3ece2] shadow-2xs space-y-2">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
+                <h4 class="font-black text-slate-900 text-xs">Rohan Varma</h4>
+                <span class="bg-slate-100 text-slate-700 text-[9px] font-bold px-1.5 py-0.2 rounded">201-A</span>
+              </div>
+              <span class="px-2 py-0.5 rounded-full bg-[#fdfbf7] text-[#a6801e] text-[9px] font-extrabold">
+                • Pending
+              </span>
+            </div>
+            <div class="text-[10px] text-slate-500 flex items-center gap-1">
+              <span>🌙</span>
+              <span>Night Pass • Return: 10:30 PM</span>
+            </div>
+            <div class="flex items-center justify-between text-[10px] pt-0.5 border-t border-slate-50">
+              <span class="text-emerald-700 font-bold flex items-center gap-1">
+                <span>✓</span>
+                <span>Parent approval verified</span>
+              </span>
+              <span class="text-slate-400 text-[9px]">Oct 24, 7:15 PM</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Ananya Iyer -->
+          <div class="preview-result-card bg-white rounded-2xl p-3 border border-[#f3ece2] shadow-2xs space-y-2">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
+                <h4 class="font-black text-slate-900 text-xs">Ananya Iyer</h4>
+                <span class="bg-slate-100 text-slate-700 text-[9px] font-bold px-1.5 py-0.2 rounded">305-B</span>
+              </div>
+              <span class="px-2 py-0.5 rounded-full bg-[#fdfbf7] text-[#a6801e] text-[9px] font-extrabold">
+                • Verifying
+              </span>
+            </div>
+            <div class="text-[10px] text-slate-500 flex items-center gap-1">
+              <span>⇄</span>
+              <span>Room Change → Room 410-A</span>
+            </div>
+            <div class="flex items-center justify-between text-[10px] pt-0.5 border-t border-slate-50">
+              <span class="text-[#a6801e] font-bold flex items-center gap-1">
+                <span>🛡️</span>
+                <span>Warden inspection passed</span>
+              </span>
+              <span class="text-slate-400 text-[9px]">Oct 24, 5:40 PM</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Karan Patel -->
+          <div class="preview-result-card bg-white rounded-2xl p-3 border border-[#f3ece2] shadow-2xs space-y-2">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
+                <h4 class="font-black text-slate-900 text-xs">Karan Patel</h4>
+                <span class="bg-slate-100 text-slate-700 text-[9px] font-bold px-1.5 py-0.2 rounded">104</span>
+              </div>
+              <span class="px-2 py-0.5 rounded-full bg-rose-100 text-rose-700 text-[9px] font-extrabold">
+                • 1h SLA Urgency
+              </span>
+            </div>
+            <div class="text-[10px] text-slate-500 flex items-center gap-1">
+              <span>👥</span>
+              <span>Guest Pass • Overnight Stay</span>
+            </div>
+            <div class="flex items-center justify-between text-[10px] pt-0.5 border-t border-slate-50">
+              <span class="text-rose-600 font-bold flex items-center gap-1">
+                <span>⏱</span>
+                <span>Auto-escalates in 42 mins</span>
+              </span>
+              <span class="text-slate-400 text-[9px]">Oct 24, 6:50 PM</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 10. Sticky Bottom CTA Bar -->
+    <div class="mt-6 pt-4 border-t border-[#ede5d8] flex flex-col sm:flex-row items-center justify-end gap-3 w-full bg-white p-4 rounded-2xl shadow-xs">
+      <button
+        type="button"
+        id="btn-show-matching"
+        class="flex-1 py-3 bg-[#180d19] hover:bg-[#281424] hover:bg-[#c59b27] text-white rounded-xl font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md shadow-[#c59b27]/20 transition cursor-pointer"
+      >
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="4" y1="6" x2="20" y2="6"/>
+          <line x1="4" y1="12" x2="16" y2="12"/>
+          <line x1="4" y1="18" x2="10" y2="18"/>
+        </svg>
+        <span>Show <span id="cta-match-count">3</span> Matching Requests</span>
+      </button>
+
+      <button
+        type="button"
+        id="btn-save-preset"
+        class="w-11 h-11 rounded-xl bg-[#fdfbf7] hover:bg-[#fbf2da] text-[#a6801e] border border-[#e3d5be]/60 flex items-center justify-center shrink-0 transition cursor-pointer"
+        title="Save Filter Preset"
+      >
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Toast Notification -->
+    <div
+      id="toast"
+      class="fixed bottom-20 left-1/2 -translate-x-1/2 max-w-[380px] w-auto bg-[#180d19] text-white px-4 py-3 rounded-2xl shadow-2xl text-xs font-bold flex items-center gap-2.5 z-50 hidden transition-all duration-300"
+    >
+      <span class="w-2 h-2 rounded-full bg-[#d4a838]"></span>
+      <span id="toast-text">Filter applied</span>
+    </div>
+
+  </div>
+
+  <script src="/js/filter-requests.js"></script>
+</body>
+</html>
+

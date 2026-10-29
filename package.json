@@ -1,0 +1,18 @@
+{
+  "name": "tamara-manager",
+  "version": "1.0.0",
+  "description": "Tamara Website Manager Portal - Built with Node.js, Tailwind CSS, and JavaScript",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

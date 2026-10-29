@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TAAMARA CO-LIVE - Operations Hub</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            gold: {
+              50: '#fdfbf7',
+              100: '#fbf2da',
+              200: '#f5e5ba',
+              300: '#edd18e',
+              400: '#e1cb8f',
+              500: '#d4a838',
+              600: '#c59b27',
+              700: '#a6801e',
+              800: '#876717',
+              900: '#6d5212',
+            },
+            brand: {
+              gold: '#c59b27',
+              goldLight: '#fef8ea',
+              goldDark: '#a6801e',
+              border: '#ede4d5',
+            },
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.15); }
+    }
+    .live-dot {
+      animation: pulse-slow 2s infinite ease-in-out;
+    }
+    .font-serif-luxury { font-family: 'Playfair Display', Georgia, serif; }
+  </style>
+</head>
+<body class="bg-[#faf6f0] text-[#1c1917] antialiased min-h-screen flex flex-col font-sans select-none overflow-x-hidden">
+
+  <!-- Mobile / Frame Container -->
+  <div class="min-h-screen flex flex-col lg:flex-row w-full bg-[#faf6f0]">
+
+  <!-- Left Sidebar Navigation (Desktop Persistent lg:flex) -->
+    <!-- Left Sidebar Navigation (Desktop Persistent lg:flex) -->
+  <aside id="app-sidebar" class="hidden lg:flex lg:flex-col lg:w-72 lg:fixed lg:inset-y-0 lg:z-40 bg-[#180d19] text-white border-r border-[#261324] shadow-2xl transition-all duration-300">
+    <!-- Brand Header -->
+    <div class="h-20 flex items-center justify-between px-6 border-b border-[#261324] bg-[#140b15]">
+      <a href="/dashboard.html" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#eab308] to-[#b45309] flex items-center justify-center shadow-lg shadow-amber-900/30 border border-amber-300/40 relative">
+          <span class="text-xl font-black font-serif-luxury text-[#180d19]">T</span>
+          <span class="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 border-2 border-[#180d19] rounded-full live-dot"></span>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-base font-bold font-serif-luxury tracking-wide text-white">TAAMARA CO-LIVE</span>
+          </div>
+          <p class="text-[10px] font-semibold text-[#c099b9] tracking-wider uppercase">NANAKRAMGUDA, HYD</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- Live Telemetry / Gate Status Capsule -->
+    <div class="px-4 py-2.5 mx-4 my-3 rounded-2xl bg-[#241223] border border-[#351b33] flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 live-dot"></span>
+        <span class="text-xs font-semibold text-[#f5e6f2]">Biometric Gate Live</span>
+      </div>
+      <span class="px-2 py-0.5 rounded-lg text-[10px] font-bold bg-[#3b1d38] text-[#f5c5e8] border border-[#52294e]">
+        Admin PMS
+      </span>
+    </div>
+
+    <!-- Navigation Menu Items -->
+    <div class="flex-1 overflow-y-auto px-4 py-2 space-y-6 no-scrollbar">
+      <div>
+        <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-[#9d7897] mb-2 font-sans">MANAGEMENT</p>
+        <nav class="space-y-1">
+          <a href="/dashboard.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold text-white bg-[#2d1729] border border-[#5c304f] shadow-md transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-[#eab308]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              <span>Dashboard Overview</span>
+            </div>
+            <span class="text-[10px] font-bold text-[#eab308]">Active</span>
+          </a>
+
+          <a href="/tenants.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span>Residents Directory</span>
+            </div>
+            <span class="text-[10px] px-2 py-0.5 rounded-md bg-[#251221] text-[#e5d5e2] font-bold">68</span>
+          </a>
+
+          <div class="space-y-1">
+            <a href="/occupancy.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+              <div class="flex items-center gap-3">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                <span>Rooms &amp; Sharing</span>
+              </div>
+              <span class="text-[10px] px-2 py-0.5 rounded-md bg-[#064e3b] text-[#34d399] font-bold">7 Beds Free</span>
+            </a>
+            <div class="hidden" style="display: none !important;">
+              <div class="flex items-center justify-between py-1 px-2 rounded-lg hover:bg-[#251221] cursor-pointer">
+                <span>› Floor 1 (Ground)</span>
+                <span class="px-1.5 py-0.2 rounded bg-[#351b31] text-[#e0cfdd] font-semibold text-[10px]">86%</span>
+              </div>
+              <div class="flex items-center justify-between py-1 px-2 rounded-lg hover:bg-[#251221] cursor-pointer">
+                <span>› Floor 2 (Premium)</span>
+                <span class="px-1.5 py-0.2 rounded bg-[#064e3b] text-[#34d399] font-semibold text-[10px]">5 Free</span>
+              </div>
+              <div class="flex items-center justify-between py-1 px-2 rounded-lg hover:bg-[#251221] cursor-pointer">
+                <span>› Floor 3 (Penthouse)</span>
+                <span class="px-1.5 py-0.2 rounded bg-[#064e3b] text-[#34d399] font-semibold text-[10px]">7 Free</span>
+              </div>
+              <a href="/occupancy.html" class="block py-1 px-2 text-[#eab308] hover:underline font-bold text-[11px] cursor-pointer">
+                + Add New Room
+              </a>
+            </div>
+          </div>
+
+          <a href="/operations.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+              <span>Operations Control</span>
+            </div>
+          </a>
+
+          <a href="/requests.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4M12 16h4M8 11h.01M8 16h.01"/></svg>
+              <span>Requests Desk</span>
+            </div>
+            <span class="text-[10px] px-2 py-0.5 rounded-md bg-[#991b1b] text-white font-extrabold">3 Active</span>
+          </a>
+        </nav>
+      </div>
+
+      <div>
+        <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-[#9d7897] mb-2 font-sans">COMMS &amp; SAFETY</p>
+        <nav class="space-y-1">
+          <a href="/broadcast.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-[#eab308]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+              <span>Broadcast Notice</span>
+            </div>
+          </a>
+
+          <a href="/notifications.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-purple-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+              <span>Notifications</span>
+            </div>
+            <span class="text-[10px] px-2 py-0.5 rounded-md bg-[#701a75] text-[#fae8ff] font-extrabold">4</span>
+          </a>
+
+          <a href="/security-permissions.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <span>Security &amp; Roles</span>
+            </div>
+          </a>
+
+          <a href="/help-support.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-amber-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>Help &amp; Support</span>
+            </div>
+          </a>
+
+          <a href="/more.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><circle cx="4" cy="4" r="2"/><circle cx="12" cy="4" r="2"/><circle cx="20" cy="4" r="2"/><circle cx="4" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="20" cy="12" r="2"/><circle cx="4" cy="20" r="2"/><circle cx="12" cy="20" r="2"/><circle cx="20" cy="20" r="2"/></svg>
+              <span>More &amp; Governance</span>
+            </div>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Campus Wings -->
+      <div class="pt-2 border-t border-[#261324]">
+        <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-[#9d7897] mb-2 font-sans">CAMPUS WINGS</p>
+        <div class="grid grid-cols-2 gap-2">
+          <a href="/block-a.html" class="py-2 px-2.5 rounded-xl bg-[#251222] border border-[#381c34] text-[11px] font-bold text-[#d4b8cf] hover:text-white hover:bg-[#341830] text-center transition cursor-pointer">
+            Block A (96) &rarr;
+          </a>
+          <a href="/block-b.html" class="py-2 px-2.5 rounded-xl bg-[#251222] border border-[#381c34] text-[11px] font-bold text-[#d4b8cf] hover:text-white hover:bg-[#341830] text-center transition cursor-pointer">
+            Block B (80) &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Manager Profile Footer -->
+    <div class="p-4 border-t border-[#261324] bg-[#140b15]">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-[#f59e0b] text-[#180d19] font-serif-luxury font-black text-sm flex items-center justify-center border-2 border-[#b45309] shadow-sm">
+            AM
+          </div>
+          <div class="truncate">
+            <p class="text-xs font-bold text-white truncate">Alex Morgan</p>
+            <p class="text-[10px] text-[#c099b9] font-medium">Super Admin • Sunrise</p>
+            <p class="text-[9px] text-[#865d80]">TAAMARA Admin Portal</p>
+          </div>
+        </div>
+        <a href="/logout-confirmation.html" class="p-2 rounded-lg text-[#ad8caa] hover:text-rose-400 hover:bg-[#281424] transition cursor-pointer" title="Sign Out">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </a>
+      </div>
+    </div>
+  </aside>
+  
+  <div class="flex-1 flex flex-col lg:pl-72 min-w-0 bg-[#faf6f0] min-h-screen">
+    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex-1 space-y-6">
+    
+    <!-- Toast Notification Banner -->
+    <div id="toast" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-2.5 rounded-2xl bg-slate-900 text-white text-xs font-semibold shadow-xl flex items-center gap-2 transition duration-300">
+      <span id="toast-text">Action completed</span>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 px-4 pt-5 pb-6 space-y-4">
+
+      <!-- 1. Header -->
+      <header class="flex items-center justify-between">
+        <div>
+          <h1 class="text-sm font-extrabold text-slate-900 tracking-tight leading-none font-serif-luxury">TAAMARA CO-LIVE</h1>
+          <p class="text-[11px] font-medium text-slate-400 mt-0.5">Operations</p>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 live-dot"></span>
+        </div>
+      </header>
+
+      <!-- 2. Section Title & Date Picker -->
+      <section class="flex items-center justify-between pt-1">
+        <div>
+          <h2 class="text-xl sm:text-[22px] font-extrabold text-slate-900 tracking-tight font-serif-luxury">
+            Hostel Operations
+          </h2>
+          <div class="flex items-center gap-1.5 text-xs text-slate-500 mt-1">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span class="font-medium">All services live • North Campus Wing</span>
+          </div>
+        </div>
+
+        <!-- Date Selector Pill -->
+        <button
+          type="button"
+          id="date-picker-btn"
+          class="bg-[#fdfbf7]/80 hover:bg-[#fbf2da] border border-[#ede4d5]/90 rounded-2xl px-3 py-1.5 flex items-center gap-2 text-xs font-bold text-slate-800 shadow-xs transition cursor-pointer"
+        >
+          <!-- Calendar Icon -->
+          <svg class="w-3.5 h-3.5 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          <div class="flex flex-col text-left leading-tight">
+            <span class="text-[9px] font-semibold text-slate-500">Today,</span>
+            <span class="text-xs font-bold text-slate-800">Oct 24</span>
+          </div>
+          <!-- Chevron Down -->
+          <svg class="w-3 h-3 text-slate-400 ml-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+      </section>
+
+      <!-- 3. Top 2 Mini Stat Cards -->
+      <section class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        
+        <!-- Mini Card 1: OCCUPANCY -->
+        <div class="bg-white rounded-2xl p-3 border border-[#f3ece2] shadow-xs flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-[#fbf2da]/80 flex items-center justify-center text-[#c59b27] shrink-0">
+            <!-- Bed Icon -->
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v9"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-[10px] font-bold text-slate-400 tracking-wider uppercase">OCCUPANCY</p>
+            <p id="op-occupancy" class="text-sm font-extrabold text-slate-900 mt-0.5">92.4%</p>
+          </div>
+        </div>
+
+        <!-- Mini Card 2: PRIORITY ALERTS -->
+        <div class="bg-white rounded-2xl p-3 border border-[#f3ece2] shadow-xs flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-rose-100/80 flex items-center justify-center text-rose-600 shrink-0">
+            <!-- Exclamation Icon -->
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+          </div>
+          <div>
+            <p class="text-[10px] font-bold text-slate-400 tracking-wider uppercase">PRIORITY ALERTS</p>
+            <p id="op-alerts" class="text-sm font-extrabold text-rose-600 mt-0.5">4 Active</p>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- 4. Section Card 1: Room & Bed Allocation -->
+      <section class="bg-white rounded-2xl p-4 border border-[#f3ece2] shadow-xs">
+        <div class="flex items-start justify-between gap-3">
+          <div class="flex items-start gap-3">
+            <div class="w-9 h-9 rounded-xl bg-[#fbf2da]/80 flex items-center justify-center text-[#c59b27] shrink-0 mt-0.5">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v9"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">Room & Bed Allocation</h3>
+              <p class="text-[11px] text-slate-500 font-medium mt-0.5">24 Vacant Beds • 12 Rooms available</p>
+            </div>
+          </div>
+          <span class="px-2.5 py-0.5 rounded-full bg-[#fdfbf7] text-[#a6801e] text-[10px] font-bold border border-[#ede4d5] shrink-0">
+            Block A • B • C
+          </span>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden my-3">
+          <div class="bg-[#c59b27] h-full rounded-full" style="width: 80%;"></div>
+        </div>
+
+        <div class="flex items-center justify-between pt-1">
+          <p class="text-xs text-slate-500 font-medium max-w-[150px] leading-tight">
+            Ready for check-in today: 9 beds
+          </p>
+          <button
+            type="button"
+            id="btn-allocate-bed"
+            class="bg-[#180d19] hover:bg-[#281424] hover:bg-[#c59b27] text-white font-bold text-xs py-2 px-3.5 rounded-xl flex items-center gap-1.5 shadow-xs transition cursor-pointer"
+          >
+            <!-- Compass / Allocation Icon -->
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+            </svg>
+            <span>Allocate Bed</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- 5. Section Card 2: Complaints & Grievances -->
+      <section class="bg-white rounded-2xl p-4 border border-[#f3ece2] shadow-xs">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-rose-100/80 flex items-center justify-center text-rose-600 shrink-0">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2">
+              <h3 class="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">Complaints & Grievances</h3>
+              <span class="px-2 py-0.5 rounded-full bg-rose-100 text-rose-600 text-[10px] font-bold">
+                • 3 Open
+              </span>
+              <span class="px-2 py-0.5 rounded-full bg-[#fbf2da] text-[#a6801e] text-[10px] font-bold">
+                1 Escalated
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tag Pills -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar my-3">
+          <span class="shrink-0 bg-slate-50 border border-[#ede5d8]/90 text-slate-700 text-xs font-semibold px-2.5 py-1 rounded-lg flex items-center gap-1.5 shadow-2xs">
+            <!-- Wrench -->
+            <svg class="w-3 h-3 text-rose-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            <span>Plumbing (Rm 204)</span>
+          </span>
+          <span class="shrink-0 bg-slate-50 border border-[#ede5d8]/90 text-slate-700 text-xs font-semibold px-2.5 py-1 rounded-lg flex items-center gap-1.5 shadow-2xs">
+            <!-- Bolt -->
+            <svg class="w-3 h-3 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span>Electrician (Floor 3)</span>
+          </span>
+          <span class="shrink-0 bg-slate-50 border border-[#ede5d8]/90 text-slate-700 text-xs font-semibold px-2.5 py-1 rounded-lg flex items-center gap-1.5 shadow-2xs">
+            <!-- Wifi -->
+            <svg class="w-3 h-3 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h.01"/><path d="M2 8.82a15 15 0 0 1 20 0"/><path d="M5 12.859a10 10 0 0 1 14 0"/><path d="M8.5 16.429a5 5 0 0 1 7 0"/></svg>
+            <span>Wi-Fi Mesh Node 2</span>
+          </span>
+        </div>
+
+        <div class="flex items-center justify-between pt-1">
+          <p class="text-xs text-rose-500 font-bold">Avg turnaround: 38 mins</p>
+          <a
+            href="/resolve-tickets.html"
+            id="btn-resolve-tickets"
+            class="bg-[#180d19] hover:bg-slate-800 text-white font-bold text-xs py-2 px-3.5 rounded-xl flex items-center gap-1.5 shadow-xs transition cursor-pointer"
+          >
+            <!-- External / Arrow Icon -->
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              <polyline points="15 3 21 3 21 9"/>
+              <line x1="10" y1="14" x2="21" y2="3"/>
+            </svg>
+            <span>Resolve Tickets</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 6. Section Card 3: Housekeeping -->
+      <section class="bg-white rounded-2xl p-4 border border-[#f3ece2] shadow-xs">
+        <div class="flex items-start gap-3">
+          <div class="w-9 h-9 rounded-xl bg-emerald-100/80 flex items-center justify-center text-emerald-600 shrink-0">
+            <!-- Sparkles / Broom Icon -->
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">Housekeeping</h3>
+            <p class="text-[11px] text-slate-500 font-medium mt-0.5">14/18 Floors Cleaned • 4 In Progress</p>
+          </div>
+        </div>
+
+        <!-- 3-Column Metrics Box -->
+        <div class="bg-[#fdfbf7] rounded-xl p-2.5 grid grid-cols-3 text-center my-3 border border-[#ede4d5]/60">
+          <div>
+            <p class="text-[10px] text-slate-500 font-medium">Completed</p>
+            <p class="text-xs font-extrabold text-emerald-600 mt-0.5">14 Floors</p>
+          </div>
+          <div class="border-x border-[#e3d5be]/60">
+            <p class="text-[10px] text-slate-500 font-medium">Sanitizing</p>
+            <p class="text-xs font-extrabold text-[#c59b27] mt-0.5">4 Floors</p>
+          </div>
+          <div>
+            <p class="text-[10px] text-slate-500 font-medium">Turnover Delay</p>
+            <p class="text-xs font-extrabold text-slate-800 mt-0.5">None</p>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-1">
+          <p class="text-xs text-slate-500 font-medium">Shift Lead: Maria Santos</p>
+          <a
+            href="/inspect-rooms.html"
+            id="btn-inspect-rooms"
+            class="bg-white border border-[#e3d5be] hover:bg-[#fdfbf7] text-[#c59b27] font-bold text-xs py-2 px-3 rounded-xl flex items-center gap-1.5 shadow-2xs transition cursor-pointer"
+          >
+            <!-- Check Icon -->
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            <span>Inspect Rooms</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 7. Section Card 4: Maintenance Tasks -->
+      <section class="bg-white rounded-2xl p-4 border border-[#f3ece2] shadow-xs">
+        <div class="flex items-start gap-3">
+          <div class="w-9 h-9 rounded-xl bg-[#fbf2da]/80 flex items-center justify-center text-[#c59b27] shrink-0">
+            <!-- Crossed Tools Icon -->
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">Maintenance Tasks</h3>
+            <p class="text-[11px] text-slate-500 font-medium mt-0.5">2 Pending Technicians scheduled for 2 PM</p>
+          </div>
+        </div>
+
+        <!-- Task Banner Box -->
+        <div class="bg-[#fdfbf7] rounded-xl p-3 flex items-center justify-between my-3 border border-[#ede4d5]/60">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <div class="w-7 h-7 rounded-full bg-[#f5e5ba]/80 flex items-center justify-center text-[#a6801e] shrink-0">
+              <!-- Clock Icon -->
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <h4 class="text-xs font-bold text-slate-900 truncate">Water Pump Overhaul & HVAC Filter</h4>
+              <p class="text-[11px] text-slate-500 truncate">Vendor: Apex Facility Solutions</p>
+            </div>
+          </div>
+          <span class="px-2.5 py-1 rounded-full bg-[#fbf2da] text-[#876717] text-[10px] font-bold shrink-0">
+            Slot 14:00
+          </span>
+        </div>
+
+        <div class="flex items-center justify-between pt-1">
+          <p class="text-xs text-slate-500 font-medium">Gate access pass generated</p>
+          <a
+            href="/manage-schedule.html"
+            id="btn-manage-schedule"
+            class="bg-[#fdfbf7] hover:bg-[#fbf2da] border border-[#e3d5be]/60 text-[#a6801e] font-bold text-xs py-2 px-3 rounded-xl flex items-center gap-1.5 shadow-2xs transition cursor-pointer"
+          >
+            <!-- Calendar Icon -->
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <span>Manage Schedule</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 8. Section Card 5: Daily Food Menu -->
+      <section class="bg-white rounded-2xl p-4 border border-[#f3ece2] shadow-xs">
+        <div class="flex items-start gap-3">
+          <div class="w-9 h-9 rounded-xl bg-[#fbf2da]/80 flex items-center justify-center text-[#c59b27] shrink-0">
+            <!-- Utensils Icon -->
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 2v6a3 3 0 0 1-3 3 3 3 0 0 1-3-3V2"/>
+              <path d="M15 11v11"/>
+              <path d="M6 2v20"/>
+              <path d="M9 2v4a3 3 0 0 1-3 3"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">Daily Food Menu</h3>
+            <p class="text-[11px] text-emerald-600 font-bold mt-0.5">Mess Hall: Open • 348 meals served</p>
+          </div>
+        </div>
+
+        <!-- Menu Box -->
+        <div class="bg-[#fdfbf7] rounded-xl p-3 space-y-1.5 my-3 text-xs border border-[#ede4d5]/60">
+          <div class="flex items-start gap-2">
+            <span class="font-bold text-slate-800 w-12 shrink-0">Lunch</span>
+            <span class="text-slate-600">Dal Makhani, Paneer, Rice</span>
+          </div>
+          <div class="flex items-start gap-2">
+            <span class="font-bold text-slate-800 w-12 shrink-0">Dinner</span>
+            <span class="text-slate-600">Chapati, Mixed Veg, Soup</span>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-1">
+          <p class="text-xs text-slate-500 font-medium">Feedback score: 4.6 / 5.0</p>
+          <a
+            href="/update-menu.html"
+            id="btn-update-menu"
+            class="bg-[#180d19] hover:bg-[#281424] hover:bg-[#c59b27] text-white font-bold text-xs py-2 px-3.5 rounded-xl flex items-center gap-1.5 shadow-xs transition cursor-pointer"
+          >
+            <!-- Edit Icon -->
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 20h9"/>
+              <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+            </svg>
+            <span>Update Menu</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 9. Section Card 6: Staff Operations & Shifts -->
+      <section class="bg-white rounded-2xl p-4 border border-[#f3ece2] shadow-xs">
+        <div class="flex items-start gap-3">
+          <div class="w-9 h-9 rounded-xl bg-[#fbf2da]/80 flex items-center justify-center text-[#c59b27] shrink-0">
+            <!-- ID Card / Users Icon -->
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="16" rx="3"/>
+              <circle cx="9" cy="10" r="2"/>
+              <path d="M15 8h2m-2 4h2M7 16h10"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">Staff Operations & Shifts</h3>
+            <p class="text-[11px] text-slate-500 font-medium mt-0.5">6 Staff on Duty • 1 On Leave</p>
+          </div>
+        </div>
+
+        <!-- Badges Grid -->
+        <div class="flex flex-wrap gap-2 my-3">
+          <span class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200">
+            • Warden (Active)
+          </span>
+          <span class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200">
+            • Security (2)
+          </span>
+          <span class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200">
+            • Cooks (3)
+          </span>
+          <span class="inline-flex items-center px-3 py-1 rounded-full bg-rose-50 text-rose-700 text-xs font-semibold border border-rose-200">
+            • 1 Leave (Night Guard)
+          </span>
+        </div>
+
+        <div class="flex items-center justify-between pt-1">
+          <p class="text-xs text-slate-500 font-medium">Next roster switch: 18:00</p>
+          <a
+            href="/shift-roster.html"
+            id="btn-shift-roster"
+            class="bg-[#fdfbf7] hover:bg-[#fbf2da] border border-[#e3d5be]/60 text-[#a6801e] font-bold text-xs py-2 px-3 rounded-xl flex items-center gap-1.5 shadow-2xs transition cursor-pointer"
+          >
+            <!-- Calendar Icon -->
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <span>Shift Roster</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 10. Section Card 7: Rent & Dues Collections -->
+      <section class="bg-white rounded-2xl p-4 border border-[#f3ece2] shadow-xs">
+        <div class="flex items-start gap-3">
+          <div class="w-9 h-9 rounded-xl bg-emerald-100/80 flex items-center justify-center text-emerald-600 shrink-0">
+            <!-- Banknote Icon -->
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect width="20" height="12" x="2" y="6" rx="2"/>
+              <circle cx="12" cy="12" r="2"/>
+              <path d="M6 12h.01M18 12h.01"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">Rent & Dues Collections</h3>
+            <p class="text-[11px] text-slate-500 font-medium mt-0.5">Month-to-date performance</p>
+          </div>
+        </div>
+
+        <!-- Financial Summary Grid -->
+        <div class="bg-[#fdfbf7] rounded-xl p-3 grid grid-cols-2 gap-4 my-3 border border-[#ede4d5]/60">
+          <div>
+            <p class="text-[11px] text-slate-500 font-semibold">Collected</p>
+            <p class="text-lg font-extrabold text-emerald-600 mt-0.5">₹18,450</p>
+            <p class="text-[10px] text-slate-500">89% target met</p>
+          </div>
+          <div>
+            <p class="text-[11px] text-slate-500 font-semibold">Pending</p>
+            <p class="text-lg font-extrabold text-rose-600 mt-0.5">₹2,200</p>
+            <p class="text-[10px] text-slate-500">7 overdue tenants</p>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between pt-1">
+          <p class="text-xs text-slate-500 font-medium">Auto-reconciliation synced</p>
+          <a
+            href="/bulk-reminders.html"
+            id="btn-send-reminders"
+            class="bg-[#180d19] hover:bg-[#281424] hover:bg-[#c59b27] text-white font-bold text-xs py-2.5 px-3.5 rounded-xl flex items-center gap-1.5 shadow-xs transition cursor-pointer"
+          >
+            <!-- Megaphone / Send Icon -->
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="m22 2-7 20-4-9-9-4Z"/>
+              <path d="M22 2 11 13"/>
+            </svg>
+            <span>Send Bulk Reminders</span>
+          </a>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 11. Sticky Bottom Navigation Bar -->
+    <nav class="hidden" style="display: none !important;">
+      
+      <!-- Tab 1: Home -->
+      <a href="/dashboard.html" class="nav-tab flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+          <rect width="7" height="7" x="3" y="3" rx="1.5"/>
+          <rect width="7" height="7" x="14" y="3" rx="1.5"/>
+          <rect width="7" height="7" x="14" y="14" rx="1.5"/>
+          <rect width="7" height="7" x="3" y="14" rx="1.5"/>
+        </svg>
+        <span class="text-[10px] font-medium">Home</span>
+      </a>
+
+      <!-- Tab 2: Tenants -->
+      <a href="/tenants.html" class="nav-tab flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <span class="text-[10px] font-medium">Tenants</span>
+      </a>
+
+      <!-- Tab 3: Operations (ACTIVE) -->
+      <a href="/operations.html" class="nav-tab active flex flex-col items-center gap-1 py-1 text-[#c59b27] transition cursor-pointer">
+        <!-- Layers Icon Active -->
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+          <polyline points="2 17 12 22 22 17"/>
+          <polyline points="2 12 12 17 22 12"/>
+        </svg>
+        <span class="text-[10px] font-bold">Operations</span>
+      </a>
+
+      <!-- Tab 4: Requests (with badge 3) -->
+      <a href="/requests.html" class="nav-tab flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer relative">
+        <div class="relative">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/>
+            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+            <path d="M12 11h4M12 16h4M8 11h.01M8 16h.01"/>
+          </svg>
+          <span class="w-3.5 h-3.5 rounded-full bg-rose-500 text-white text-[9px] font-bold flex items-center justify-center absolute -top-1 -right-2">
+            3
+          </span>
+        </div>
+        <span class="text-[10px] font-medium">Requests</span>
+      </a>
+
+      <!-- Tab 5: More -->
+      <a href="/more.html" class="nav-tab flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+          <circle cx="4" cy="4" r="2"/>
+          <circle cx="12" cy="4" r="2"/>
+          <circle cx="20" cy="4" r="2"/>
+          <circle cx="4" cy="12" r="2"/>
+          <circle cx="12" cy="12" r="2"/>
+          <circle cx="20" cy="12" r="2"/>
+          <circle cx="4" cy="20" r="2"/>
+          <circle cx="12" cy="20" r="2"/>
+          <circle cx="20" cy="20" r="2"/>
+        </svg>
+        <span class="text-[10px] font-medium">More</span>
+      </a>
+
+    </nav>
+
+  </div>
+
+  <!-- Client-side JavaScript -->
+    </div>
+  </div>
+
+  <script src="/js/operations.js"></script>
+</body>
+</html>
+

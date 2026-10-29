@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TAAMARA CO-LIVE - Bulk Reminder Dispatch</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            gold: {
+              50: '#fdfbf7',
+              100: '#fbf2da',
+              200: '#f5e5ba',
+              300: '#edd18e',
+              400: '#e1cb8f',
+              500: '#d4a838',
+              600: '#c59b27',
+              700: '#a6801e',
+              800: '#876717',
+              900: '#6d5212',
+            },
+            brand: {
+              gold: '#c59b27',
+              goldLight: '#fef8ea',
+              goldDark: '#a6801e',
+              border: '#ede4d5',
+            },
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.15); }
+    }
+    .live-dot {
+      animation: pulse-slow 2s infinite ease-in-out;
+    }
+    .font-serif-luxury { font-family: 'Playfair Display', Georgia, serif; }
+  </style>
+</head>
+<body class="bg-[#faf6f0] text-[#1c1917] antialiased min-h-screen flex flex-col font-sans select-none overflow-x-hidden">
+
+  <!-- Mobile / Frame Container -->
+  <div class="w-full max-w-5xl mx-auto space-y-6 pb-12">
+    
+    <!-- Toast Notification Banner -->
+    <div id="toast" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-2.5 rounded-2xl bg-slate-900 text-white text-xs font-semibold shadow-xl flex items-center gap-2 transition duration-300">
+      <span id="toast-text">Action completed</span>
+    </div>
+
+    <!-- 1. Top Hub Header -->
+    <header class="bg-white px-4 py-3.5 border-b border-[#f3ece2] flex items-center justify-between sticky top-0 z-30">
+      <div class="flex items-center gap-3">
+        <!-- Back Button returning to Operations Hub -->
+        <a href="/operations.html" id="back-btn" class="w-8 h-8 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-700 transition cursor-pointer">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </a>
+        <div>
+          <span class="text-[9px] font-extrabold text-[#c59b27] uppercase tracking-wider block">TAAMARA HUB</span>
+          <h1 class="text-xs font-extrabold text-slate-900 tracking-tight leading-none mt-0.5 font-serif-luxury">Rent &amp; Dues Collections</h1>
+        </div>
+      </div>
+      <!-- Notification Bell -->
+      <button type="button" id="btn-bell" class="w-8 h-8 rounded-full bg-[#fdfbf7] hover:bg-[#fbf2da] text-[#a6801e] flex items-center justify-center transition cursor-pointer relative" title="Notifications">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+        </svg>
+        <span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+      </button>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 px-4 pt-3.5 space-y-4">
+
+      <!-- Breadcrumbs & Section Title -->
+      <div>
+        <nav class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 flex items-center gap-1">
+          <a href="/operations.html" class="hover:text-[#c59b27] transition">OPERATIONS HUB</a>
+          <span>&gt;</span>
+          <span class="text-slate-600">RENT &amp; DUES COLLECTIONS</span>
+        </nav>
+        <div class="flex items-center justify-between mt-1">
+          <h2 class="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight leading-tight font-serif-luxury">Bulk Reminder Dispatch</h2>
+          <!-- Action Required Badge -->
+          <span class="px-2.5 py-1 rounded-full bg-rose-50 border border-rose-200/70 text-rose-700 text-[10px] font-extrabold flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-rose-600 live-dot"></span>
+            <span>Action Required</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- 2. Total Outstanding Dues Dark Hero Card -->
+      <section class="bg-[#180d19] text-white rounded-3xl p-5 border border-slate-800/80 shadow-lg relative overflow-hidden space-y-3.5">
+        <!-- Background subtle glow -->
+        <div class="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-[#c59b27]/10 blur-2xl pointer-events-none"></div>
+
+        <div class="flex items-start justify-between relative z-10">
+          <div>
+            <span class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 block">TOTAL OUTSTANDING DUES</span>
+            <div class="flex items-center gap-2 mt-1">
+              <span class="text-3xl font-black text-white leading-none tracking-tight">₹2,200</span>
+              <span id="tenant-count-badge" class="px-2.5 py-0.5 rounded-full bg-rose-950/80 text-rose-300 border border-rose-800/50 text-[11px] font-bold">
+                7 Tenants
+              </span>
+            </div>
+          </div>
+          <!-- Clipboard Icon -->
+          <div class="w-10 h-10 rounded-2xl bg-slate-800/80 text-[#d4a838] flex items-center justify-center border border-slate-700/60 shadow-xs">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+              <path d="M12 11h4"/>
+              <path d="M12 16h4"/>
+              <circle cx="9" cy="11" r="1"/>
+              <circle cx="9" cy="16" r="1"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Inflow & Grace Period metrics -->
+        <div class="grid grid-cols-2 gap-3 pt-1 border-t border-slate-800/80 relative z-10 text-xs">
+          <div>
+            <span class="text-[10px] font-semibold text-slate-400 block">Month-To-Date Inflow</span>
+            <span class="font-extrabold text-white text-xs mt-0.5 block">
+              ₹18,450 <span class="text-emerald-400 font-black">(89%)</span>
+            </span>
+          </div>
+          <div>
+            <span class="text-[10px] font-semibold text-slate-400 block">Grace Period Cutoff</span>
+            <span class="font-bold text-slate-200 text-xs mt-0.5 block flex items-center gap-1">
+              <span>⏱</span>
+              <span>48h Remaining</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden relative z-10">
+          <div class="bg-gradient-to-r from-[#c59b27] to-emerald-400 h-full rounded-full transition-all duration-500" style="width: 89%;"></div>
+        </div>
+      </section>
+
+      <!-- 3. Target Segmentation Filter -->
+      <section class="space-y-1.5">
+        <div class="flex items-center justify-between px-1">
+          <div class="flex items-center gap-1.5 text-xs font-extrabold text-slate-900">
+            <svg class="w-3.5 h-3.5 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+            </svg>
+            <span>Target Segmentation Filter</span>
+          </div>
+          <span class="text-[10px] font-bold text-slate-400">Tap to filter</span>
+        </div>
+
+        <!-- Chips Row -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5" style="scrollbar-width: none;">
+          <!-- All Overdue (7) -->
+          <button
+            type="button"
+            id="filter-all-overdue"
+            data-target="all"
+            class="seg-filter active shrink-0 px-3.5 py-1.5 rounded-full bg-[#180d19] text-white text-xs font-bold shadow-xs transition cursor-pointer flex items-center gap-1.5"
+          >
+            <span>✓</span>
+            <span>All Overdue 7</span>
+          </button>
+
+          <!-- Critical >7 Days Late (4) -->
+          <button
+            type="button"
+            id="filter-critical-overdue"
+            data-target="critical"
+            class="seg-filter shrink-0 px-3.5 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 text-xs font-bold transition cursor-pointer flex items-center gap-1.5"
+          >
+            <span class="text-rose-600 text-xs">⚠️</span>
+            <span>Critical &gt;7 Days Late 4</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- 4. Dispatch Channels Multi-Select Card -->
+      <section class="bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-sm space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/>
+              <path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/>
+              <circle cx="12" cy="12" r="2"/>
+              <path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/>
+              <path d="M19.1 4.9C23 8.8 23 15.2 19.1 19.1"/>
+            </svg>
+            <h3 class="text-xs font-extrabold text-slate-900">Dispatch Channels Multi-Select</h3>
+          </div>
+          <span id="active-channels-count" class="px-2 py-0.5 rounded-full bg-[#fdfbf7] text-[#a6801e] text-[10px] font-black border border-[#ede4d5]">
+            2 Active
+          </span>
+        </div>
+
+        <!-- Channel 1: WhatsApp Gateway -->
+        <label class="flex items-center justify-between p-3 rounded-2xl border border-[#ede4d5] bg-[#fdfbf7]/40 hover:bg-[#fdfbf7]/70 transition cursor-pointer">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-2xl bg-emerald-500 text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-xs">
+              💬
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="text-xs font-extrabold text-slate-900 leading-tight">WhatsApp Gateway</h4>
+                <span class="text-[10px] font-black text-emerald-600 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-100">98% open rate</span>
+              </div>
+              <p class="text-[11px] text-slate-400 font-medium mt-0.5">Instant push to registered phone</p>
+            </div>
+          </div>
+          <input type="checkbox" id="channel-wa" checked class="channel-check w-4 h-4 rounded text-[#c59b27] accent-[#c59b27] cursor-pointer">
+        </label>
+
+        <!-- Channel 2: SMS + UPI Deep-link -->
+        <label class="flex items-center justify-between p-3 rounded-2xl border border-[#ede4d5] bg-[#fdfbf7]/40 hover:bg-[#fdfbf7]/70 transition cursor-pointer">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-2xl bg-[#c59b27] text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-xs">
+              📱
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="text-xs font-extrabold text-slate-900 leading-tight">SMS + UPI Deep-link</h4>
+                <span class="text-[10px] font-black text-[#c59b27] bg-[#fdfbf7] px-1.5 py-0.2 rounded border border-[#ede4d5]">100% Delivery</span>
+              </div>
+              <p class="text-[11px] text-slate-400 font-medium mt-0.5">Includes 1-click Razorpay/UPI direct payment link</p>
+            </div>
+          </div>
+          <input type="checkbox" id="channel-sms" checked class="channel-check w-4 h-4 rounded text-[#c59b27] accent-[#c59b27] cursor-pointer">
+        </label>
+
+        <!-- Channel 3: Automated IVR Call -->
+        <label class="flex items-center justify-between p-3 rounded-2xl border border-[#ede5d8] bg-slate-50 hover:bg-slate-100/70 transition cursor-pointer">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-2xl bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-sm shrink-0">
+              📞
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="text-xs font-extrabold text-slate-900 leading-tight">Automated IVR Call</h4>
+                <span class="text-[10px] font-black text-rose-600 bg-rose-50 px-1.5 py-0.2 rounded border border-rose-100">&gt;10d overdue</span>
+              </div>
+              <p class="text-[11px] text-slate-400 font-medium mt-0.5">Synthesized local speech reminder</p>
+            </div>
+          </div>
+          <input type="checkbox" id="channel-ivr" class="channel-check w-4 h-4 rounded text-[#c59b27] accent-[#c59b27] cursor-pointer">
+        </label>
+
+        <!-- Dispatch Action Buttons inside Channel Card -->
+        <div class="space-y-2 pt-1">
+          <!-- Big Gold Button: Send Bulk Reminders -->
+          <button
+            type="button"
+            id="btn-dispatch-bulk-reminders"
+            class="w-full py-3.5 px-4 bg-[#180d19] hover:bg-[#281424] hover:bg-[#c59b27] active:bg-[#a6801e] text-white rounded-2xl text-xs sm:text-sm font-extrabold flex items-center justify-center gap-2 shadow-lg shadow-[#c59b27]/25 transition cursor-pointer"
+          >
+            <span>🚀</span>
+            <span id="btn-dispatch-text">Send Bulk Reminders to 7 Tenants</span>
+          </button>
+
+          <!-- Secondary Button: Schedule Auto-Followup -->
+          <button
+            type="button"
+            id="btn-schedule-followup"
+            class="w-full py-3 px-4 bg-[#fdfbf7] hover:bg-[#fbf2da] text-[#a6801e] rounded-2xl text-xs font-extrabold flex items-center justify-center gap-2 border border-[#ede4d5] transition cursor-pointer"
+          >
+            <span>⏱</span>
+            <span>Schedule Auto-Followup in 48 Hours</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- 5. Customizable Reminder Payload Card -->
+      <section class="bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-sm space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+            </svg>
+            <h3 class="text-xs font-extrabold text-slate-900">Customizable Reminder Payload</h3>
+          </div>
+          <button type="button" id="btn-reset-template" class="text-xs font-extrabold text-[#c59b27] hover:underline cursor-pointer">
+            Reset
+          </button>
+        </div>
+
+        <div>
+          <span class="text-[10px] font-bold text-slate-400 block mb-1.5">Tap variable pill to insert:</span>
+          <div class="flex flex-wrap items-center gap-1.5">
+            <button type="button" class="btn-var-pill px-2.5 py-1 rounded-lg bg-[#fdfbf7] hover:bg-[#fbf2da] text-[#a6801e] text-[10px] font-extrabold cursor-pointer border border-[#ede4d5] transition" data-var="{Tenant_Name}">+{Tenant_Name}</button>
+            <button type="button" class="btn-var-pill px-2.5 py-1 rounded-lg bg-[#fdfbf7] hover:bg-[#fbf2da] text-[#a6801e] text-[10px] font-extrabold cursor-pointer border border-[#ede4d5] transition" data-var="{Amount_Due}">+{Amount_Due}</button>
+            <button type="button" class="btn-var-pill px-2.5 py-1 rounded-lg bg-[#fdfbf7] hover:bg-[#fbf2da] text-[#a6801e] text-[10px] font-extrabold cursor-pointer border border-[#ede4d5] transition" data-var="{Room_Number}">+{Room_Number}</button>
+            <button type="button" class="btn-var-pill px-2.5 py-1 rounded-lg bg-[#fdfbf7] hover:bg-[#fbf2da] text-[#a6801e] text-[10px] font-extrabold cursor-pointer border border-[#ede4d5] transition" data-var="{Due_Date}">+{Due_Date}</button>
+            <button type="button" class="btn-var-pill px-2.5 py-1 rounded-lg bg-[#fdfbf7] hover:bg-[#fbf2da] text-[#a6801e] text-[10px] font-extrabold cursor-pointer border border-[#ede4d5] transition" data-var="{Payment_Link}">+{Payment_Link}</button>
+          </div>
+        </div>
+
+        <!-- Textarea Template Box -->
+        <div class="p-3 bg-slate-50 rounded-2xl border border-[#ede5d8]/90 space-y-2">
+          <textarea
+            id="template-textarea"
+            rows="4"
+            class="w-full bg-transparent border-0 p-0 text-xs font-medium text-slate-800 leading-relaxed focus:outline-none resize-none"
+          >Dear {Tenant_Name}, friendly reminder that your hostel dues of ${Amount_Due} for {Room_Number} are pending. Avoid late fees of ₹15 by paying before 26 Oct via this link: {Payment_Link}. Need assistance? Contact manager.</textarea>
+          
+          <div class="flex items-center justify-between pt-1 border-t border-[#ede5d8]/60 text-[10px]">
+            <span class="font-extrabold text-emerald-600 flex items-center gap-1">
+              <span>✓</span>
+              <span>Verified Safe Template</span>
+            </span>
+            <span id="char-counter" class="font-bold text-slate-400">224 chars • 2 SMS segments</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. Target Recipients Preview Card -->
+      <section class="bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-sm space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 rounded-xl bg-[#fdfbf7] text-[#c59b27] flex items-center justify-center font-bold text-xs">
+              👥
+            </div>
+            <div>
+              <h3 class="text-xs font-extrabold text-slate-900 leading-tight">Target Recipients Preview</h3>
+              <p class="text-[10px] text-slate-400 font-medium" id="preview-showing-text">Showing 4 of 7 prioritized tenants</p>
+            </div>
+          </div>
+          <!-- Dropdown List Button -->
+          <button type="button" class="px-2.5 py-1 rounded-full bg-[#fdfbf7] text-[#a6801e] text-[10px] font-extrabold flex items-center gap-1">
+            <span>List</span>
+            <span>▾</span>
+          </button>
+        </div>
+
+        <!-- Recipients List -->
+        <div class="space-y-2" id="recipients-container">
+
+          <!-- Recipient 1: David Miller -->
+          <div class="recipient-row flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-[#f3ece2]" data-status="critical">
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="text-xs font-black text-slate-900">David Miller</h4>
+                <span class="px-1.5 py-0.2 rounded bg-white border border-[#ede5d8] text-slate-600 text-[10px] font-bold">Rm 204-B</span>
+              </div>
+              <p class="text-[10px] font-extrabold text-rose-600 flex items-center gap-1 mt-0.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-rose-600"></span>
+                <span>9 days overdue</span>
+              </p>
+            </div>
+            <div class="text-right">
+              <span class="text-xs font-black text-slate-900 block leading-tight">₹840.00</span>
+              <span class="text-[10px] text-slate-400 font-semibold block">Total Due</span>
+            </div>
+          </div>
+
+          <!-- Recipient 2: Sameer Khan -->
+          <div class="recipient-row flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-[#f3ece2]" data-status="critical">
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="text-xs font-black text-slate-900">Sameer Khan</h4>
+                <span class="px-1.5 py-0.2 rounded bg-white border border-[#ede5d8] text-slate-600 text-[10px] font-bold">Rm 105-A</span>
+              </div>
+              <p class="text-[10px] font-extrabold text-rose-600 flex items-center gap-1 mt-0.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-rose-600 live-dot"></span>
+                <span>12 days late (Critical)</span>
+              </p>
+            </div>
+            <div class="text-right">
+              <span class="text-xs font-black text-slate-900 block leading-tight">₹650.00</span>
+              <span class="text-[10px] text-slate-400 font-semibold block">Total Due</span>
+            </div>
+          </div>
+
+          <!-- Recipient 3: Rahul Sharma -->
+          <div class="recipient-row flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-[#f3ece2]" data-status="normal">
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="text-xs font-black text-slate-900">Rahul Sharma</h4>
+                <span class="px-1.5 py-0.2 rounded bg-white border border-[#ede5d8] text-slate-600 text-[10px] font-bold">Rm 302-C</span>
+              </div>
+              <p class="text-[10px] font-bold text-slate-500 flex items-center gap-1 mt-0.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                <span>5 days late</span>
+              </p>
+            </div>
+            <div class="text-right">
+              <span class="text-xs font-black text-slate-900 block leading-tight">₹420.00</span>
+              <span class="text-[10px] text-slate-400 font-semibold block">Total Due</span>
+            </div>
+          </div>
+
+          <!-- Recipient 4: Priya Nair -->
+          <div class="recipient-row flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-[#f3ece2]" data-status="normal">
+            <div>
+              <div class="flex items-center gap-2">
+                <h4 class="text-xs font-black text-slate-900">Priya Nair</h4>
+                <span class="px-1.5 py-0.2 rounded bg-white border border-[#ede5d8] text-slate-600 text-[10px] font-bold">Rm 102-B</span>
+              </div>
+              <p class="text-[10px] font-bold text-[#c59b27] flex items-center gap-1 mt-0.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#c59b27]"></span>
+                <span>Mess dues pending</span>
+              </p>
+            </div>
+            <div class="text-right">
+              <span class="text-xs font-black text-slate-900 block leading-tight">₹180.00</span>
+              <span class="text-[10px] text-slate-400 font-semibold block">Mess Fee</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 7. Fixed Bottom Navigation Bar -->
+    <nav class="hidden" style="display: none !important;">
+      <!-- 1. Overview -->
+      <a href="/dashboard.html" class="flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"/>
+          <rect x="14" y="3" width="7" height="7"/>
+          <rect x="14" y="14" width="7" height="7"/>
+          <rect x="3" y="14" width="7" height="7"/>
+        </svg>
+        <span class="text-[10px] font-bold">Overview</span>
+      </a>
+
+      <!-- 2. Rooms / Operations (Active) -->
+      <a href="/operations.html" class="flex flex-col items-center gap-1 py-1 text-[#c59b27] relative transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v9"/>
+        </svg>
+        <span class="text-[10px] font-black">Rooms</span>
+        <span class="absolute -top-0.5 right-2 w-2 h-2 rounded-full bg-[#c59b27]"></span>
+      </a>
+
+      <!-- 3. Requests -->
+      <a href="/requests.html" class="flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+        </svg>
+        <span class="text-[10px] font-bold">Requests</span>
+      </a>
+
+      <!-- 4. Tenants -->
+      <a href="/tenants.html" class="flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <span class="text-[10px] font-bold">Tenants</span>
+      </a>
+    </nav>
+
+  </div>
+
+  <!-- Client-side JavaScript -->
+  <script src="/js/bulk-reminders.js"></script>
+</body>
+</html>
+

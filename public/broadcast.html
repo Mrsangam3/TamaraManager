@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>TAAMARA CO-LIVE — Broadcast Notice</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .font-serif-luxury { font-family: 'Playfair Display', Georgia, serif; }
+  </style>
+</head>
+<body class="bg-[#faf6f0] text-[#1c1917] antialiased min-h-screen flex flex-col font-sans select-none overflow-x-hidden">
+
+  <!-- Mobile Frame Container (Max 430px) -->
+  <div class="min-h-screen flex flex-col lg:flex-row w-full bg-[#faf6f0]">
+
+  <!-- Left Sidebar Navigation (Desktop Persistent lg:flex) -->
+    <!-- Left Sidebar Navigation (Desktop Persistent lg:flex) -->
+  <aside id="app-sidebar" class="hidden lg:flex lg:flex-col lg:w-72 lg:fixed lg:inset-y-0 lg:z-40 bg-[#180d19] text-white border-r border-[#261324] shadow-2xl transition-all duration-300">
+    <!-- Brand Header -->
+    <div class="h-20 flex items-center justify-between px-6 border-b border-[#261324] bg-[#140b15]">
+      <a href="/dashboard.html" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#eab308] to-[#b45309] flex items-center justify-center shadow-lg shadow-amber-900/30 border border-amber-300/40 relative">
+          <span class="text-xl font-black font-serif-luxury text-[#180d19]">T</span>
+          <span class="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 border-2 border-[#180d19] rounded-full live-dot"></span>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-base font-bold font-serif-luxury tracking-wide text-white">TAAMARA CO-LIVE</span>
+          </div>
+          <p class="text-[10px] font-semibold text-[#c099b9] tracking-wider uppercase">NANAKRAMGUDA, HYD</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- Live Telemetry / Gate Status Capsule -->
+    <div class="px-4 py-2.5 mx-4 my-3 rounded-2xl bg-[#241223] border border-[#351b33] flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 live-dot"></span>
+        <span class="text-xs font-semibold text-[#f5e6f2]">Biometric Gate Live</span>
+      </div>
+      <span class="px-2 py-0.5 rounded-lg text-[10px] font-bold bg-[#3b1d38] text-[#f5c5e8] border border-[#52294e]">
+        Admin PMS
+      </span>
+    </div>
+
+    <!-- Navigation Menu Items -->
+    <div class="flex-1 overflow-y-auto px-4 py-2 space-y-6 no-scrollbar">
+      <div>
+        <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-[#9d7897] mb-2 font-sans">MANAGEMENT</p>
+        <nav class="space-y-1">
+          <a href="/dashboard.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold text-white bg-[#2d1729] border border-[#5c304f] shadow-md transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-[#eab308]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              <span>Dashboard Overview</span>
+            </div>
+            <span class="text-[10px] font-bold text-[#eab308]">Active</span>
+          </a>
+
+          <a href="/tenants.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span>Residents Directory</span>
+            </div>
+            <span class="text-[10px] px-2 py-0.5 rounded-md bg-[#251221] text-[#e5d5e2] font-bold">68</span>
+          </a>
+
+          <div class="space-y-1">
+            <a href="/occupancy.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+              <div class="flex items-center gap-3">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                <span>Rooms &amp; Sharing</span>
+              </div>
+              <span class="text-[10px] px-2 py-0.5 rounded-md bg-[#064e3b] text-[#34d399] font-bold">7 Beds Free</span>
+            </a>
+            <div class="hidden" style="display: none !important;">
+              <div class="flex items-center justify-between py-1 px-2 rounded-lg hover:bg-[#251221] cursor-pointer">
+                <span>› Floor 1 (Ground)</span>
+                <span class="px-1.5 py-0.2 rounded bg-[#351b31] text-[#e0cfdd] font-semibold text-[10px]">86%</span>
+              </div>
+              <div class="flex items-center justify-between py-1 px-2 rounded-lg hover:bg-[#251221] cursor-pointer">
+                <span>› Floor 2 (Premium)</span>
+                <span class="px-1.5 py-0.2 rounded bg-[#064e3b] text-[#34d399] font-semibold text-[10px]">5 Free</span>
+              </div>
+              <div class="flex items-center justify-between py-1 px-2 rounded-lg hover:bg-[#251221] cursor-pointer">
+                <span>› Floor 3 (Penthouse)</span>
+                <span class="px-1.5 py-0.2 rounded bg-[#064e3b] text-[#34d399] font-semibold text-[10px]">7 Free</span>
+              </div>
+              <a href="/occupancy.html" class="block py-1 px-2 text-[#eab308] hover:underline font-bold text-[11px] cursor-pointer">
+                + Add New Room
+              </a>
+            </div>
+          </div>
+
+          <a href="/operations.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+              <span>Operations Control</span>
+            </div>
+          </a>
+
+          <a href="/requests.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4M12 16h4M8 11h.01M8 16h.01"/></svg>
+              <span>Requests Desk</span>
+            </div>
+            <span class="text-[10px] px-2 py-0.5 rounded-md bg-[#991b1b] text-white font-extrabold">3 Active</span>
+          </a>
+        </nav>
+      </div>
+
+      <div>
+        <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-[#9d7897] mb-2 font-sans">COMMS &amp; SAFETY</p>
+        <nav class="space-y-1">
+          <a href="/broadcast.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-[#eab308]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+              <span>Broadcast Notice</span>
+            </div>
+          </a>
+
+          <a href="/notifications.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-purple-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+              <span>Notifications</span>
+            </div>
+            <span class="text-[10px] px-2 py-0.5 rounded-md bg-[#701a75] text-[#fae8ff] font-extrabold">4</span>
+          </a>
+
+          <a href="/security-permissions.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <span>Security &amp; Roles</span>
+            </div>
+          </a>
+
+          <a href="/help-support.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-amber-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>Help &amp; Support</span>
+            </div>
+          </a>
+
+          <a href="/more.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><circle cx="4" cy="4" r="2"/><circle cx="12" cy="4" r="2"/><circle cx="20" cy="4" r="2"/><circle cx="4" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="20" cy="12" r="2"/><circle cx="4" cy="20" r="2"/><circle cx="12" cy="20" r="2"/><circle cx="20" cy="20" r="2"/></svg>
+              <span>More &amp; Governance</span>
+            </div>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Campus Wings -->
+      <div class="pt-2 border-t border-[#261324]">
+        <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-[#9d7897] mb-2 font-sans">CAMPUS WINGS</p>
+        <div class="grid grid-cols-2 gap-2">
+          <a href="/block-a.html" class="py-2 px-2.5 rounded-xl bg-[#251222] border border-[#381c34] text-[11px] font-bold text-[#d4b8cf] hover:text-white hover:bg-[#341830] text-center transition cursor-pointer">
+            Block A (96) &rarr;
+          </a>
+          <a href="/block-b.html" class="py-2 px-2.5 rounded-xl bg-[#251222] border border-[#381c34] text-[11px] font-bold text-[#d4b8cf] hover:text-white hover:bg-[#341830] text-center transition cursor-pointer">
+            Block B (80) &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Manager Profile Footer -->
+    <div class="p-4 border-t border-[#261324] bg-[#140b15]">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-[#f59e0b] text-[#180d19] font-serif-luxury font-black text-sm flex items-center justify-center border-2 border-[#b45309] shadow-sm">
+            AM
+          </div>
+          <div class="truncate">
+            <p class="text-xs font-bold text-white truncate">Alex Morgan</p>
+            <p class="text-[10px] text-[#c099b9] font-medium">Super Admin • Sunrise</p>
+            <p class="text-[9px] text-[#865d80]">TAAMARA Admin Portal</p>
+          </div>
+        </div>
+        <a href="/logout-confirmation.html" class="p-2 rounded-lg text-[#ad8caa] hover:text-rose-400 hover:bg-[#281424] transition cursor-pointer" title="Sign Out">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </a>
+      </div>
+    </div>
+  </aside>
+  
+  <div class="flex-1 flex flex-col lg:pl-72 min-w-0 bg-[#faf6f0] min-h-screen">
+    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex-1 space-y-6">
+
+    <!-- 1. Header (Sticky Top) -->
+    <header class="bg-white/95 backdrop-blur-md px-4 py-3 border-b border-[#f3ece2] flex items-center justify-between sticky top-0 z-30">
+      <div class="w-8"></div>
+      <div class="text-center">
+        <h1 class="text-xs font-black text-slate-900 leading-tight font-serif-luxury">More Hub</h1>
+      </div>
+      <button
+        type="button"
+        id="btn-bell"
+        class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center relative transition cursor-pointer"
+        title="Notifications"
+      >
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+      </button>
+    </header>
+
+    <!-- Main Content Stream -->
+    <main class="flex-1 px-4 pt-3 space-y-3.5 text-xs">
+
+      <!-- 2. Sub-header (Back + Broadcast Title + History Action) -->
+      <section class="flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <a
+            href="/more.html"
+            id="btn-back"
+            class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 transition cursor-pointer"
+            title="Back to More"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </a>
+          <div>
+            <h2 class="text-sm font-black text-slate-900 leading-tight font-serif-luxury">Broadcast Notice</h2>
+            <p class="text-[10px] text-slate-500 font-medium">Reach residents &amp; wardens instantly</p>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          id="btn-history"
+          class="w-8 h-8 rounded-full bg-[#fdfbf7] text-[#c59b27] hover:bg-[#fbf2da] flex items-center justify-center relative transition cursor-pointer"
+          title="Past Broadcast History"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 8v4l3 3"></path>
+            <circle cx="12" cy="12" r="9"></circle>
+          </svg>
+          <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#c59b27] border border-white"></span>
+        </button>
+      </section>
+
+      <!-- 3. Notice Classification Pills -->
+      <section class="space-y-1.5">
+        <h3 class="text-xs font-black text-slate-800">Notice Classification</h3>
+        <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5" id="classification-group">
+          <button
+            type="button"
+            data-classification="general"
+            class="class-pill active px-3.5 py-1.5 rounded-full bg-[#180d19] text-white font-extrabold text-[11px] flex items-center gap-1.5 shadow-xs cursor-pointer transition shrink-0"
+          >
+            <span>📢</span>
+            <span>General Notice</span>
+          </button>
+          <button
+            type="button"
+            data-classification="urgent"
+            class="class-pill px-3.5 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 font-bold text-[11px] flex items-center gap-1.5 cursor-pointer transition shrink-0"
+          >
+            <span class="text-rose-500">✱</span>
+            <span>Urgent / Curfew</span>
+          </button>
+          <button
+            type="button"
+            data-classification="maintenance"
+            class="class-pill px-3.5 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 font-bold text-[11px] flex items-center gap-1.5 cursor-pointer transition shrink-0"
+          >
+            <span class="text-[#c59b27]">💧</span>
+            <span>Maintenance</span>
+          </button>
+          <button
+            type="button"
+            data-classification="events"
+            class="class-pill px-3.5 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 font-bold text-[11px] flex items-center gap-1.5 cursor-pointer transition shrink-0"
+          >
+            <span>🎉</span>
+            <span>Events</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- 4. Target Audience Card -->
+      <section class="bg-white rounded-2xl p-3.5 border border-[#f3ece2] shadow-2xs space-y-2.5">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            <h3 class="text-xs font-black text-slate-900">Target Audience</h3>
+          </div>
+          <span id="badge-audience-count" class="px-2 py-0.5 rounded-full bg-[#fdfbf7] text-[#a6801e] text-[10px] font-bold border border-[#ede4d5]">
+            176 selected
+          </span>
+        </div>
+
+        <div class="flex flex-wrap gap-1.5" id="audience-pills-group">
+          <button
+            type="button"
+            data-count="176"
+            data-label="All Tenants (176)"
+            class="audience-pill active px-3 py-1.5 rounded-full bg-[#180d19] text-white font-extrabold text-[11px] flex items-center gap-1 shadow-xs cursor-pointer transition"
+          >
+            <span>✓</span>
+            <span>All Tenants (176)</span>
+          </button>
+          <button
+            type="button"
+            data-count="96"
+            data-label="Block A Only (96)"
+            class="audience-pill px-3 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 font-bold text-[11px] cursor-pointer transition"
+          >
+            Block A Only (96)
+          </button>
+          <button
+            type="button"
+            data-count="80"
+            data-label="Block B Only (80)"
+            class="audience-pill px-3 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 font-bold text-[11px] cursor-pointer transition"
+          >
+            Block B Only (80)
+          </button>
+          <button
+            type="button"
+            data-count="14"
+            data-label="Staff & Wardens (14)"
+            class="audience-pill px-3 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 font-bold text-[11px] cursor-pointer transition"
+          >
+            Staff &amp; Wardens (14)
+          </button>
+          <button
+            type="button"
+            data-count="8"
+            data-label="Pending Dues (8)"
+            class="audience-pill px-3 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 font-bold text-[11px] cursor-pointer transition"
+          >
+            Pending Dues (8)
+          </button>
+        </div>
+      </section>
+
+      <!-- 5. Dispatch Channels Card -->
+      <section class="bg-white rounded-2xl p-3.5 border border-[#f3ece2] shadow-2xs space-y-2.5">
+        <div class="flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"></path>
+            <path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"></path>
+            <circle cx="12" cy="12" r="2"></circle>
+            <path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"></path>
+            <path d="M19.1 4.9C23 8.8 23 15.2 19.1 19.1"></path>
+          </svg>
+          <h3 class="text-xs font-black text-slate-900">Dispatch Channels</h3>
+        </div>
+
+        <div class="space-y-2">
+          <!-- Channel 1: In-App Push -->
+          <label class="flex items-center justify-between p-2.5 bg-slate-50/70 hover:bg-[#fdfbf7]/40 rounded-xl border border-[#f3ece2] cursor-pointer transition">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <div class="w-8 h-8 rounded-xl bg-[#fbf2da] text-[#c59b27] flex items-center justify-center shrink-0">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+              </div>
+              <div class="min-w-0">
+                <span class="text-xs font-bold text-slate-900 block leading-tight">In-App Push Notification</span>
+                <span class="text-[10px] text-slate-500 font-medium">100% active verified devices</span>
+              </div>
+            </div>
+            <input type="checkbox" id="channel-push" checked class="w-4 h-4 rounded text-[#c59b27] accent-[#c59b27] cursor-pointer shrink-0 ml-2" />
+          </label>
+
+          <!-- Channel 2: WhatsApp Official Broadcast -->
+          <label class="flex items-center justify-between p-2.5 bg-slate-50/70 hover:bg-emerald-50/40 rounded-xl border border-[#f3ece2] cursor-pointer transition">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <div class="w-8 h-8 rounded-xl bg-emerald-700 text-white flex items-center justify-center shrink-0 shadow-xs">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+                </svg>
+              </div>
+              <div class="min-w-0">
+                <span class="text-xs font-bold text-slate-900 block leading-tight">WhatsApp Official Broadcast</span>
+                <span class="text-[10px] text-emerald-600 font-bold">High open rate, 98% within 5m</span>
+              </div>
+            </div>
+            <input type="checkbox" id="channel-wa" checked class="w-4 h-4 rounded text-[#c59b27] accent-[#c59b27] cursor-pointer shrink-0 ml-2" />
+          </label>
+
+          <!-- Channel 3: Urgent SMS Gateway -->
+          <label class="flex items-center justify-between p-2.5 bg-slate-50/70 hover:bg-slate-100 rounded-xl border border-[#f3ece2] cursor-pointer transition">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <div class="w-8 h-8 rounded-xl bg-slate-100 text-slate-600 flex items-center justify-center shrink-0">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </div>
+              <div class="min-w-0">
+                <span class="text-xs font-bold text-slate-900 block leading-tight">Urgent SMS Gateway</span>
+                <span class="text-[10px] text-slate-400 font-medium">Carrier-backed fallback route</span>
+              </div>
+            </div>
+            <input type="checkbox" id="channel-sms" class="w-4 h-4 rounded text-[#c59b27] accent-[#c59b27] cursor-pointer shrink-0 ml-2" />
+          </label>
+        </div>
+      </section>
+
+      <!-- 6. Composer Card -->
+      <section class="bg-white rounded-2xl p-3.5 border border-[#f3ece2] shadow-2xs space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 20h9"></path>
+              <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+            </svg>
+            <h3 class="text-xs font-black text-slate-900">Composer</h3>
+          </div>
+          <span class="px-2 py-0.5 rounded-full bg-rose-50 text-rose-700 text-[10px] font-bold border border-rose-100 flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+            <span>High Priority</span>
+          </span>
+        </div>
+
+        <!-- Announcement Title -->
+        <div class="space-y-1">
+          <label class="block text-[10px] font-extrabold text-slate-700">Announcement Title</label>
+          <input
+            type="text"
+            id="input-bc-title"
+            value="Scheduled Water Supply Interruption - Block B"
+            class="w-full p-3 bg-[#fdfbf7] border border-[#ede4d5] rounded-xl text-xs font-bold text-slate-900 outline-none focus:border-[#c59b27]"
+            placeholder="Enter announcement subject..."
+          />
+        </div>
+
+        <!-- Message Body -->
+        <div class="space-y-1">
+          <div class="flex items-center justify-between text-[10px]">
+            <label class="font-extrabold text-slate-700">Message Body</label>
+            <span id="char-counter" class="text-slate-400 font-medium">218 / 500</span>
+          </div>
+          <textarea
+            id="textarea-bc-body"
+            rows="4"
+            maxlength="500"
+            class="w-full p-3 bg-[#fdfbf7] border border-[#ede4d5] rounded-xl text-xs font-medium text-slate-800 outline-none focus:border-[#c59b27] resize-none leading-relaxed"
+          >Please note that central overhead water tank maintenance will take place tomorrow, Oct 25 between 10:00 AM and 01:00 PM. Please store sufficient drinking water. Geysers will remain offline during servicing hours.</textarea>
+        </div>
+
+        <!-- Attachment Chip -->
+        <div id="attachment-chip" class="p-2.5 bg-[#fdfbf7] border border-[#e3d5be]/80 rounded-xl flex items-center justify-between transition">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <div class="w-7 h-7 rounded-lg bg-[#fbf2da] text-[#a6801e] flex items-center justify-center shrink-0">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <h4 class="text-xs font-bold text-slate-900 truncate">water_works_notice_signed.pdf</h4>
+              <p class="text-[9px] text-slate-500 font-medium">340 KB • Official Circular</p>
+            </div>
+          </div>
+          <button
+            type="button"
+            id="btn-remove-attachment"
+            class="text-slate-400 hover:text-rose-600 p-1 cursor-pointer font-bold text-sm"
+            title="Remove attachment"
+          >
+            ✕
+          </button>
+        </div>
+      </section>
+
+      <!-- 7. Schedule Dispatch Row -->
+      <section class="bg-white rounded-2xl p-3 border border-[#f3ece2] shadow-2xs flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span class="text-xs font-black text-slate-900">Schedule Dispatch</span>
+        </div>
+        <div class="bg-slate-100 p-0.5 rounded-full flex gap-1" id="schedule-toggle-group">
+          <button
+            type="button"
+            id="btn-sched-now"
+            class="px-3 py-1 rounded-full bg-[#180d19] text-white font-extrabold text-[10px] shadow-xs cursor-pointer transition"
+          >
+            Now
+          </button>
+          <button
+            type="button"
+            id="btn-sched-later"
+            class="px-3 py-1 rounded-full text-slate-500 hover:text-slate-900 font-bold text-[10px] cursor-pointer transition"
+          >
+            Later
+          </button>
+        </div>
+      </section>
+
+      <!-- 8. Action Buttons -->
+      <section class="space-y-2 pt-1">
+        <button
+          type="button"
+          id="btn-preview-notice"
+          class="w-full py-3 bg-[#e8f0fe] hover:bg-[#fbf2da] text-[#a6801e] font-black text-xs rounded-xl flex items-center justify-center gap-2 transition cursor-pointer"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+          <span>Preview Announcement</span>
+        </button>
+
+        <button
+          type="button"
+          id="btn-dispatch-notice"
+          class="w-full py-3 bg-[#180d19] hover:bg-[#281424] hover:bg-[#c59b27] text-white font-black text-xs rounded-xl shadow-md shadow-[#c59b27]/20 flex items-center justify-center gap-2 transition cursor-pointer"
+        >
+          <span>🚀</span>
+          <span id="btn-dispatch-label">Dispatch Broadcast Notice (176 Tenants)</span>
+        </button>
+      </section>
+
+    </main>
+
+    <!-- 9. Sticky Bottom Navigation Bar -->
+    <nav class="hidden" style="display: none !important;">
+      <a href="/dashboard.html" class="flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><rect width="7" height="7" x="3" y="3" rx="1.5"/><rect width="7" height="7" x="14" y="3" rx="1.5"/><rect width="7" height="7" x="14" y="14" rx="1.5"/><rect width="7" height="7" x="3" y="14" rx="1.5"/></svg>
+        <span class="text-[10px] font-medium">Dashboard</span>
+      </a>
+      <a href="/block-a.html" class="flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>
+        <span class="text-[10px] font-medium">Rooms</span>
+      </a>
+      <a href="/requests.html" class="flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <span class="text-[10px] font-medium">Requests</span>
+      </a>
+      <a href="/tenants.html" class="flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span class="text-[10px] font-medium">Tenants</span>
+      </a>
+      <a href="/more.html" class="flex flex-col items-center gap-1 py-1 text-[#c59b27] cursor-pointer font-bold">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/><circle cx="5" cy="12" r="1.5"/></svg>
+        <span class="text-[10px]">More</span>
+      </a>
+    </nav>
+
+    <!-- Modal: Preview Notice -->
+    <div id="modal-preview" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 hidden">
+      <div class="bg-white rounded-3xl max-w-sm w-full p-5 space-y-3.5 shadow-2xl border border-[#f3ece2] text-left animate-in fade-in zoom-in duration-200">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="text-base">👁️</span>
+            <h3 class="text-sm font-black text-slate-900">Notice Preview</h3>
+          </div>
+          <button type="button" id="btn-close-preview" class="text-slate-400 hover:text-slate-600 text-sm font-black cursor-pointer">✕</button>
+        </div>
+        <div class="bg-[#fdfbf7] rounded-2xl p-3.5 space-y-2 border border-[#ede4d5]">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-extrabold uppercase text-[#a6801e] tracking-wider">TAAMARA CO-LIVE OFFICIAL</span>
+            <span class="text-[9px] text-slate-400">Just Now</span>
+          </div>
+          <h4 id="preview-modal-title" class="text-xs font-black text-slate-900">Scheduled Water Supply Interruption</h4>
+          <p id="preview-modal-body" class="text-[11px] text-slate-700 leading-relaxed font-normal"></p>
+          <div id="preview-modal-attachment" class="text-[10px] text-[#c59b27] font-bold flex items-center gap-1 pt-1">
+            <span>📎</span>
+            <span>water_works_notice_signed.pdf</span>
+          </div>
+        </div>
+        <button type="button" id="btn-modal-dismiss" class="w-full py-2.5 bg-[#c59b27] text-white font-black text-xs rounded-xl cursor-pointer">
+          Looks Good ✓
+        </button>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div
+      id="toast"
+      class="fixed bottom-20 left-1/2 -translate-x-1/2 max-w-[380px] w-auto bg-[#180d19] text-white px-4 py-3 rounded-2xl shadow-2xl text-xs font-bold flex items-center gap-2.5 z-50 hidden transition-all duration-300"
+    >
+      <span class="w-2 h-2 rounded-full bg-[#d4a838]"></span>
+      <span id="toast-text">Action completed successfully</span>
+    </div>
+
+  </div>
+    </div>
+  </div>
+
+  <script src="/js/broadcast.js"></script>
+</body>
+</html>
+

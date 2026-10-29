@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TAAMARA CO-LIVE - Assign Bed</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            gold: {
+              50: '#fdfbf7',
+              100: '#fbf2da',
+              200: '#f5e5ba',
+              300: '#edd18e',
+              400: '#e1cb8f',
+              500: '#d4a838',
+              600: '#c59b27',
+              700: '#a6801e',
+              800: '#876717',
+              900: '#6d5212',
+            },
+            brand: {
+              gold: '#c59b27',
+              goldLight: '#fef8ea',
+              goldDark: '#a6801e',
+              border: '#ede4d5',
+            },
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.15); }
+    }
+    .live-dot {
+      animation: pulse-slow 2s infinite ease-in-out;
+    }
+    .font-serif-luxury { font-family: 'Playfair Display', Georgia, serif; }
+  </style>
+</head>
+<body class="bg-[#faf6f0] text-[#1c1917] antialiased min-h-screen flex flex-col font-sans select-none overflow-x-hidden">
+
+  <!-- Mobile / Frame Container -->
+  <div class="w-full max-w-5xl mx-auto space-y-6 pb-12">
+    
+    <!-- Toast Notification Banner -->
+    <div id="toast" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-2.5 rounded-2xl bg-slate-900 text-white text-xs font-semibold shadow-xl flex items-center gap-2 transition duration-300">
+      <span id="toast-text">Action completed</span>
+    </div>
+
+    <!-- 1. Top Header -->
+    <header class="bg-white px-4 py-3.5 border-b border-[#f3ece2] flex items-center justify-between sticky top-0 z-30">
+      <div class="flex items-center gap-3">
+        <!-- Back Button -->
+        <a href="/dashboard.html" id="back-btn" class="w-8 h-8 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-700 transition cursor-pointer">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </a>
+        <div>
+          <h1 class="text-xs font-extrabold text-slate-900 tracking-tight leading-none font-serif-luxury">TAAMARA CO-LIVE</h1>
+          <p class="text-[11px] font-semibold text-slate-500 mt-0.5">Assign Bed</p>
+        </div>
+      </div>
+      <!-- Close Button -->
+      <a href="/dashboard.html" id="close-btn" class="w-8 h-8 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-500 hover:text-slate-800 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </a>
+    </header>
+
+    <!-- Main Scrollable Content Area -->
+    <main class="flex-1 px-4 pt-4 pb-6 space-y-4">
+
+      <!-- 2. Target Tenant Overview Card -->
+      <section class="bg-white rounded-3xl p-4 sm:p-5 border border-[#f3ece2] shadow-sm relative overflow-hidden">
+        <div class="flex items-start gap-3">
+          <!-- Green live indicator dot -->
+          <div class="w-3.5 h-3.5 rounded-full bg-emerald-500 mt-1 shrink-0 live-dot border-2 border-white shadow-2xs"></div>
+
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center gap-2">
+              <h2 id="assign-tenant-name" class="text-base font-extrabold text-slate-900 tracking-tight">
+                Aryan Sharma
+              </h2>
+              <span class="px-2 py-0.5 rounded-full bg-[#fbf2da] text-[#a6801e] text-[10px] font-extrabold">
+                • New Tenant
+              </span>
+            </div>
+
+            <!-- Preference -->
+            <div class="flex items-center gap-1.5 text-xs text-slate-600 font-semibold mt-1">
+              <svg class="w-3.5 h-3.5 text-[#c59b27] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="4" y="2" width="16" height="20" rx="2" ry="2"/>
+                <path d="M9 22v-4h6v4"/>
+              </svg>
+              <span>Prefers Block A • Shared 2-Bed</span>
+            </div>
+
+            <!-- Meta Pills -->
+            <div class="flex items-center gap-2 mt-2 text-[11px] font-medium text-slate-600">
+              <span class="px-2.5 py-1 rounded-xl bg-slate-50 border border-[#ede5d8]/70 flex items-center gap-1">
+                <svg class="w-3.5 h-3.5 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                <span>Move-in: Today</span>
+              </span>
+              <span class="px-2.5 py-1 rounded-xl bg-emerald-50 text-emerald-800 border border-emerald-200/70 flex items-center gap-1 font-semibold">
+                <svg class="w-3.5 h-3.5 text-emerald-600" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/>
+                </svg>
+                <span>Docs Verified</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Wing / Block & Floor Selector -->
+      <section class="space-y-2.5 pt-1">
+        <div class="flex items-center justify-between">
+          <h3 class="text-[10px] font-extrabold text-slate-400 tracking-wider uppercase">
+            SELECT WING / BLOCK
+          </h3>
+          <span class="text-xs font-bold text-[#c59b27]">14 Beds Available</span>
+        </div>
+
+        <!-- Wing Buttons -->
+        <div class="grid grid-cols-3 gap-2">
+          <button
+            type="button"
+            id="wing-a-btn"
+            class="wing-btn py-2.5 px-3 bg-white border-2 border-[#c59b27] text-[#c59b27] rounded-2xl text-xs font-extrabold flex items-center justify-center gap-1.5 shadow-xs transition cursor-pointer"
+          >
+            <svg class="w-3.5 h-3.5 text-[#c59b27]" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11"/>
+            </svg>
+            <span>Block A</span>
+          </button>
+          <button
+            type="button"
+            id="wing-b-btn"
+            class="wing-btn py-2.5 px-3 bg-white border border-[#ede5d8] text-slate-600 hover:bg-slate-50 rounded-2xl text-xs font-semibold flex items-center justify-center gap-1.5 transition cursor-pointer"
+          >
+            <span>Block B</span>
+          </button>
+          <button
+            type="button"
+            id="wing-c-btn"
+            class="wing-btn py-2.5 px-3 bg-white border border-[#ede5d8] text-slate-600 hover:bg-slate-50 rounded-2xl text-xs font-semibold flex items-center justify-center gap-1.5 transition cursor-pointer"
+          >
+            <span>Block C</span>
+          </button>
+        </div>
+
+        <!-- Floor Selector Pills -->
+        <div class="grid grid-cols-3 gap-2 pt-1">
+          <button
+            type="button"
+            id="floor-1-btn"
+            class="floor-btn py-2 px-3 bg-white border border-[#ede5d8] hover:bg-slate-50 text-slate-700 rounded-xl text-xs font-semibold transition cursor-pointer text-center"
+          >
+            Floor 1
+          </button>
+          <button
+            type="button"
+            id="floor-2-btn"
+            class="floor-btn py-2 px-3 bg-[#180d19] text-white rounded-xl text-xs font-extrabold shadow-xs transition cursor-pointer text-center"
+          >
+            Floor 2 (Target)
+          </button>
+          <button
+            type="button"
+            id="floor-3-btn"
+            class="floor-btn py-2 px-3 bg-white border border-[#ede5d8] hover:bg-slate-50 text-slate-700 rounded-xl text-xs font-semibold transition cursor-pointer text-center"
+          >
+            Floor 3
+          </button>
+        </div>
+      </section>
+
+      <!-- 4. Floor 2 Layout Rooms List -->
+      <section class="space-y-3 pt-1">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-1.5 text-xs font-extrabold text-slate-900">
+            <svg class="w-4 h-4 text-slate-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect width="18" height="18" x="3" y="3" rx="2"/>
+              <path d="M3 9h18M9 21V9"/>
+            </svg>
+            <span>Floor 2 Layout</span>
+          </div>
+          <!-- Legend -->
+          <div class="flex items-center gap-3 text-[10px] font-bold">
+            <span class="flex items-center gap-1 text-[#c59b27]">
+              <span class="w-2 h-2 rounded-full bg-[#c59b27]"></span>
+              Selected
+            </span>
+            <span class="flex items-center gap-1 text-emerald-600">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              Vacant
+            </span>
+          </div>
+        </div>
+
+        <!-- Room 201: Single • AC (Fully Occupied) -->
+        <div class="bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-2xs space-y-3 opacity-80">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <h4 class="text-sm font-extrabold text-slate-900">Room 201</h4>
+              <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 text-[10px] font-bold">
+                Single • AC
+              </span>
+            </div>
+            <span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 text-[10px] font-bold">
+              • Fully Occupied
+            </span>
+          </div>
+
+          <div class="bg-[#faf6f0] rounded-2xl p-3 flex items-center justify-between border border-[#f3ece2]">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-xl bg-slate-200 text-slate-500 flex items-center justify-center">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v9"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-xs font-bold text-slate-700">Bed A</p>
+                <p class="text-[10px] text-slate-400 font-medium">Occupant: Rahul S. (Till Dec 2025)</p>
+              </div>
+            </div>
+            <!-- Lock Icon -->
+            <svg class="w-4 h-4 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Room 202: Shared 2-Bed • Non-AC (1 Bed Vacant) -->
+        <div class="bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-2xs space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <h4 class="text-sm font-extrabold text-slate-900">Room 202</h4>
+              <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 text-[10px] font-bold">
+                Shared 2-Bed • Non-AC
+              </span>
+            </div>
+            <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200/60">
+              1 Bed Vacant
+            </span>
+          </div>
+
+          <div class="space-y-2">
+            <!-- Bed A (Occupied) -->
+            <div class="bg-[#faf6f0] rounded-2xl p-3 flex items-center justify-between border border-[#f3ece2]">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-xl bg-slate-200 text-slate-500 flex items-center justify-center">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v9"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-xs font-bold text-slate-700">Bed A</p>
+                  <p class="text-[10px] text-slate-400 font-medium">Occupant: Vikram P.</p>
+                </div>
+              </div>
+              <span class="text-[10px] font-bold text-slate-400">Occupied</span>
+            </div>
+
+            <!-- Bed B (Vacant) -->
+            <div class="bg-[#fdfbf7] rounded-2xl p-3 flex items-center justify-between border border-[#ede4d5]/70">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-xl bg-[#fbf2da] text-[#c59b27] flex items-center justify-center">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v9"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="flex items-center gap-1.5">
+                    <p class="text-xs font-bold text-slate-800">Bed B</p>
+                    <span class="text-[9px] font-bold text-slate-500 bg-white px-1.5 py-0.2 rounded border border-[#ede5d8]">Window side</span>
+                  </div>
+                  <p class="text-[10px] font-semibold text-slate-600 mt-0.5">₹320 / month</p>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="bed-select-btn px-3 py-1 rounded-full bg-white text-[#c59b27] hover:bg-[#fdfbf7] border border-[#e3d5be] text-[10px] font-extrabold cursor-pointer transition shadow-2xs"
+                data-room="Room 202"
+                data-bed="Bed B"
+                data-price="₹320"
+              >
+                • Select
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Room 203: Shared 2-Bed • Premium AC (Matches Preference) -->
+        <div class="bg-white rounded-3xl p-4 border-2 border-[#e3d5be] shadow-sm space-y-3 relative overflow-hidden">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <h4 class="text-sm font-extrabold text-[#c59b27]">Room 203</h4>
+              <span class="px-2 py-0.5 rounded-md bg-[#fdfbf7] text-[#876717] text-[10px] font-bold">
+                Shared 2-Bed • Premium AC
+              </span>
+            </div>
+            <span class="px-2.5 py-0.5 rounded-full bg-[#fbf2da] text-[#876717] text-[10px] font-extrabold flex items-center gap-1">
+              <span>★</span>
+              <span>Matches Preference</span>
+            </span>
+          </div>
+
+          <div class="space-y-2">
+            <!-- Bed A (Active Selected Bed) -->
+            <div id="selected-bed-card" class="bg-gradient-to-r from-[#c59b27] to-indigo-600 text-white rounded-2xl p-3.5 shadow-md shadow-[#c59b27]/20 flex items-center justify-between relative">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-xl bg-white/20 text-white flex items-center justify-center shrink-0">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v9"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <p class="text-xs font-extrabold text-white">Bed A (Selected)</p>
+                    <span class="text-[9px] font-bold text-[#6d5212] bg-white/90 px-1.5 py-0.2 rounded">
+                      Balcony Facing
+                    </span>
+                  </div>
+                  <p class="text-[10px] text-[#fbf2da] font-medium mt-0.5">
+                    ₹350 / month • Includes dedicated study desk
+                  </p>
+                </div>
+              </div>
+              <span class="w-6 h-6 rounded-full bg-white text-[#c59b27] flex items-center justify-center shadow-xs shrink-0">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </span>
+            </div>
+
+            <!-- Bed B -->
+            <div class="bg-[#fdfbf7] rounded-2xl p-3 flex items-center justify-between border border-[#ede4d5]/70">
+              <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-xl bg-[#fbf2da] text-[#c59b27] flex items-center justify-center">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v9"/>
+                  </svg>
+                </div>
+                <div>
+                  <div class="flex items-center gap-1.5">
+                    <p class="text-xs font-bold text-slate-800">Bed B</p>
+                    <span class="text-[9px] font-bold text-slate-500 bg-white px-1.5 py-0.2 rounded border border-[#ede5d8]">Wardrobe adjacent</span>
+                  </div>
+                  <p class="text-[10px] font-semibold text-slate-600 mt-0.5">₹350 / month</p>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="bed-select-btn px-3 py-1 rounded-full bg-white text-[#c59b27] hover:bg-[#fdfbf7] border border-[#e3d5be] text-[10px] font-extrabold cursor-pointer transition shadow-2xs"
+                data-room="Room 203"
+                data-bed="Bed B"
+                data-price="₹350"
+              >
+                • Select
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Room 204: Triple Shared (1 Bed Vacant) -->
+        <div class="bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-2xs space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <h4 class="text-sm font-extrabold text-slate-900">Room 204</h4>
+              <span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 text-[10px] font-bold">
+                Triple Shared
+              </span>
+            </div>
+            <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200/60">
+              1 Bed Vacant
+            </span>
+          </div>
+
+          <div class="bg-[#fdfbf7] rounded-2xl p-3 flex items-center justify-between border border-[#ede4d5]/70">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-xl bg-[#fbf2da] text-[#c59b27] flex items-center justify-center">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v9"/>
+                </svg>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <p class="text-xs font-bold text-slate-800">Bed C (Lower Bunk)</p>
+                  <span class="text-[9px] font-bold text-emerald-700 bg-emerald-100 px-1.5 py-0.2 rounded">Economical</span>
+                </div>
+                <p class="text-[10px] font-semibold text-slate-600 mt-0.5">₹280 / month</p>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="bed-select-btn px-3 py-1 rounded-full bg-white text-[#c59b27] hover:bg-[#fdfbf7] border border-[#e3d5be] text-[10px] font-extrabold cursor-pointer transition shadow-2xs"
+              data-room="Room 204"
+              data-bed="Bed C"
+              data-price="₹280"
+            >
+              • Select
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Inclusions & Allocation Perks -->
+      <section class="space-y-2 pt-1">
+        <div class="flex items-center justify-between">
+          <h3 class="text-[10px] font-extrabold text-slate-400 tracking-wider uppercase">
+            INCLUSIONS & ALLOCATION PERKS
+          </h3>
+          <svg class="w-4 h-4 text-[#c59b27]" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.25 14.25l-4.5-4.5 1.41-1.41 3.09 3.09 7.09-7.09 1.41 1.41-8.5 8.5z"/>
+          </svg>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2 text-xs font-bold text-slate-700">
+          <div class="bg-[#fdfbf7] rounded-xl p-2.5 border border-[#ede4d5] flex items-center gap-2">
+            <span class="text-[#c59b27]">📶</span>
+            <span class="text-[11px] truncate">Wi-Fi 100Mbps Included</span>
+          </div>
+          <div class="bg-[#fdfbf7] rounded-xl p-2.5 border border-[#ede4d5] flex items-center gap-2">
+            <span class="text-[#c59b27]">🚿</span>
+            <span class="text-[11px] truncate">Attached Bathroom</span>
+          </div>
+          <div class="bg-[#fdfbf7] rounded-xl p-2.5 border border-[#ede4d5] flex items-center gap-2">
+            <span class="text-[#c59b27]">🧺</span>
+            <span class="text-[11px] truncate">Weekly Linen Change</span>
+          </div>
+          <div class="bg-[#fdfbf7] rounded-xl p-2.5 border border-[#ede4d5] flex items-center gap-2">
+            <span class="text-[#c59b27]">💳</span>
+            <span class="text-[11px] truncate">Keycard #KC-203A</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 6. Move-in Checklist -->
+      <section class="bg-white rounded-3xl p-4 sm:p-5 border border-[#f3ece2] shadow-sm space-y-3">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xs font-extrabold text-slate-900 tracking-tight">MOVE-IN CHECKLIST</h3>
+          <span id="checklist-counter" class="px-2 py-0.5 rounded-full bg-[#fbf2da] text-[#a6801e] text-[10px] font-extrabold">
+            2 of 3 Done
+          </span>
+        </div>
+
+        <div class="space-y-2 text-xs font-semibold text-slate-700">
+          <!-- Item 1: Checked -->
+          <label class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-[#f3ece2] cursor-pointer hover:bg-[#fdfbf7]/50 transition">
+            <div class="flex items-center gap-2.5">
+              <input type="checkbox" checked class="checklist-item w-4 h-4 rounded bg-[#c59b27] text-[#c59b27] accent-[#c59b27] cursor-pointer">
+              <span class="text-xs">Physical Room Key / NFC Tag Issued</span>
+            </div>
+            <span class="text-[#c59b27]">🔑</span>
+          </label>
+
+          <!-- Item 2: Checked -->
+          <label class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-[#f3ece2] cursor-pointer hover:bg-[#fdfbf7]/50 transition">
+            <div class="flex items-center gap-2.5">
+              <input type="checkbox" checked class="checklist-item w-4 h-4 rounded bg-[#c59b27] text-[#c59b27] accent-[#c59b27] cursor-pointer">
+              <span class="text-xs">Biometric Turnstile Access Provisioned</span>
+            </div>
+            <span class="text-[#c59b27]">👤</span>
+          </label>
+
+          <!-- Item 3: Unchecked -->
+          <label class="flex items-center justify-between p-2.5 rounded-xl bg-slate-50 border border-[#f3ece2] cursor-pointer hover:bg-[#fdfbf7]/50 transition">
+            <div class="flex items-center gap-2.5">
+              <input type="checkbox" id="check-handbook" class="checklist-item w-4 h-4 rounded bg-white text-[#c59b27] accent-[#c59b27] cursor-pointer">
+              <span class="text-xs">Welcome Kit & Hostel Handbook Handed Over</span>
+            </div>
+            <span class="text-slate-400">📖</span>
+          </label>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 7. Sticky Bottom Action Footer Bar -->
+    <footer class="mt-6 pt-4 border-t border-[#ede5d8] flex flex-col sm:flex-row items-center justify-end gap-3 w-full bg-white p-4 rounded-2xl shadow-xs">
+      <button
+        type="button"
+        id="btn-lock-allocation"
+        class="w-full py-3.5 px-4 bg-[#180d19] hover:bg-[#281424] hover:bg-[#c59b27] active:bg-[#a6801e] text-white rounded-2xl text-xs sm:text-sm font-extrabold flex items-center justify-center gap-2 shadow-lg shadow-[#c59b27]/25 transition cursor-pointer"
+      >
+        <!-- Lock Icon -->
+        <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+        <span id="btn-lock-text">Assign & Lock Bed Allocation (Room 203 - Bed A)</span>
+      </button>
+
+      <!-- Subtitle -->
+      <div class="flex items-center justify-center gap-1 text-[10px] text-slate-500 font-medium text-center">
+        <svg class="w-3 h-3 text-[#c59b27] shrink-0" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+        </svg>
+        <span>Instant SMS receipt and digital key credentials will be sent to Aryan.</span>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Client-side JavaScript -->
+  <script src="/js/assign-bed.js"></script>
+</body>
+</html>
+

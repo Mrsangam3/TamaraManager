@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TAAMARA CO-LIVE — Manager Web Portal</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            gold: {
+              50: '#fdfbf7',
+              100: '#fbf2da',
+              200: '#f5e5ba',
+              300: '#edd18e',
+              400: '#e1cb8f',
+              500: '#d4a838',
+              600: '#c59b27',
+              700: '#a6801e',
+              800: '#876717',
+              900: '#6d5212',
+            },
+            brand: {
+              gold: '#c59b27',
+              goldLight: '#fef8ea',
+              goldDark: '#a6801e',
+              border: '#ede4d5',
+            },
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Plus Jakarta Sans & Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.15); }
+    }
+    .live-dot {
+      animation: pulse-slow 2s infinite ease-in-out;
+    }
+    .font-serif-luxury { font-family: 'Playfair Display', Georgia, serif; }
+  </style>
+</head>
+<body class="bg-[#faf6f0] text-[#1c1917] antialiased min-h-screen font-sans select-none overflow-x-hidden">
+
+  <!-- Enterprise Web Application Portal Container -->
+  <div class="min-h-screen w-full flex flex-col lg:flex-row">
+    
+    <!-- LEFT COLUMN: Brand Hero & Operations Telemetry Showcase (Desktop Persistent) -->
+    <aside class="hidden lg:flex lg:w-1/2 xl:w-7/12 min-h-screen bg-[#180d19] text-white p-8 sm:p-12 xl:p-16 flex-col justify-between relative overflow-hidden border-r border-[#261324] shadow-2xl">
+      
+      <!-- Background Ambient Glow Accents -->
+      <div class="absolute -top-32 -left-32 w-96 h-96 bg-[#c59b27]/15 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-[#4a154b]/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- 1. Brand Header -->
+      <div class="relative z-10">
+        <a href="/" class="flex items-center gap-3.5 group cursor-pointer inline-flex">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#eab308] to-[#b45309] flex items-center justify-center shadow-xl shadow-amber-950/40 border border-amber-300/40 relative">
+            <span class="text-2xl font-black font-serif-luxury text-[#180d19]">T</span>
+            <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-400 border-2 border-[#180d19] rounded-full live-dot"></span>
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-xl font-bold font-serif-luxury tracking-wide text-white">TAAMARA CO-LIVE</span>
+              <span class="px-2 py-0.5 rounded-full text-[9px] font-extrabold uppercase tracking-wider bg-[#2e172a] text-[#f5c5e8] border border-[#52294e]">PMS Hub</span>
+            </div>
+            <p class="text-[11px] font-semibold text-[#c099b9] tracking-wider uppercase">NANAKRAMGUDA, HYDERABAD</p>
+          </div>
+        </a>
+      </div>
+
+      <!-- 2. Hero Presentation & Telemetry Cards -->
+      <div class="relative z-10 my-auto py-10 space-y-8 max-w-xl">
+        <div class="space-y-3">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#241223] border border-[#381c34] text-[11px] font-bold text-[#eab308]">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 live-dot"></span>
+            <span>Central Management &amp; Operations Portal</span>
+          </div>
+          <h2 class="text-3xl xl:text-4xl font-extrabold font-serif-luxury text-white tracking-tight leading-snug">
+            Autonomous Operations for Premium Living &amp; Student Housing
+          </h2>
+          <p class="text-sm text-[#d4b8cf] leading-relaxed">
+            Centralized administrative console for real-time occupancy management, facial turnstile telemetry, automated rent reconciliation, and warden shift handovers.
+          </p>
+        </div>
+
+        <!-- Real-Time Metrics & Telemetry Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
+          
+          <!-- Metric 1: Campus Capacity -->
+          <div class="p-4 rounded-2xl bg-[#241223] border border-[#351b33] space-y-1">
+            <div class="flex items-center justify-between text-xs text-[#c099b9]">
+              <span class="font-bold flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-[#eab308]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                <span>Live Capacity</span>
+              </span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#064e3b] text-[#34d399]">94.8% Full</span>
+            </div>
+            <p class="text-lg font-black text-white font-serif-luxury">166 / 176 Beds</p>
+            <p class="text-[10px] text-[#ad8caa]">Block A (96) • Block B (80) Campus</p>
+          </div>
+
+          <!-- Metric 2: Security & Biometrics -->
+          <div class="p-4 rounded-2xl bg-[#241223] border border-[#351b33] space-y-1">
+            <div class="flex items-center justify-between text-xs text-[#c099b9]">
+              <span class="font-bold flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <span>Turnstiles</span>
+              </span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#064e3b] text-[#34d399]">100% Online</span>
+            </div>
+            <p class="text-lg font-black text-white font-serif-luxury">Biometric Gate Live</p>
+            <p class="text-[10px] text-[#ad8caa]">RFID &amp; FaceID active at Duty Room 102</p>
+          </div>
+
+          <!-- Metric 3: Financial Yield -->
+          <div class="p-4 rounded-2xl bg-[#241223] border border-[#351b33] space-y-1">
+            <div class="flex items-center justify-between text-xs text-[#c099b9]">
+              <span class="font-bold flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-[#eab308]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                <span>Collection Cycle</span>
+              </span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#3b1d38] text-[#f5c5e8]">Oct Cycle</span>
+            </div>
+            <p class="text-lg font-black text-white font-serif-luxury">₹6,85,000</p>
+            <p class="text-[10px] text-[#ad8caa]">Realized monthly revenue • 64 settled</p>
+          </div>
+
+          <!-- Metric 4: Warden In-Charge -->
+          <div class="p-4 rounded-2xl bg-[#241223] border border-[#351b33] space-y-1">
+            <div class="flex items-center justify-between text-xs text-[#c099b9]">
+              <span class="font-bold flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-[#eab308]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+                <span>Active Duty</span>
+              </span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#281424] text-[#e0cfdd]">Shift Open</span>
+            </div>
+            <p class="text-lg font-black text-white font-serif-luxury">Alex Morgan</p>
+            <p class="text-[10px] text-[#ad8caa]">Super Admin • Sunrise Terminal HF-9022</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 3. Left Footer Metadata -->
+      <div class="relative z-10 flex items-center justify-between text-[11px] text-[#9d7897] pt-4 border-t border-[#261324]">
+        <div class="flex items-center gap-3">
+          <span class="flex items-center gap-1 text-slate-300">
+            <svg class="w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>256-Bit TLS Encrypted Session</span>
+          </span>
+          <span>•</span>
+          <span>ISO-27001 Certified Host</span>
+        </div>
+        <p>© 2026 TAAMARA Co-Living</p>
+      </div>
+
+    </aside>
+
+    <!-- RIGHT COLUMN: Web Authentication Workspace (Desktop & Mobile Adaptive) -->
+    <main class="flex-1 min-h-screen bg-[#faf6f0] flex flex-col justify-center items-center p-6 sm:p-10 lg:p-12 xl:p-16">
+      
+      <!-- Container for Login View -->
+      <div id="login-container" class="w-full max-w-lg space-y-6">
+
+        <!-- Mobile-Only Brand Header (Hidden on Desktop) -->
+        <div class="lg:hidden flex flex-col items-center text-center mb-2">
+          <div class="w-14 h-14 rounded-2xl bg-[#180d19] flex items-center justify-center shadow-lg shadow-amber-950/20 border border-slate-700/30 relative mb-2">
+            <span class="text-xl font-black font-serif-luxury text-amber-400">T</span>
+            <span class="absolute bottom-1 right-1 w-3 h-3 bg-emerald-400 border-2 border-white rounded-full live-dot"></span>
+          </div>
+          <span class="text-lg font-bold font-serif-luxury text-[#180d19]">TAAMARA CO-LIVE</span>
+          <span class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Property Management System</span>
+        </div>
+
+        <!-- Portal Header -->
+        <div class="space-y-1.5 text-left">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#fbf2da] border border-[#ede4d5] shadow-2xs">
+            <svg class="w-3.5 h-3.5 text-[#c59b27]" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/>
+            </svg>
+            <span class="text-[11px] font-bold tracking-wider text-[#876717] uppercase">
+              TAAMARA CO-LIVE PORTAL
+            </span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-[#180d19] tracking-tight font-serif-luxury">
+            Welcome Back, Manager
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-500 font-medium">
+            Enter administrative credentials to access the central property operations desk.
+          </p>
+        </div>
+
+        <!-- Main Login Card -->
+        <div class="w-full bg-white rounded-3xl p-6 sm:p-8 border border-[#f3ece2] shadow-xl shadow-stone-200/50 relative">
+          
+          <!-- Ops Terminal Header Banner -->
+          <div class="flex items-center justify-between bg-[#fdfbf7] rounded-xl px-4 py-2.5 mb-5 border border-[#ede4d5]">
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+              <span id="terminal-name" class="text-xs font-bold text-slate-800 tracking-tight">Ops Terminal 04</span>
+            </div>
+            <div class="flex items-center gap-1.5 bg-white px-2.5 py-0.5 rounded-full border border-[#ede4d5] shadow-2xs">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#c59b27]"></span>
+              <span id="terminal-version" class="text-[11px] font-extrabold text-slate-700">v2.8 Live</span>
+            </div>
+          </div>
+
+          <!-- Login Form -->
+          <form id="manager-login-form" class="space-y-4">
+            
+            <!-- Field 1: Property / Branch Code -->
+            <div>
+              <div class="flex items-center justify-between mb-1.5">
+                <label for="branch-code" class="text-xs font-bold text-slate-800">
+                  Property / Branch Code
+                </label>
+                <button
+                  type="button"
+                  id="autofill-btn"
+                  class="inline-flex items-center gap-1 text-[11px] font-bold text-[#c59b27] hover:text-[#a6801e] transition cursor-pointer"
+                >
+                  <svg class="w-3.5 h-3.5 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 4V2m0 16v-2m7-7h-2M6 11H4m13.364-6.364l-1.414 1.414M7.05 16.95l-1.414 1.414m12.728 0l-1.414-1.414M7.05 7.05L5.636 5.636M12 8l-6 6 2 2 6-6-2-2z"/>
+                  </svg>
+                  <span>Auto-fill demo</span>
+                </button>
+              </div>
+              <div class="relative flex items-center bg-[#fdfbf7] rounded-xl border border-[#ede4d5] focus-within:border-[#c59b27] focus-within:bg-white focus-within:ring-2 focus-within:ring-[#f5e5ba] transition">
+                <span class="pl-3.5 pr-2 flex items-center justify-center text-slate-400">
+                  <svg class="w-4 h-4 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M12 3v6m0 6v6M3 12h6m6 0h6"/>
+                    <circle cx="12" cy="3" r="1.5"/>
+                    <circle cx="12" cy="21" r="1.5"/>
+                    <circle cx="3" cy="12" r="1.5"/>
+                    <circle cx="21" cy="12" r="1.5"/>
+                  </svg>
+                </span>
+                <input
+                  type="text"
+                  id="branch-code"
+                  name="branchCode"
+                  value="BLR-CAMPUS-01"
+                  placeholder="e.g. BLR-CAMPUS-01"
+                  required
+                  class="w-full py-2.5 pr-10 text-xs sm:text-sm font-semibold text-slate-800 bg-transparent outline-none tracking-wide"
+                />
+                <span class="absolute right-3 top-1/2 -translate-y-1/2">
+                  <svg class="w-4 h-4 text-emerald-500" viewBox="0 0 24 24" fill="currentColor">
+                    <path fill-rule="evenodd" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.25 14.25l-4.5-4.5 1.41-1.41 3.09 3.09 7.09-7.09 1.41 1.41-8.5 8.5z" clip-rule="evenodd"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
+
+            <!-- Field 2: Manager ID / Phone / Email -->
+            <div>
+              <label for="manager-id" class="block text-xs font-bold text-slate-800 mb-1.5">
+                Manager ID / Work Email
+              </label>
+              <div class="relative flex items-center bg-[#fdfbf7] rounded-xl border border-[#ede4d5] focus-within:border-[#c59b27] focus-within:bg-white focus-within:ring-2 focus-within:ring-[#f5e5ba] transition">
+                <span class="pl-3.5 pr-2 flex items-center justify-center text-slate-400">
+                  <svg class="w-4 h-4 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="16" rx="3"/>
+                    <circle cx="9" cy="10" r="2"/>
+                    <path d="M15 8h2m-2 4h2M7 16h10"/>
+                  </svg>
+                </span>
+                <input
+                  type="text"
+                  id="manager-id"
+                  name="managerId"
+                  value="manager.blr@taamaracolive.com"
+                  placeholder="manager.blr@taamaracolive.com"
+                  required
+                  class="w-full py-2.5 pr-3.5 text-xs sm:text-sm font-semibold text-slate-800 bg-transparent outline-none"
+                />
+              </div>
+            </div>
+
+            <!-- Field 3: Security Key / Password -->
+            <div>
+              <label for="password" class="block text-xs font-bold text-slate-800 mb-1.5">
+                Security Key / Password
+              </label>
+              <div class="relative flex items-center bg-[#fdfbf7] rounded-xl border border-[#ede4d5] focus-within:border-[#c59b27] focus-within:bg-white focus-within:ring-2 focus-within:ring-[#f5e5ba] transition">
+                <span class="pl-3.5 pr-2 flex items-center justify-center text-slate-400">
+                  <svg class="w-4 h-4 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="7.5" cy="15.5" r="4.5"/>
+                    <path d="m21 3-9.5 9.5M15.5 7.5l3 3M18 5l2 2"/>
+                  </svg>
+                </span>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  value="••••••••••••"
+                  placeholder="Enter security key"
+                  required
+                  class="w-full py-2.5 pr-10 text-xs sm:text-sm font-semibold text-slate-800 bg-transparent outline-none"
+                />
+                <button
+                  type="button"
+                  id="toggle-password-btn"
+                  class="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600 transition cursor-pointer"
+                  aria-label="Toggle password visibility"
+                >
+                  <svg id="eye-icon" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Options: Remember Device & Forgot Key -->
+            <div class="flex items-center justify-between pt-1 pb-1">
+              <label class="flex items-center gap-2 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  id="remember-device"
+                  name="rememberDevice"
+                  checked
+                  class="w-4 h-4 rounded bg-[#c59b27] text-[#c59b27] border-[#ede4d5] focus:ring-0 cursor-pointer accent-[#c59b27]"
+                />
+                <span class="text-xs font-semibold text-slate-600">Remember device</span>
+              </label>
+              <a
+                href="#forgot"
+                id="forgot-key-btn"
+                class="text-xs font-bold text-[#c59b27] hover:text-[#a6801e] transition"
+              >
+                Forgot Key?
+              </a>
+            </div>
+
+            <!-- Feedback Alert Container -->
+            <div id="status-alert" class="hidden text-xs px-3 py-2.5 rounded-xl text-center font-bold transition duration-200"></div>
+
+            <!-- Primary Sign In Button -->
+            <button
+              type="submit"
+              id="submit-btn"
+              class="w-full py-3.5 px-4 bg-[#180d19] hover:bg-[#281424] text-white rounded-xl text-xs sm:text-sm font-black flex items-center justify-center gap-2 shadow-md shadow-stone-900/10 transition duration-150 cursor-pointer"
+            >
+              <span id="submit-text">Sign In as Manager</span>
+              <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
+
+            <!-- OR AUTHENTICATE Divider -->
+            <div class="relative flex items-center justify-center py-2">
+              <div class="border-t border-[#ede5d8] w-full"></div>
+              <span class="bg-white px-3 text-[10px] font-black text-slate-400 tracking-wider uppercase absolute">
+                OR AUTHENTICATE
+              </span>
+            </div>
+
+            <!-- Quick Biometric Login Button -->
+            <button
+              type="button"
+              id="biometric-btn"
+              class="w-full py-3 px-4 bg-[#fef8ea] hover:bg-[#fbf2da] border border-[#ede4d5] text-[#876717] rounded-xl text-xs sm:text-sm font-extrabold flex items-center justify-center gap-2 transition duration-150 cursor-pointer shadow-2xs"
+            >
+              <svg class="w-5 h-5 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M12 10a2 2 0 0 0-2 2c0 1.02-.1 2.51-.26 4"/>
+                <path d="M14 13.12c0 2.38 0 6.38-1 8.88"/>
+                <path d="M2 16h.01"/>
+                <path d="M21.8 16c.2-2 .131-5.354 0-6"/>
+                <path d="M5 19.5C5.5 18 6 15 6 12a6 6 0 0 1 .34-2"/>
+                <path d="M8.65 22c.21-.66.45-1.32.57-2"/>
+                <path d="M9 6.8a6 6 0 0 1 9 5.2v2"/>
+              </svg>
+              <span>Quick Biometric Login</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Bottom Stat & Trust Badges -->
+        <div class="w-full grid grid-cols-2 gap-3">
+          
+          <!-- Card 1: Branch Status -->
+          <div class="bg-white rounded-2xl p-3 flex items-center gap-2.5 border border-[#ede5d8] shadow-2xs">
+            <div class="w-9 h-9 rounded-xl bg-[#fbf2da] text-[#c59b27] flex items-center justify-center shrink-0">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v9"/>
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <p class="text-[10px] text-slate-500 font-bold leading-tight">Branch Status</p>
+              <p id="stat-occupancy" class="text-xs font-black text-slate-900 leading-tight">94% Occupied</p>
+            </div>
+          </div>
+
+          <!-- Card 2: Hostel Shield -->
+          <div class="bg-white rounded-2xl p-3 flex items-center gap-2.5 border border-[#ede5d8] shadow-2xs">
+            <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="m9 12 2 2 4-4"/>
+              </svg>
+            </div>
+            <div class="min-w-0">
+              <p class="text-[10px] text-slate-500 font-bold leading-tight">Hostel Shield</p>
+              <p id="stat-shield" class="text-xs font-black text-slate-900 leading-tight truncate">256-Bit Encrypted</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer Support Info -->
+        <div class="text-center space-y-1.5 pt-2">
+          <p class="text-xs text-slate-500 font-medium">
+            Trouble entering premises terminal?
+          </p>
+          <button
+            type="button"
+            id="admin-support-btn"
+            class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 hover:text-[#c59b27] transition cursor-pointer"
+          >
+            <svg class="w-3.5 h-3.5 text-slate-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
+              <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
+            </svg>
+            <span>Contact System Administrator</span>
+          </button>
+          <p id="terminal-meta" class="text-[10px] text-slate-400 font-semibold tracking-tight">
+            Terminal ID: HST-BLR-04 • IP Whitelisted
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Dashboard Container (shown upon successful login) -->
+      <div id="dashboard-container" class="hidden w-full max-w-xl bg-white rounded-3xl p-8 border border-[#f3ece2] shadow-xl text-center space-y-4">
+        <div class="w-16 h-16 rounded-2xl bg-[#c59b27] text-white flex items-center justify-center font-extrabold text-2xl shadow-lg mx-auto">
+          TC
+        </div>
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          Authenticated Session Active
+        </div>
+        <h2 class="text-2xl font-extrabold text-slate-900 font-serif-luxury">Manager Portal Ready</h2>
+        <p class="text-sm text-slate-500">
+          Logged into <span id="dash-branch" class="font-bold text-slate-800">BLR-CAMPUS-01</span> as <span id="dash-manager" class="font-bold text-slate-800">manager.blr@taamaracolive.com</span>.
+          Redirecting to management dashboard...
+        </p>
+        <button
+          id="logout-btn"
+          class="px-5 py-2.5 bg-[#180d19] hover:bg-[#281424] text-white rounded-xl text-xs font-bold transition cursor-pointer"
+        >
+          ← Return to Login
+        </button>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Client-side JavaScript -->
+  <script src="/js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>TAAMARA CO-LIVE — App Preferences</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .font-serif-luxury { font-family: 'Playfair Display', Georgia, serif; }
+  </style>
+</head>
+<body class="bg-[#faf6f0] text-[#1c1917] antialiased min-h-screen flex flex-col font-sans select-none overflow-x-hidden">
+
+  <!-- Mobile Frame Container (Max 430px) -->
+  <div class="w-full max-w-5xl mx-auto space-y-6 pb-12">
+
+    <!-- 1. Header (Sticky Top) -->
+    <header class="bg-white/95 backdrop-blur-md px-4 py-3 border-b border-[#f3ece2] flex items-center justify-between sticky top-0 z-30">
+      <div class="w-8"></div>
+      <div class="text-center">
+        <h1 class="text-xs font-black text-slate-900 leading-tight font-serif-luxury">More Hub</h1>
+      </div>
+      <button
+        type="button"
+        id="btn-bell"
+        class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center relative transition cursor-pointer"
+        title="Notifications"
+      >
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+      </button>
+    </header>
+
+    <!-- Main Content Stream -->
+    <main class="flex-1 px-4 pt-3 space-y-4 text-xs">
+
+      <!-- 2. Sub-header (Back + App Preferences Title + Reset Action) -->
+      <section class="flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <a
+            href="/more.html"
+            id="btn-back"
+            class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 transition cursor-pointer"
+            title="Back to More"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </a>
+          <h2 class="text-sm font-black text-slate-900 leading-tight font-serif-luxury">App Preferences</h2>
+        </div>
+
+        <button
+          type="button"
+          id="btn-reset-pref"
+          class="text-xs font-bold text-[#c59b27] hover:text-[#876717] transition cursor-pointer px-2 py-1 rounded-lg hover:bg-[#fdfbf7]"
+          title="Restore factory defaults"
+        >
+          Reset
+        </button>
+      </section>
+
+      <!-- 3. Section: DISPLAY & APPEARANCE -->
+      <section class="space-y-2">
+        <div class="flex items-center gap-1.5 px-1">
+          <svg class="w-3.5 h-3.5 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+          <h3 class="text-[10px] font-black text-slate-400 tracking-wider uppercase">DISPLAY &amp; APPEARANCE</h3>
+        </div>
+
+        <div class="bg-white rounded-2xl p-3.5 border border-[#f3ece2] shadow-2xs space-y-3.5">
+          <!-- Theme Mode -->
+          <div>
+            <label class="block text-xs font-black text-slate-800 mb-1.5">Theme Mode</label>
+            <div class="bg-slate-100/80 p-1 rounded-xl flex gap-1" id="theme-mode-group">
+              <button
+                type="button"
+                data-theme="light"
+                class="theme-btn active flex-1 py-1.5 px-3 rounded-lg bg-white text-[#c59b27] font-extrabold text-xs shadow-xs flex items-center justify-center gap-1.5 cursor-pointer transition"
+              >
+                <span>☀</span>
+                <span>Light</span>
+              </button>
+              <button
+                type="button"
+                data-theme="dark"
+                class="theme-btn flex-1 py-1.5 px-3 rounded-lg text-slate-500 font-bold hover:text-slate-800 text-xs flex items-center justify-center gap-1.5 cursor-pointer transition"
+              >
+                <span>☾</span>
+                <span>Dark</span>
+              </button>
+              <button
+                type="button"
+                data-theme="system"
+                class="theme-btn flex-1 py-1.5 px-3 rounded-lg text-slate-500 font-bold hover:text-slate-800 text-xs flex items-center justify-center gap-1.5 cursor-pointer transition"
+              >
+                <span>🖵</span>
+                <span>System</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Compact Card View -->
+          <div class="flex items-center justify-between pt-1">
+            <div class="min-w-0 pr-3">
+              <h4 class="text-xs font-black text-slate-900 leading-tight">Compact Card View</h4>
+              <p class="text-[10px] text-slate-400 font-medium mt-0.5">Pack higher room density per screen</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer shrink-0">
+              <input type="checkbox" id="toggle-compact" class="sr-only peer">
+              <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#c59b27]"></div>
+            </label>
+          </div>
+
+          <!-- Font Size Scale -->
+          <div class="pt-1 space-y-2">
+            <div class="flex items-center justify-between">
+              <label class="text-xs font-black text-slate-800">Font Size Scale</label>
+              <span id="badge-font-size" class="px-2 py-0.5 rounded-full bg-[#fdfbf7] text-[#a6801e] text-[10px] font-bold border border-[#ede4d5]">
+                Standard
+              </span>
+            </div>
+            <div class="grid grid-cols-3 gap-2" id="font-scale-group">
+              <button
+                type="button"
+                data-scale="standard"
+                class="font-scale-btn active py-2.5 px-2 bg-[#fdfbf7]/70 border-2 border-[#c59b27] text-[#a6801e] rounded-xl flex flex-col items-center justify-center cursor-pointer transition"
+              >
+                <span class="text-sm font-black">A</span>
+                <span class="text-[9px] font-extrabold mt-0.5">Standard</span>
+              </button>
+              <button
+                type="button"
+                data-scale="medium"
+                class="font-scale-btn py-2.5 px-2 bg-slate-50 border border-[#ede5d8] text-slate-700 hover:bg-slate-100 rounded-xl flex flex-col items-center justify-center cursor-pointer transition"
+              >
+                <span class="text-base font-black">A⁺</span>
+                <span class="text-[9px] font-bold mt-0.5 text-slate-500">Medium</span>
+              </button>
+              <button
+                type="button"
+                data-scale="large"
+                class="font-scale-btn py-2.5 px-2 bg-slate-50 border border-[#ede5d8] text-slate-700 hover:bg-slate-100 rounded-xl flex flex-col items-center justify-center cursor-pointer transition"
+              >
+                <span class="text-lg font-black leading-none">A⁺⁺</span>
+                <span class="text-[9px] font-bold mt-0.5 text-slate-500">Large</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 4. Section: PUSH & SOUND ALERTS -->
+      <section class="space-y-2">
+        <div class="flex items-center justify-between px-1">
+          <div class="flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <h3 class="text-[10px] font-black text-slate-400 tracking-wider uppercase">PUSH &amp; SOUND ALERTS</h3>
+          </div>
+          <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[9px] font-extrabold border border-emerald-200">
+            High Priority
+          </span>
+        </div>
+
+        <div class="bg-white rounded-2xl p-3.5 border border-[#f3ece2] shadow-2xs divide-y divide-slate-100 space-y-3">
+
+          <!-- Urgent Curfew Breach Alerts -->
+          <div class="flex items-center justify-between pt-0.5">
+            <div class="min-w-0 pr-3">
+              <div class="flex items-center gap-1.5">
+                <h4 class="text-xs font-black text-slate-900 leading-tight">Urgent Curfew Breach Alerts</h4>
+                <span class="px-1.5 py-0.2 rounded-full bg-rose-100 text-rose-700 text-[9px] font-black">
+                  📢 Loud
+                </span>
+              </div>
+              <p class="text-[10px] text-slate-400 font-medium mt-0.5">Overrides Do-Not-Disturb between 23:00-06:00</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer shrink-0">
+              <input type="checkbox" id="toggle-alert-curfew" checked class="sr-only peer">
+              <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#c59b27]"></div>
+            </label>
+          </div>
+
+          <!-- Room Change & Leave Requests -->
+          <div class="flex items-center justify-between pt-3">
+            <div class="min-w-0 pr-3">
+              <h4 class="text-xs font-black text-slate-900 leading-tight">Room Change &amp; Leave Requests</h4>
+              <p class="text-[10px] text-slate-400 font-medium mt-0.5">Instant push notification on tenant submission</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer shrink-0">
+              <input type="checkbox" id="toggle-alert-requests" checked class="sr-only peer">
+              <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#c59b27]"></div>
+            </label>
+          </div>
+
+          <!-- Emergency Escapes (<1h SLA) -->
+          <div class="flex items-center justify-between pt-3">
+            <div class="min-w-0 pr-3">
+              <div class="flex items-center gap-1.5">
+                <h4 class="text-xs font-black text-slate-900 leading-tight">Emergency Escapes (&lt;1h SLA)</h4>
+                <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+              </div>
+              <p class="text-[10px] text-slate-400 font-medium mt-0.5">Critical pipeline leakages, electrical hazards</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer shrink-0">
+              <input type="checkbox" id="toggle-alert-emergency" checked class="sr-only peer">
+              <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#c59b27]"></div>
+            </label>
+          </div>
+
+          <!-- Rent & Fee Payments -->
+          <div class="flex items-center justify-between pt-3">
+            <div class="min-w-0 pr-3">
+              <h4 class="text-xs font-black text-slate-900 leading-tight">Rent &amp; Fee Payments</h4>
+              <p class="text-[10px] text-slate-400 font-medium mt-0.5">Real-time ledger updates and receipts</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer shrink-0">
+              <input type="checkbox" id="toggle-alert-rent" checked class="sr-only peer">
+              <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#c59b27]"></div>
+            </label>
+          </div>
+
+          <!-- Alert Volume Slider -->
+          <div class="pt-3 space-y-2">
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="font-extrabold text-slate-800">Alert Volume</span>
+              <span id="label-volume" class="font-black text-[#c59b27]">100% Loud</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-slate-400 text-xs">🔈</span>
+              <input
+                type="range"
+                id="range-volume"
+                min="0"
+                max="100"
+                value="100"
+                class="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-[#c59b27]"
+              />
+              <span class="text-[#c59b27] text-xs">🔊</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 5. Save Action CTA (Prominent Gold Button) -->
+      <section>
+        <button
+          type="button"
+          id="btn-save-pref"
+          class="w-full py-3 bg-[#180d19] hover:bg-[#281424] hover:bg-[#c59b27] text-white font-black text-xs rounded-xl shadow-md shadow-[#c59b27]/20 flex items-center justify-center gap-2 transition cursor-pointer"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+            <polyline points="7 3 7 8 15 8"></polyline>
+          </svg>
+          <span>Save Preferences</span>
+        </button>
+      </section>
+
+      <!-- 6. Section: OPERATIONAL DEFAULTS -->
+      <section class="space-y-2">
+        <div class="flex items-center gap-1.5 px-1">
+          <svg class="w-3.5 h-3.5 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="4" y1="21" x2="4" y2="14"></line>
+            <line x1="4" y1="10" x2="4" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12" y2="3"></line>
+            <line x1="20" y1="21" x2="20" y2="16"></line>
+            <line x1="20" y1="12" x2="20" y2="3"></line>
+            <line x1="1" y1="14" x2="7" y2="14"></line>
+            <line x1="9" y1="8" x2="15" y2="8"></line>
+            <line x1="17" y1="16" x2="23" y2="16"></line>
+          </svg>
+          <h3 class="text-[10px] font-black text-slate-400 tracking-wider uppercase">OPERATIONAL DEFAULTS</h3>
+        </div>
+
+        <div class="bg-white rounded-2xl p-3.5 border border-[#f3ece2] shadow-2xs divide-y divide-slate-100 space-y-3">
+
+          <!-- Default Wing on Launch -->
+          <div class="pt-0.5 space-y-1.5">
+            <label class="block text-xs font-black text-slate-800">Default Wing on Launch</label>
+            <div class="relative">
+              <select
+                id="select-default-wing"
+                class="w-full py-2.5 px-3 bg-slate-50 border border-[#ede5d8] rounded-xl text-xs font-bold text-slate-800 outline-none appearance-none cursor-pointer focus:border-[#c59b27]"
+              >
+                <option value="all">Block A &amp; B (All)</option>
+                <option value="block-a">Block A Only (North Wing)</option>
+                <option value="block-b">Block B Only (South Wing)</option>
+                <option value="ground">Ground Floor Lobby &amp; Mess Only</option>
+              </select>
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-slate-400 font-bold">
+                ⌄
+              </div>
+            </div>
+          </div>
+
+          <!-- Auto-refresh Live Sensor Map -->
+          <div class="flex items-center justify-between pt-3">
+            <div class="min-w-0 pr-3">
+              <h4 class="text-xs font-black text-slate-900 leading-tight">Auto-refresh Live Sensor Map</h4>
+              <p class="text-[10px] text-slate-400 font-medium mt-0.5">Refreshes bed beacons every 30 seconds</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer shrink-0">
+              <input type="checkbox" id="toggle-sensor-refresh" checked class="sr-only peer">
+              <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#c59b27]"></div>
+            </label>
+          </div>
+
+          <!-- Haptic Feedback -->
+          <div class="flex items-center justify-between pt-3">
+            <div class="min-w-0 pr-3">
+              <h4 class="text-xs font-black text-slate-900 leading-tight">Haptic Feedback</h4>
+              <p class="text-[10px] text-slate-400 font-medium mt-0.5">Vibrate device on quick check-in &amp; approvals</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer shrink-0">
+              <input type="checkbox" id="toggle-haptic" checked class="sr-only peer">
+              <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#c59b27]"></div>
+            </label>
+          </div>
+
+          <!-- Offline Cache Sync -->
+          <div class="flex items-center justify-between pt-3">
+            <div class="min-w-0 pr-3">
+              <div class="flex items-center gap-1.5">
+                <h4 class="text-xs font-black text-slate-900 leading-tight">Offline Cache Sync</h4>
+                <span class="text-[10px] text-slate-400 font-semibold">(Synced 2m ago)</span>
+              </div>
+              <p class="text-[10px] text-slate-400 font-medium mt-0.5">Enables basement turnstile scanning without cellular</p>
+            </div>
+            <label class="relative inline-flex items-center cursor-pointer shrink-0">
+              <input type="checkbox" id="toggle-offline-cache" checked class="sr-only peer">
+              <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#c59b27]"></div>
+            </label>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 7. Section: APP DATA & STORAGE -->
+      <section class="space-y-2">
+        <div class="flex items-center gap-1.5 px-1">
+          <svg class="w-3.5 h-3.5 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+            <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+            <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+          </svg>
+          <h3 class="text-[10px] font-black text-slate-400 tracking-wider uppercase">APP DATA &amp; STORAGE</h3>
+        </div>
+
+        <div class="bg-white rounded-2xl p-3 border border-[#f3ece2] shadow-2xs space-y-2.5">
+          <!-- Cached Files & Proofs Row -->
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3 min-w-0">
+              <div class="w-9 h-9 rounded-xl bg-[#fdfbf7] text-[#c59b27] flex items-center justify-center shrink-0">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </div>
+              <div class="min-w-0">
+                <h4 class="text-xs font-black text-slate-900 leading-tight">Cached Files &amp; Proofs</h4>
+                <p class="text-[10px] text-slate-400 font-medium truncate mt-0.5">Inspection photos, lease documents</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2 shrink-0">
+              <span id="cached-size-label" class="text-xs font-black text-slate-900">142 MB</span>
+              <button
+                type="button"
+                id="btn-clear-cache"
+                class="px-2.5 py-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-100 text-[10px] font-extrabold transition cursor-pointer"
+              >
+                Clear
+              </button>
+            </div>
+          </div>
+
+          <!-- App Version Row -->
+          <div class="bg-slate-50 p-2.5 rounded-xl border border-[#f3ece2] flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <svg class="w-3.5 h-3.5 text-slate-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+              <span class="text-[11px] font-black text-slate-700">TAAMARA CO-LIVE Manager</span>
+            </div>
+            <span class="text-[10px] font-bold text-slate-400">v2.4.1 (Build 8920)</span>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 8. Sticky Bottom Navigation Bar -->
+    <nav class="hidden" style="display: none !important;">
+      <a href="/dashboard.html" class="flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><rect width="7" height="7" x="3" y="3" rx="1.5"/><rect width="7" height="7" x="14" y="3" rx="1.5"/><rect width="7" height="7" x="14" y="14" rx="1.5"/><rect width="7" height="7" x="3" y="14" rx="1.5"/></svg>
+        <span class="text-[10px] font-medium">Dashboard</span>
+      </a>
+      <a href="/block-a.html" class="flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>
+        <span class="text-[10px] font-medium">Rooms</span>
+      </a>
+      <a href="/requests.html" class="flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <span class="text-[10px] font-medium">Requests</span>
+      </a>
+      <a href="/tenants.html" class="flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <span class="text-[10px] font-medium">Tenants</span>
+      </a>
+      <a href="/more.html" class="flex flex-col items-center gap-1 py-1 text-[#c59b27] cursor-pointer font-bold">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/><circle cx="5" cy="12" r="1.5"/></svg>
+        <span class="text-[10px]">More</span>
+      </a>
+    </nav>
+
+    <!-- Toast Notification -->
+    <div
+      id="toast"
+      class="fixed bottom-20 left-1/2 -translate-x-1/2 max-w-[380px] w-auto bg-[#180d19] text-white px-4 py-3 rounded-2xl shadow-2xl text-xs font-bold flex items-center gap-2.5 z-50 hidden transition-all duration-300"
+    >
+      <span class="w-2 h-2 rounded-full bg-[#d4a838]"></span>
+      <span id="toast-text">Preferences saved successfully</span>
+    </div>
+
+  </div>
+
+  <script src="/js/app-preferences.js"></script>
+</body>
+</html>
+

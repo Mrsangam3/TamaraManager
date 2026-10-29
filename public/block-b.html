@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TAAMARA CO-LIVE - Block B Operational Hub</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            gold: {
+              50: '#fdfbf7',
+              100: '#fbf2da',
+              200: '#f5e5ba',
+              300: '#edd18e',
+              400: '#e1cb8f',
+              500: '#d4a838',
+              600: '#c59b27',
+              700: '#a6801e',
+              800: '#876717',
+              900: '#6d5212',
+            },
+            brand: {
+              gold: '#c59b27',
+              goldLight: '#fef8ea',
+              goldDark: '#a6801e',
+              border: '#ede4d5',
+            },
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.15); }
+    }
+    .live-dot {
+      animation: pulse-slow 2s infinite ease-in-out;
+    }
+    .font-serif-luxury { font-family: 'Playfair Display', Georgia, serif; }
+  </style>
+</head>
+<body class="bg-[#faf6f0] text-[#1c1917] antialiased min-h-screen flex flex-col font-sans select-none overflow-x-hidden">
+
+  <!-- Mobile / Frame Container -->
+  <div class="min-h-screen flex flex-col lg:flex-row w-full bg-[#faf6f0]">
+
+  <!-- Left Sidebar Navigation (Desktop Persistent lg:flex) -->
+    <!-- Left Sidebar Navigation (Desktop Persistent lg:flex) -->
+  <aside id="app-sidebar" class="hidden lg:flex lg:flex-col lg:w-72 lg:fixed lg:inset-y-0 lg:z-40 bg-[#180d19] text-white border-r border-[#261324] shadow-2xl transition-all duration-300">
+    <!-- Brand Header -->
+    <div class="h-20 flex items-center justify-between px-6 border-b border-[#261324] bg-[#140b15]">
+      <a href="/dashboard.html" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#eab308] to-[#b45309] flex items-center justify-center shadow-lg shadow-amber-900/30 border border-amber-300/40 relative">
+          <span class="text-xl font-black font-serif-luxury text-[#180d19]">T</span>
+          <span class="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 border-2 border-[#180d19] rounded-full live-dot"></span>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-base font-bold font-serif-luxury tracking-wide text-white">TAAMARA CO-LIVE</span>
+          </div>
+          <p class="text-[10px] font-semibold text-[#c099b9] tracking-wider uppercase">NANAKRAMGUDA, HYD</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- Live Telemetry / Gate Status Capsule -->
+    <div class="px-4 py-2.5 mx-4 my-3 rounded-2xl bg-[#241223] border border-[#351b33] flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 live-dot"></span>
+        <span class="text-xs font-semibold text-[#f5e6f2]">Biometric Gate Live</span>
+      </div>
+      <span class="px-2 py-0.5 rounded-lg text-[10px] font-bold bg-[#3b1d38] text-[#f5c5e8] border border-[#52294e]">
+        Admin PMS
+      </span>
+    </div>
+
+    <!-- Navigation Menu Items -->
+    <div class="flex-1 overflow-y-auto px-4 py-2 space-y-6 no-scrollbar">
+      <div>
+        <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-[#9d7897] mb-2 font-sans">MANAGEMENT</p>
+        <nav class="space-y-1">
+          <a href="/dashboard.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold text-white bg-[#2d1729] border border-[#5c304f] shadow-md transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-[#eab308]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              <span>Dashboard Overview</span>
+            </div>
+            <span class="text-[10px] font-bold text-[#eab308]">Active</span>
+          </a>
+
+          <a href="/tenants.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span>Residents Directory</span>
+            </div>
+            <span class="text-[10px] px-2 py-0.5 rounded-md bg-[#251221] text-[#e5d5e2] font-bold">68</span>
+          </a>
+
+          <div class="space-y-1">
+            <a href="/occupancy.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+              <div class="flex items-center gap-3">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                <span>Rooms &amp; Sharing</span>
+              </div>
+              <span class="text-[10px] px-2 py-0.5 rounded-md bg-[#064e3b] text-[#34d399] font-bold">7 Beds Free</span>
+            </a>
+            <div class="hidden" style="display: none !important;">
+              <div class="flex items-center justify-between py-1 px-2 rounded-lg hover:bg-[#251221] cursor-pointer">
+                <span>› Floor 1 (Ground)</span>
+                <span class="px-1.5 py-0.2 rounded bg-[#351b31] text-[#e0cfdd] font-semibold text-[10px]">86%</span>
+              </div>
+              <div class="flex items-center justify-between py-1 px-2 rounded-lg hover:bg-[#251221] cursor-pointer">
+                <span>› Floor 2 (Premium)</span>
+                <span class="px-1.5 py-0.2 rounded bg-[#064e3b] text-[#34d399] font-semibold text-[10px]">5 Free</span>
+              </div>
+              <div class="flex items-center justify-between py-1 px-2 rounded-lg hover:bg-[#251221] cursor-pointer">
+                <span>› Floor 3 (Penthouse)</span>
+                <span class="px-1.5 py-0.2 rounded bg-[#064e3b] text-[#34d399] font-semibold text-[10px]">7 Free</span>
+              </div>
+              <a href="/occupancy.html" class="block py-1 px-2 text-[#eab308] hover:underline font-bold text-[11px] cursor-pointer">
+                + Add New Room
+              </a>
+            </div>
+          </div>
+
+          <a href="/operations.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+              <span>Operations Control</span>
+            </div>
+          </a>
+
+          <a href="/requests.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4M12 16h4M8 11h.01M8 16h.01"/></svg>
+              <span>Requests Desk</span>
+            </div>
+            <span class="text-[10px] px-2 py-0.5 rounded-md bg-[#991b1b] text-white font-extrabold">3 Active</span>
+          </a>
+        </nav>
+      </div>
+
+      <div>
+        <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-[#9d7897] mb-2 font-sans">COMMS &amp; SAFETY</p>
+        <nav class="space-y-1">
+          <a href="/broadcast.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-[#eab308]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+              <span>Broadcast Notice</span>
+            </div>
+          </a>
+
+          <a href="/notifications.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-purple-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+              <span>Notifications</span>
+            </div>
+            <span class="text-[10px] px-2 py-0.5 rounded-md bg-[#701a75] text-[#fae8ff] font-extrabold">4</span>
+          </a>
+
+          <a href="/security-permissions.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <span>Security &amp; Roles</span>
+            </div>
+          </a>
+
+          <a href="/help-support.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-amber-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>Help &amp; Support</span>
+            </div>
+          </a>
+
+          <a href="/more.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><circle cx="4" cy="4" r="2"/><circle cx="12" cy="4" r="2"/><circle cx="20" cy="4" r="2"/><circle cx="4" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="20" cy="12" r="2"/><circle cx="4" cy="20" r="2"/><circle cx="12" cy="20" r="2"/><circle cx="20" cy="20" r="2"/></svg>
+              <span>More &amp; Governance</span>
+            </div>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Campus Wings -->
+      <div class="pt-2 border-t border-[#261324]">
+        <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-[#9d7897] mb-2 font-sans">CAMPUS WINGS</p>
+        <div class="grid grid-cols-2 gap-2">
+          <a href="/block-a.html" class="py-2 px-2.5 rounded-xl bg-[#251222] border border-[#381c34] text-[11px] font-bold text-[#d4b8cf] hover:text-white hover:bg-[#341830] text-center transition cursor-pointer">
+            Block A (96) &rarr;
+          </a>
+          <a href="/block-b.html" class="py-2 px-2.5 rounded-xl bg-[#251222] border border-[#381c34] text-[11px] font-bold text-[#d4b8cf] hover:text-white hover:bg-[#341830] text-center transition cursor-pointer">
+            Block B (80) &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Manager Profile Footer -->
+    <div class="p-4 border-t border-[#261324] bg-[#140b15]">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-[#f59e0b] text-[#180d19] font-serif-luxury font-black text-sm flex items-center justify-center border-2 border-[#b45309] shadow-sm">
+            AM
+          </div>
+          <div class="truncate">
+            <p class="text-xs font-bold text-white truncate">Alex Morgan</p>
+            <p class="text-[10px] text-[#c099b9] font-medium">Super Admin • Sunrise</p>
+            <p class="text-[9px] text-[#865d80]">TAAMARA Admin Portal</p>
+          </div>
+        </div>
+        <a href="/logout-confirmation.html" class="p-2 rounded-lg text-[#ad8caa] hover:text-rose-400 hover:bg-[#281424] transition cursor-pointer" title="Sign Out">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </a>
+      </div>
+    </div>
+  </aside>
+  
+  <div class="flex-1 flex flex-col lg:pl-72 min-w-0 bg-[#faf6f0] min-h-screen">
+    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex-1 space-y-6">
+    
+    <!-- Toast Notification Banner -->
+    <div id="toast" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-2.5 rounded-2xl bg-slate-900 text-white text-xs font-semibold shadow-xl flex items-center gap-2 transition duration-300">
+      <span id="toast-text">Action completed</span>
+    </div>
+
+    <!-- 1. Top Header -->
+    <header class="bg-white px-4 py-3.5 border-b border-[#f3ece2] flex items-center justify-between sticky top-0 z-30">
+      <div class="flex items-center gap-3">
+        <!-- Back Button returning to Tenants Directory -->
+        <a href="/tenants.html" id="back-btn" class="w-8 h-8 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-700 transition cursor-pointer">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </a>
+        <div>
+          <h1 class="text-xs font-extrabold text-slate-900 tracking-tight leading-none font-serif-luxury">TAAMARA CO-LIVE</h1>
+          <p class="text-[11px] font-semibold text-slate-500 mt-0.5">Block B Overview</p>
+        </div>
+      </div>
+      <!-- Close Button -->
+      <a href="/tenants.html" id="close-btn" class="w-8 h-8 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-500 hover:text-slate-800 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </a>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 px-4 pt-4 space-y-4">
+
+      <!-- 2. Block B Operational Hub Dossier Card -->
+      <section class="bg-white rounded-3xl p-4 sm:p-5 border border-[#f3ece2] shadow-sm space-y-3.5">
+        <!-- Top Pill & Building Icon -->
+        <div class="flex items-center justify-between">
+          <span class="px-2.5 py-1 rounded-full bg-[#fdfbf7] text-[#a6801e] text-[10px] font-extrabold tracking-tight">
+            • BOYS WING • NORTH CAMPUS
+          </span>
+          <div class="w-8 h-8 rounded-xl bg-[#fdfbf7] text-[#c59b27] flex items-center justify-center shadow-2xs">
+            <!-- Building Icon -->
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect width="16" height="20" x="4" y="2" rx="2" ry="2"/>
+              <path d="M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Title & Subtitle -->
+        <div>
+          <h2 class="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight leading-tight font-serif-luxury">
+            Block B Operational Hub
+          </h2>
+          <p class="text-xs text-slate-400 font-medium mt-0.5">3-Storey Residential Complex</p>
+        </div>
+
+        <!-- Live Wing Capacity Bar -->
+        <div class="space-y-1.5 pt-0.5">
+          <div class="flex items-center justify-between text-xs font-bold">
+            <span class="text-slate-700">Live Wing Capacity</span>
+            <span class="text-[#c59b27] font-extrabold">94.8% Occupied</span>
+          </div>
+
+          <!-- Tri-segment progress track -->
+          <div class="w-full h-2 rounded-full bg-slate-100 overflow-hidden flex">
+            <div class="bg-[#c59b27] h-full" style="width: 92.8%;"></div>
+            <div class="bg-amber-400 h-full" style="width: 2.1%;"></div>
+            <div class="bg-sky-200 h-full" style="width: 5.1%;"></div>
+          </div>
+
+          <!-- Legend Row -->
+          <div class="flex items-center gap-3 text-[10px] font-bold text-slate-500 pt-0.5">
+            <span class="flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#c59b27]"></span>
+              <span>91 Occupied</span>
+            </span>
+            <span class="flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+              <span>2 Maintenance</span>
+            </span>
+            <span class="flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-sky-300"></span>
+              <span>5 Vacant</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- 3-Box Stats Matrix -->
+        <div class="grid grid-cols-3 gap-2 pt-1 text-center">
+          <div class="bg-slate-50 border border-[#f3ece2] rounded-2xl p-2.5">
+            <span class="text-lg font-black text-slate-900 block leading-none">98</span>
+            <span class="text-[9px] font-extrabold text-slate-400 uppercase tracking-wider block mt-1">TOTAL BEDS</span>
+          </div>
+          <div class="bg-emerald-50 border border-emerald-100 rounded-2xl p-2.5">
+            <span class="text-lg font-black text-emerald-600 block leading-none">05</span>
+            <span class="text-[9px] font-extrabold text-emerald-600 uppercase tracking-wider block mt-1">AVAILABLE</span>
+          </div>
+          <div class="bg-amber-50 border border-amber-100 rounded-2xl p-2.5">
+            <span class="text-lg font-black text-amber-600 block leading-none">02</span>
+            <span class="text-[9px] font-extrabold text-amber-600 uppercase tracking-wider block mt-1">REPAIRS</span>
+          </div>
+        </div>
+
+        <!-- Warden Contact Strip -->
+        <div class="p-3 bg-slate-50 rounded-2xl border border-[#f3ece2] flex items-center justify-between gap-3">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <div class="w-9 h-9 rounded-full bg-[#180d19] text-white font-black text-xs flex items-center justify-center shrink-0">
+              SD
+            </div>
+            <div class="min-w-0">
+              <div class="flex items-center gap-1.5">
+                <span class="text-xs font-extrabold text-slate-900 truncate">Sunil Deshmukh</span>
+                <span class="px-1.5 py-0.5 rounded-md bg-[#fbf2da] text-[#a6801e] text-[9px] font-extrabold">Warden</span>
+              </div>
+              <p class="text-[11px] text-slate-500 font-medium truncate mt-0.5">+91 98234 11029</p>
+            </div>
+          </div>
+
+          <!-- Call & WhatsApp Actions -->
+          <div class="flex items-center gap-1.5 shrink-0">
+            <a href="tel:+919823411029" class="w-8 h-8 rounded-full bg-white border border-[#ede5d8] text-[#c59b27] flex items-center justify-center hover:bg-[#fdfbf7] transition cursor-pointer" title="Call Warden">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </a>
+            <button type="button" id="btn-warden-chat" class="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center hover:bg-emerald-600 transition cursor-pointer" title="Chat on WhatsApp">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Floor Level Selector -->
+      <section class="space-y-2">
+        <div class="flex items-center justify-between px-1">
+          <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">SELECT FLOOR LEVEL</span>
+          <button type="button" id="btn-floor-view" class="text-xs font-bold text-[#c59b27] hover:text-[#a6801e] flex items-center gap-1 cursor-pointer">
+            <!-- Grid icon -->
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+            <span>Floor View</span>
+          </button>
+        </div>
+
+        <!-- Filter Chips Row -->
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5" style="scrollbar-width: none;">
+          <button type="button" class="floor-chip shrink-0 px-3.5 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 text-xs font-bold transition cursor-pointer">
+            All Floors
+          </button>
+          <button type="button" class="floor-chip shrink-0 px-3.5 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 text-xs font-bold flex items-center gap-1.5 transition cursor-pointer">
+            <span>Floor 1 (Ground)</span>
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          </button>
+          <button type="button" class="floor-chip active shrink-0 px-3.5 py-1.5 rounded-full bg-[#180d19] text-white text-xs font-bold flex items-center gap-1.5 shadow-xs transition cursor-pointer">
+            <span>Floor 2</span>
+            <span class="px-1.5 py-0.5 rounded-full bg-emerald-950 text-emerald-400 text-[10px] font-black">3 Vacant</span>
+          </button>
+          <button type="button" class="floor-chip shrink-0 px-3.5 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 text-xs font-bold flex items-center gap-1.5 transition cursor-pointer">
+            <span>Floor 3</span>
+            <span class="px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-600 text-[10px]">1 Vacant</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- 4. Floor 2 Active Rooms Section -->
+      <section class="space-y-3">
+        <div class="flex items-center justify-between px-1">
+          <div class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-[#c59b27]"></span>
+            <h3 class="text-xs font-extrabold text-slate-900">Floor 2 • Active Rooms</h3>
+          </div>
+          <span class="text-[11px] font-bold text-slate-400">4 Rooms Listed</span>
+        </div>
+
+        <!-- ROOM 201: Single Suite (Full) -->
+        <article class="bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-xs space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="w-8 h-8 rounded-xl bg-[#fdfbf7] text-[#c59b27] font-extrabold text-xs flex items-center justify-center">201</span>
+              <div>
+                <h4 class="text-xs font-extrabold text-slate-900 leading-tight">Room 201</h4>
+                <p class="text-[11px] text-slate-400 font-medium">Single Suite • Air Conditioned</p>
+              </div>
+            </div>
+            <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-extrabold">• Full</span>
+          </div>
+
+          <!-- Occupant Detail Box -->
+          <div class="p-2.5 bg-slate-50 rounded-2xl border border-[#f3ece2] flex items-center justify-between text-[11px]">
+            <div class="flex items-center gap-2">
+              <span class="text-[#c59b27]">🛏️</span>
+              <div>
+                <span class="font-extrabold text-slate-900">Rahul S.</span>
+                <p class="text-[10px] text-slate-400">Tenant ID: #TN-8812 • Term: Spring 24</p>
+              </div>
+            </div>
+            <span class="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 text-[10px] font-black">Paid • ₹580</span>
+          </div>
+        </article>
+
+        <!-- ROOM 202: Double Sharing (1 Available) -->
+        <article class="bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-xs space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="w-8 h-8 rounded-xl bg-[#fdfbf7] text-[#c59b27] font-extrabold text-xs flex items-center justify-center">202</span>
+              <div>
+                <h4 class="text-xs font-extrabold text-slate-900 leading-tight">Room 202</h4>
+                <p class="text-[11px] text-slate-400 font-medium">Double Sharing • Standard Ventilation</p>
+              </div>
+            </div>
+            <span class="px-2 py-0.5 rounded-full bg-[#fdfbf7] text-[#a6801e] text-[10px] font-extrabold">• 1 Available</span>
+          </div>
+
+          <!-- Bed A (Occupied) -->
+          <div class="p-2.5 bg-slate-50 rounded-2xl border border-[#f3ece2] flex items-center justify-between text-[11px]">
+            <div class="flex items-center gap-2">
+              <span class="px-1.5 py-0.5 rounded bg-slate-200 text-slate-700 text-[9px] font-extrabold">BED A</span>
+              <div>
+                <span class="font-extrabold text-slate-900">Vikram P.</span>
+                <p class="text-[10px] text-slate-400">Lease ends Jun 30</p>
+              </div>
+            </div>
+            <span class="px-2 py-0.5 rounded-md bg-slate-200 text-slate-700 text-[10px] font-bold">Occupied</span>
+          </div>
+
+          <!-- Bed B (Vacant) -->
+          <div class="p-2.5 bg-emerald-50/50 rounded-2xl border border-emerald-100 flex items-center justify-between text-[11px]">
+            <div class="flex items-center gap-2">
+              <span class="px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[9px] font-extrabold">BED B</span>
+              <div>
+                <span class="font-extrabold text-slate-900">Vacant Space</span>
+                <p class="text-[10px] text-emerald-600 font-bold">₹320 / month</p>
+              </div>
+            </div>
+            <a href="/assign-bed.html" class="py-1 px-3 bg-[#180d19] hover:bg-[#281424] hover:bg-[#c59b27] text-white text-[11px] font-extrabold rounded-xl flex items-center gap-1 shadow-2xs transition cursor-pointer">
+              <span>+</span>
+              <span>Assign</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- ROOM 203: Twin Premium (1 Available) -->
+        <article class="bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-xs space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="w-8 h-8 rounded-xl bg-[#fdfbf7] text-[#c59b27] font-extrabold text-xs flex items-center justify-center">203</span>
+              <div>
+                <h4 class="text-xs font-extrabold text-slate-900 leading-tight">Room 203</h4>
+                <p class="text-[11px] text-slate-400 font-medium">Twin Premium • Split AC & Balcony</p>
+              </div>
+            </div>
+            <span class="px-2 py-0.5 rounded-full bg-[#fdfbf7] text-[#a6801e] text-[10px] font-extrabold">• 1 Available</span>
+          </div>
+
+          <!-- Bed A (Assigned Today) -->
+          <div class="p-2.5 bg-indigo-50/60 rounded-2xl border border-indigo-100 flex items-center justify-between text-[11px]">
+            <div class="flex items-center gap-2">
+              <span class="px-1.5 py-0.5 rounded bg-indigo-200 text-indigo-900 text-[9px] font-extrabold">BED A</span>
+              <div>
+                <span class="font-extrabold text-slate-900">Aryan Sharma</span>
+                <p class="text-[10px] text-[#c59b27] font-semibold">Assigned Today • Move-in 2 PM</p>
+              </div>
+            </div>
+            <span class="px-2 py-0.5 rounded-md bg-indigo-100 text-indigo-700 text-[10px] font-bold">Pending Key</span>
+          </div>
+
+          <!-- Bed B (Vacant Space) -->
+          <div class="p-2.5 bg-emerald-50/50 rounded-2xl border border-emerald-100 flex items-center justify-between text-[11px]">
+            <div class="flex items-center gap-2">
+              <span class="px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[9px] font-extrabold">BED B</span>
+              <div>
+                <span class="font-extrabold text-slate-900">Vacant Space</span>
+                <p class="text-[10px] text-emerald-600 font-bold">₹350 / month</p>
+              </div>
+            </div>
+            <button type="button" class="btn-reserve-space py-1 px-3 bg-white border border-[#e3d5be] text-[#a6801e] hover:bg-[#fdfbf7] text-[11px] font-extrabold rounded-xl flex items-center gap-1 shadow-2xs transition cursor-pointer">
+              <span>🔖</span>
+              <span>Reserve</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- ROOM 204: Triple Economy (1 Overdue) -->
+        <article class="bg-white rounded-3xl p-4 border border-rose-100 shadow-xs space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="w-8 h-8 rounded-xl bg-[#fdfbf7] text-[#c59b27] font-extrabold text-xs flex items-center justify-center">204</span>
+              <div>
+                <h4 class="text-xs font-extrabold text-slate-900 leading-tight">Room 204</h4>
+                <p class="text-[11px] text-slate-400 font-medium">Triple Economy • Attached Washroom</p>
+              </div>
+            </div>
+            <span class="px-2 py-0.5 rounded-full bg-rose-100 text-rose-700 text-[10px] font-extrabold">• 1 Overdue</span>
+          </div>
+
+          <!-- Bed A: Aarav Mehta -->
+          <div class="p-2.5 bg-slate-50 rounded-2xl border border-[#f3ece2] flex items-center justify-between text-[11px]">
+            <div class="flex items-center gap-2">
+              <span class="px-1.5 py-0.5 rounded bg-slate-200 text-slate-700 text-[9px] font-extrabold">BED A</span>
+              <div>
+                <span class="font-extrabold text-slate-900">Aarav Mehta</span>
+                <p class="text-[10px] text-slate-400">Clear Balance</p>
+              </div>
+            </div>
+            <span class="text-emerald-600 font-black text-[10px]">Paid</span>
+          </div>
+
+          <!-- Bed B: Rahul Sharma (Overdue) -->
+          <div class="p-2.5 bg-rose-50/60 rounded-2xl border border-rose-200 flex items-center justify-between text-[11px]">
+            <div class="flex items-center gap-2">
+              <span class="px-1.5 py-0.5 rounded bg-rose-200 text-rose-900 text-[9px] font-extrabold">BED B</span>
+              <div>
+                <span class="font-extrabold text-slate-900">Rahul Sharma</span>
+                <p class="text-[10px] text-rose-600 font-bold">Overdue ₹420 (7d late)</p>
+              </div>
+            </div>
+            <button type="button" class="btn-remind-rent py-1 px-3 bg-[#b91c1c] hover:bg-rose-800 text-white text-[11px] font-extrabold rounded-xl flex items-center gap-1 shadow-2xs transition cursor-pointer">
+              <span>🔔</span>
+              <span>Remind</span>
+            </button>
+          </div>
+
+          <!-- Bed C: Vacant Space -->
+          <div class="p-2.5 bg-emerald-50/50 rounded-2xl border border-emerald-100 flex items-center justify-between text-[11px]">
+            <div class="flex items-center gap-2">
+              <span class="px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[9px] font-extrabold">BED C</span>
+              <div>
+                <span class="font-extrabold text-slate-900">Vacant Space</span>
+                <p class="text-[10px] text-emerald-600 font-bold">₹280 / month</p>
+              </div>
+            </div>
+            <a href="/assign-bed.html" class="py-1 px-3 bg-[#180d19] hover:bg-[#281424] hover:bg-[#c59b27] text-white text-[11px] font-extrabold rounded-xl flex items-center gap-1 shadow-2xs transition cursor-pointer">
+              <span>+</span>
+              <span>Assign</span>
+            </a>
+          </div>
+        </article>
+      </section>
+
+      <!-- 5. Floor 3 Live Highlights Section -->
+      <section class="space-y-2.5 pt-1">
+        <div class="flex items-center justify-between px-1">
+          <div class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+            <h3 class="text-xs font-extrabold text-slate-900">Floor 3 Live Highlights</h3>
+          </div>
+          <button type="button" id="btn-switch-floor" class="text-xs font-bold text-[#c59b27] hover:text-[#a6801e] flex items-center gap-0.5 cursor-pointer">
+            <span>Switch Floor</span>
+            <span>&rarr;</span>
+          </button>
+        </div>
+
+        <!-- Highlight 1: AC Leakage -->
+        <article class="bg-white rounded-3xl p-3.5 border border-[#f3ece2] shadow-xs space-y-2">
+          <div class="flex items-start gap-2.5">
+            <div class="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+              ✏️
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between">
+                <h4 class="text-xs font-extrabold text-slate-900">Room 304 • AC Leakage</h4>
+                <span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[9px] font-extrabold">In Progress</span>
+              </div>
+              <p class="text-[11px] text-slate-500 font-medium mt-0.5 leading-snug">
+                Cooling unit condensation drainage clogged. Tenant notified.
+              </p>
+              <p class="text-[10px] text-[#c59b27] font-bold mt-1 flex items-center gap-1">
+                <span>⏱️</span>
+                <span>Technician arriving in 15 mins (CoolTech Services)</span>
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Highlight 2: Quiet Study Double -->
+        <article class="bg-white rounded-3xl p-3.5 border border-[#f3ece2] shadow-xs flex items-center justify-between gap-3">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <span class="w-8 h-8 rounded-xl bg-[#fdfbf7] text-[#c59b27] font-extrabold text-xs flex items-center justify-center shrink-0">305</span>
+            <div class="min-w-0">
+              <h4 class="text-xs font-extrabold text-slate-900 truncate">Quiet Study Double</h4>
+              <p class="text-[11px] text-slate-500 font-medium truncate mt-0.5">1 Vacant • Occupant: Kevin T.</p>
+            </div>
+          </div>
+          <a href="/assign-bed.html" class="py-1.5 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl shrink-0 transition cursor-pointer">
+            Inspect
+          </a>
+        </article>
+      </section>
+
+    </main>
+
+    <!-- 6. Sticky Bottom Action Footer -->
+    <footer class="mt-6 pt-4 border-t border-[#ede5d8] flex flex-col sm:flex-row items-center justify-end gap-3 w-full bg-white p-4 rounded-2xl shadow-xs">
+      <button
+        type="button"
+        id="btn-add-room"
+        class="flex-1 py-3.5 px-4 bg-[#180d19] hover:bg-[#281424] hover:bg-[#c59b27] active:bg-[#a6801e] text-white rounded-2xl text-xs sm:text-sm font-extrabold flex items-center justify-center gap-2 shadow-lg shadow-[#c59b27]/25 transition cursor-pointer"
+      >
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <circle cx="12" cy="10"/>
+          <line x1="12" y1="8" x2="12" y2="16"/>
+          <line x1="8" y1="12" x2="16" y2="12"/>
+        </svg>
+        <span>+ Add Room in Block B</span>
+      </button>
+
+      <button
+        type="button"
+        id="btn-wing-report"
+        class="w-12 h-12 bg-[#fdfbf7] hover:bg-[#fbf2da] text-[#c59b27] rounded-2xl flex items-center justify-center transition cursor-pointer"
+        title="Export Wing Report"
+      >
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+          <polyline points="10 9 9 9 8 9"/>
+        </svg>
+      </button>
+    </footer>
+
+  </div>
+
+  <!-- Client-side JavaScript -->
+    </div>
+  </div>
+
+  <script src="/js/block-b.js"></script>
+</body>
+</html>
+

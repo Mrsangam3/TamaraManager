@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TAAMARA CO-LIVE - Rejected Requests & Policy Infractions</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            gold: {
+              50: '#fdfbf7',
+              100: '#fbf2da',
+              200: '#f5e5ba',
+              300: '#edd18e',
+              400: '#e1cb8f',
+              500: '#d4a838',
+              600: '#c59b27',
+              700: '#a6801e',
+              800: '#876717',
+              900: '#6d5212',
+            },
+            brand: {
+              gold: '#c59b27',
+              goldLight: '#fef8ea',
+              goldDark: '#a6801e',
+              border: '#ede4d5',
+            },
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.15); }
+    }
+    .live-dot {
+      animation: pulse-slow 2s infinite ease-in-out;
+    }
+    .font-serif-luxury { font-family: 'Playfair Display', Georgia, serif; }
+  </style>
+</head>
+<body class="bg-[#faf6f0] text-[#1c1917] antialiased min-h-screen flex flex-col font-sans select-none overflow-x-hidden">
+
+  <!-- Mobile Frame Container (430px wide standard, centered on desktop) -->
+  <div class="w-full max-w-5xl mx-auto space-y-6 pb-12">
+
+    <!-- Toast Notification Banner -->
+    <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-2.5 rounded-2xl bg-slate-900 text-white text-xs font-semibold shadow-xl items-center gap-2 transition duration-300">
+      <span id="toast-text">Operation completed</span>
+    </div>
+
+    <!-- 1. Top Header & Navigation -->
+    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-[#ede5d8] px-4 pt-4 pb-3">
+      <div class="flex items-center justify-between">
+        
+        <!-- Back Button -->
+        <a 
+          href="/requests.html" 
+          id="btn-back"
+          class="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 transition cursor-pointer"
+          title="Back to Requests Console"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </a>
+
+        <!-- Center Branding & Title -->
+        <div class="text-center">
+          <div class="text-[10px] font-extrabold text-[#c59b27] tracking-wider uppercase">
+            TAAMARA CO-LIVE
+          </div>
+          <h1 class="text-sm font-extrabold text-slate-900 leading-tight font-serif-luxury">
+            Requests Hub
+          </h1>
+        </div>
+
+        <!-- Notification Bell Icon -->
+        <button 
+          id="btn-bell"
+          type="button" 
+          class="w-9 h-9 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-600 flex items-center justify-center transition cursor-pointer relative"
+          title="Infraction Alerts"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+          <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-white"></span>
+        </button>
+      </div>
+
+      <!-- Breadcrumbs Path -->
+      <div class="flex items-center gap-1.5 mt-2.5 text-[11px] text-slate-500">
+        <!-- Shield / Cross Icon -->
+        <svg class="w-3.5 h-3.5 text-rose-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="15" y1="9" x2="9" y2="15"/>
+          <line x1="9" y1="9" x2="15" y2="15"/>
+        </svg>
+        <span class="font-bold text-slate-600 uppercase text-[10px] tracking-wider">REQUESTS & APPROVALS</span>
+        <span class="text-slate-400">›</span>
+        <span class="font-black text-rose-600 uppercase text-[10px] tracking-wider">REJECTED ARCHIVE</span>
+      </div>
+    </header>
+
+    <!-- Main Scrollable Area -->
+    <main class="p-4 space-y-4">
+
+      <!-- 2. Subscreen Header & Red Counter Badge -->
+      <section class="flex items-center justify-between">
+        <div>
+          <h2 class="text-xl font-black text-slate-900 tracking-tight font-serif-luxury">Rejected Requests</h2>
+          <p class="text-[11px] text-slate-500 font-medium">Archived policy infractions & audit trails</p>
+        </div>
+
+        <span id="badge-total-rejected" class="w-8 h-8 rounded-full bg-rose-100 text-rose-700 font-extrabold text-xs flex items-center justify-center border border-rose-200">
+          4
+        </span>
+      </section>
+
+      <!-- 3. Horizontal Filter Pills -->
+      <section>
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
+          <button 
+            type="button" 
+            data-filter="all"
+            class="rej-filter-pill active shrink-0 px-3.5 py-1.5 rounded-full bg-[#180d19] text-white text-xs font-bold shadow-xs transition cursor-pointer"
+          >
+            All Rejected (4)
+          </button>
+          <button 
+            type="button" 
+            data-filter="curfew"
+            class="rej-filter-pill shrink-0 px-3.5 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 text-xs font-bold transition cursor-pointer"
+          >
+            Curfew Breaches (2)
+          </button>
+          <button 
+            type="button" 
+            data-filter="room"
+            class="rej-filter-pill shrink-0 px-3.5 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 text-xs font-bold transition cursor-pointer"
+          >
+            Room Changes (1)
+          </button>
+          <button 
+            type="button" 
+            data-filter="dues"
+            class="rej-filter-pill shrink-0 px-3.5 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 text-xs font-bold transition cursor-pointer"
+          >
+            Dues Pending (1)
+          </button>
+        </div>
+      </section>
+
+      <!-- 4. Institutional Disciplinary Enforcement Banner -->
+      <section class="bg-[#fff1f2] rounded-3xl p-4 border border-rose-200/70 flex items-start gap-3">
+        <div class="w-9 h-9 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center shrink-0">
+          <!-- Gavel / Scale Icon -->
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="m14 13-7.5 7.5c-.8.8-2 .8-2.8 0s-.8-2 0-2.8L11.2 10.2"/>
+            <path d="m16 16 6-6"/>
+            <path d="m8 8 6-6"/>
+            <path d="m9 7 8 8"/>
+            <path d="m21 11-8-8"/>
+          </svg>
+        </div>
+        <div class="space-y-1">
+          <h3 class="text-xs font-black text-slate-900 leading-tight">Institutional Disciplinary Enforcement</h3>
+          <p class="text-[11px] text-slate-600 leading-relaxed font-medium">
+            Requests rejected due to disciplinary warnings, capacity bottlenecks, or parental non-confirmation. Audit logs are preserved for warden reviews.
+          </p>
+        </div>
+      </section>
+
+      <!-- 5. Section Subheader -->
+      <div class="flex items-center justify-between text-xs pt-1">
+        <span class="text-[10px] font-black uppercase tracking-wider text-slate-400">ARCHIVED ENTRIES (4)</span>
+        <span class="text-[10px] font-bold text-[#c59b27] flex items-center gap-1">
+          <svg class="w-3 h-3 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+          <span>Audited by Dean Office</span>
+        </span>
+      </div>
+
+      <!-- 6. Rejected Request Cards Stream -->
+      <div id="rejected-cards-container" class="space-y-3.5">
+
+        <!-- CARD 1: Dev Malik (Curfew Breach) -->
+        <article class="rejected-card bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-sm space-y-3" data-category="curfew" data-name="dev malik" data-room="203-b">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-2.5">
+              <div class="w-7 h-7 rounded-full bg-rose-600 text-white flex items-center justify-center font-bold text-xs shrink-0">
+                ✕
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-slate-900 leading-tight">Dev Malik</h3>
+                  <span class="px-1.5 py-0.2 bg-slate-100 text-slate-600 text-[10px] font-bold rounded">203-B</span>
+                </div>
+                <p class="text-xs text-slate-500 font-semibold mt-0.5">Late Night Pass Request</p>
+              </div>
+            </div>
+
+            <span class="text-[10px] text-slate-400 font-bold">Oct 23, 21:00</span>
+          </div>
+
+          <!-- Badges -->
+          <div class="flex flex-wrap items-center gap-1.5">
+            <span class="px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700 text-[10px] font-bold flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-rose-600"></span>
+              <span>Rejected • Unexcused Absence History</span>
+            </span>
+            <span class="px-2 py-0.5 rounded-full bg-[#fdfbf7] text-[#a6801e] text-[10px] font-bold border border-[#e3d5be]/60">
+              ⏱ 3 Violations
+            </span>
+          </div>
+
+          <!-- Rationale Box -->
+          <div class="bg-[#fdfbf7]/70 rounded-2xl p-3 border border-[#ede4d5]/70 space-y-1.5 text-xs">
+            <div class="flex items-center gap-1.5 font-bold text-slate-900 text-[11px]">
+              <svg class="w-3.5 h-3.5 text-rose-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+              <span>Rejection Audit Rationale</span>
+            </div>
+            <p class="text-[11px] text-slate-600 leading-relaxed font-medium">
+              3 previous unnotified curfew violations in October. Requires direct parent tele-conference and formal indemnity letter before fresh clearances.
+            </p>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="grid grid-cols-2 gap-2 pt-0.5">
+            <button 
+              type="button" 
+              class="btn-reopen bg-[#fdfbf7] hover:bg-[#fbf2da] text-slate-800 font-bold text-xs py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 border border-[#e3d5be]/60 transition cursor-pointer"
+              data-name="Dev Malik"
+              data-type="Late Night Pass"
+            >
+              <svg class="w-3.5 h-3.5 text-slate-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                <path d="M3 3v5h5"/>
+              </svg>
+              <span>Re-open</span>
+            </button>
+
+            <button 
+              type="button" 
+              class="btn-call-guardian bg-[#180d19] hover:bg-[#281424] hover:bg-[#c59b27] text-white font-bold text-xs py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 transition cursor-pointer shadow-xs"
+              data-name="Dev Malik"
+              data-guardian="Mr. R. K. Malik (+91 98112 40019)"
+            >
+              <svg class="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+              <span>Call Guardian</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- CARD 2: Aditya Verma (Zero Vacancy) -->
+        <article class="rejected-card bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-sm space-y-3" data-category="room" data-name="aditya verma" data-room="304-b">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-2.5">
+              <div class="w-7 h-7 rounded-full bg-rose-600 text-white flex items-center justify-center font-bold text-xs shrink-0">
+                ✕
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-slate-900 leading-tight">Aditya Verma</h3>
+                  <span class="px-1.5 py-0.2 bg-slate-100 text-slate-600 text-[10px] font-bold rounded">304-B</span>
+                </div>
+                <p class="text-xs text-slate-500 font-semibold mt-0.5">Room Change to Single Suite</p>
+              </div>
+            </div>
+
+            <span class="text-[10px] text-slate-400 font-bold">Oct 22, 14:15</span>
+          </div>
+
+          <!-- Badges -->
+          <div class="flex flex-wrap items-center gap-1.5">
+            <span class="px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700 text-[10px] font-bold flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-rose-600"></span>
+              <span>Rejected • Zero Vacancy</span>
+            </span>
+            <span class="px-2 py-0.5 rounded-full bg-[#fbf2da] text-[#a6801e] text-[10px] font-bold">
+              Waitlist #3
+            </span>
+          </div>
+
+          <!-- Inventory Status Box -->
+          <div class="bg-[#fdfbf7]/70 rounded-2xl p-3 border border-[#ede4d5]/70 space-y-1.5 text-xs">
+            <div class="flex items-center gap-1.5 font-bold text-slate-900 text-[11px]">
+              <svg class="w-3.5 h-3.5 text-[#c59b27] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+              </svg>
+              <span>Inventory Status</span>
+            </div>
+            <p class="text-[11px] text-slate-600 leading-relaxed font-medium">
+              Single occupancy suites are 100% full until semester end. Placed on priority waitlist #3 automatically.
+            </p>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="grid grid-cols-2 gap-2 pt-0.5">
+            <button 
+              type="button" 
+              class="btn-view-waitlist bg-[#fdfbf7] hover:bg-[#fbf2da] text-slate-800 font-bold text-xs py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 border border-[#e3d5be]/60 transition cursor-pointer"
+              data-name="Aditya Verma"
+              data-position="#3"
+            >
+              <svg class="w-3.5 h-3.5 text-slate-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="8" y1="6" x2="21" y2="6"/>
+                <line x1="8" y1="12" x2="21" y2="12"/>
+                <line x1="8" y1="18" x2="21" y2="18"/>
+                <line x1="3" y1="6" x2="3.01" y2="6"/>
+                <line x1="3" y1="12" x2="3.01" y2="12"/>
+                <line x1="3" y1="18" x2="3.01" y2="18"/>
+              </svg>
+              <span>View Waitlist</span>
+            </button>
+
+            <button 
+              type="button" 
+              class="btn-custom-note bg-[#180d19] hover:bg-slate-800 text-white font-bold text-xs py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 transition cursor-pointer shadow-xs"
+              data-name="Aditya Verma"
+            >
+              <svg class="w-3.5 h-3.5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 20h9"/>
+                <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+              </svg>
+              <span>Custom Note</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- CARD 3: Rahul Sharma (Policy Violation Clause 4.2) -->
+        <article class="rejected-card bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-sm space-y-3" data-category="curfew" data-name="rahul sharma" data-room="204-b">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-2.5">
+              <div class="w-7 h-7 rounded-full bg-rose-600 text-white flex items-center justify-center font-bold text-xs shrink-0">
+                ✕
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-slate-900 leading-tight">Rahul Sharma</h3>
+                  <span class="px-1.5 py-0.2 bg-slate-100 text-slate-600 text-[10px] font-bold rounded">204-B</span>
+                </div>
+                <p class="text-xs text-slate-500 font-semibold mt-0.5">Overnight Guest Pass</p>
+              </div>
+            </div>
+
+            <span class="text-[10px] text-slate-400 font-bold">Oct 21, 18:40</span>
+          </div>
+
+          <!-- Badges -->
+          <div class="flex flex-wrap items-center gap-1.5">
+            <span class="px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700 text-[10px] font-bold flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-rose-600"></span>
+              <span>Rejected • Policy Violation</span>
+            </span>
+            <span class="px-2 py-0.5 rounded-full bg-[#fdfbf7] text-[#a6801e] text-[10px] font-bold border border-[#e3d5be]/60">
+              Clause 4.2
+            </span>
+          </div>
+
+          <!-- Handbook Clause Box -->
+          <div class="bg-[#fdfbf7]/70 rounded-2xl p-3 border border-[#ede4d5]/70 space-y-1.5 text-xs">
+            <div class="flex items-center gap-1.5 font-bold text-slate-900 text-[11px]">
+              <svg class="w-3.5 h-3.5 text-rose-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
+                <path d="M6 6h10M6 10h10"/>
+              </svg>
+              <span>Hostel Handbook Clause</span>
+            </div>
+            <p class="text-[11px] text-slate-600 leading-relaxed font-medium">
+              Overnight non-family guests prohibited in shared blocks as per clause 4.2. Hostels operate under zero unauthorized visitor policy after 20:00.
+            </p>
+          </div>
+
+          <!-- Action Button: Policy Details -->
+          <button 
+            type="button" 
+            class="btn-policy-details w-full bg-[#fdfbf7] hover:bg-[#fbf2da] text-[#a6801e] font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center gap-1.5 border border-[#e3d5be]/60 transition cursor-pointer"
+            data-clause="Clause 4.2: Visitor Curfew & Overnight Guests"
+          >
+            <svg class="w-3.5 h-3.5 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+              <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+            </svg>
+            <span>Policy Details</span>
+          </button>
+        </article>
+
+        <!-- CARD 4: Sameer Khan (Dues Pending) -->
+        <article class="rejected-card bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-sm space-y-3" data-category="dues" data-name="sameer khan" data-room="301-c">
+          <div class="flex items-start justify-between">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-full bg-[#fbf2da] text-[#a6801e] font-black text-xs flex items-center justify-center shrink-0">
+                SK
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-sm font-extrabold text-slate-900 leading-tight">Sameer Khan</h3>
+                  <span class="px-1.5 py-0.2 bg-slate-100 text-slate-600 text-[10px] font-bold rounded">301-C</span>
+                </div>
+                <p class="text-xs text-slate-500 font-semibold mt-0.5">Weekend Night Out</p>
+              </div>
+            </div>
+
+            <span class="text-[10px] text-slate-400 font-bold">Oct 20, 11:05</span>
+          </div>
+
+          <!-- Badges -->
+          <div class="flex flex-wrap items-center gap-1.5">
+            <span class="px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700 text-[10px] font-bold flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-rose-600"></span>
+              <span>Rejected • Dues Pending</span>
+            </span>
+            <span class="px-2 py-0.5 rounded-full bg-rose-50 text-rose-700 text-[10px] font-bold border border-rose-200">
+              ₹620.00 Overdue
+            </span>
+          </div>
+
+          <!-- Bursar Hold Box -->
+          <div class="bg-[#fdfbf7]/70 rounded-2xl p-3 border border-[#ede4d5]/70 space-y-1.5 text-xs">
+            <div class="flex items-center gap-1.5 font-bold text-slate-900 text-[11px]">
+              <svg class="w-3.5 h-3.5 text-rose-600 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect width="20" height="12" x="2" y="6" rx="2"/>
+                <circle cx="12" cy="12" r="2"/>
+              </svg>
+              <span>Bursar Hold</span>
+            </div>
+            <p class="text-[11px] text-slate-600 leading-relaxed font-medium">
+              Overdue rent balance &gt; ₹600 requires clearance before non-academic leave permits can be approved by residential staff.
+            </p>
+          </div>
+
+          <!-- Action Button: View Fee Dues -->
+          <button 
+            type="button" 
+            id="btn-view-fee-dues"
+            class="w-full bg-[#180d19] hover:bg-slate-800 text-white font-extrabold text-xs py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition cursor-pointer shadow-md"
+            data-amount="₹620.00"
+            data-name="Sameer Khan"
+          >
+            <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect width="20" height="14" x="2" y="5" rx="2"/>
+              <line x1="2" y1="10" x2="22" y2="10"/>
+            </svg>
+            <span>View Fee Dues (₹620.00)</span>
+          </button>
+        </article>
+
+      </div>
+
+      <!-- 7. Download CTA & Cryptographic Stamp -->
+      <section class="space-y-2 pt-2">
+        <button 
+          type="button" 
+          id="btn-download-report"
+          class="w-full bg-[#180d19] hover:bg-[#281424] hover:bg-[#c59b27] text-white font-extrabold text-xs py-3.5 px-4 rounded-2xl flex items-center justify-center gap-2 transition cursor-pointer shadow-md"
+        >
+          <!-- Download Icon -->
+          <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          <span>Download Disciplinary &amp; Rejection Report</span>
+        </button>
+
+        <div class="flex items-center justify-center gap-1.5 text-[11px] text-slate-500 font-medium">
+          <!-- Lock / Seal Icon -->
+          <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <span>Cryptographically sealed export (PDF &amp; CSV)</span>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 8. Sticky Bottom Navigation Bar -->
+    <nav class="hidden" style="display: none !important;">
+      
+      <!-- Tab 1: Dashboard -->
+      <a href="/dashboard.html" class="nav-tab flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+          <rect width="7" height="7" x="3" y="3" rx="1.5"/>
+          <rect width="7" height="7" x="14" y="3" rx="1.5"/>
+          <rect width="7" height="7" x="14" y="14" rx="1.5"/>
+          <rect width="7" height="7" x="3" y="14" rx="1.5"/>
+        </svg>
+        <span class="text-[10px] font-medium">Dashboard</span>
+      </a>
+
+      <!-- Tab 2: Rooms -->
+      <a href="/block-a.html" class="nav-tab flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        <span class="text-[10px] font-medium">Rooms</span>
+      </a>
+
+      <!-- Tab 3: Requests (Active with Notification Badge) -->
+      <a href="/requests.html" class="nav-tab flex flex-col items-center gap-1 py-1 text-[#c59b27] transition cursor-pointer relative">
+        <div class="relative">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/>
+            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+            <path d="M12 11h4M12 16h4M8 11h.01M8 16h.01"/>
+          </svg>
+          <span class="w-2 h-2 rounded-full bg-rose-500 absolute -top-0.5 -right-1"></span>
+        </div>
+        <span class="text-[10px] font-bold">Requests</span>
+      </a>
+
+      <!-- Tab 4: Tenants -->
+      <a href="/tenants.html" class="nav-tab flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <span class="text-[10px] font-medium">Tenants</span>
+      </a>
+
+    </nav>
+
+    <!-- ==================== MODALS ==================== -->
+
+    <!-- Modal 1: Call Guardian Modal -->
+    <div id="modal-call-guardian" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+      <div class="bg-white w-full max-w-[360px] rounded-3xl p-6 shadow-2xl border border-[#ede5d8] text-center space-y-4">
+        <div class="w-14 h-14 rounded-full bg-[#fbf2da] text-[#c59b27] mx-auto flex items-center justify-center">
+          <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="text-sm font-extrabold text-slate-900">Guardian Teleconference</h3>
+          <p id="guardian-contact-text" class="text-xs text-[#c59b27] font-bold mt-0.5">Mr. R. K. Malik (+91 98112 40019)</p>
+          <p class="text-[11px] text-slate-500 mt-2">Required by Chief Warden to review 3 unnotified curfew violations.</p>
+        </div>
+        <div class="pt-1 flex gap-2">
+          <button type="button" id="btn-close-guardian" class="flex-1 py-2.5 bg-slate-100 text-slate-700 font-bold text-xs rounded-xl">Dismiss</button>
+          <button type="button" id="btn-dial-guardian" class="flex-1 py-2.5 bg-[#180d19] hover:bg-[#281424] text-white font-bold text-xs rounded-xl">Dial Phone</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 2: Policy Clause Modal -->
+    <div id="modal-policy" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+      <div class="bg-white w-full max-w-[380px] rounded-3xl p-5 shadow-2xl border border-[#ede5d8] space-y-3">
+        <div class="flex items-center justify-between border-b border-[#f3ece2] pb-2">
+          <h3 class="text-sm font-extrabold text-slate-900">Hostel Rules: Clause 4.2</h3>
+          <button type="button" id="btn-close-policy" class="text-slate-400 hover:text-slate-600 text-lg font-bold">✕</button>
+        </div>
+        <div class="text-xs space-y-2 text-slate-600 leading-relaxed">
+          <p class="font-bold text-slate-900">Non-Resident Overnight Restriction</p>
+          <p>
+            "No boarder is permitted to host outside guests, friends, or relatives in residential wings between 20:00 PM and 07:00 AM without 48 hours prior deanery sanction."
+          </p>
+          <p class="text-[11px] text-rose-600 font-bold">
+            Violation penalty: Immediate warning entry into permanent institutional transcript.
+          </p>
+        </div>
+        <button type="button" id="btn-dismiss-policy" class="w-full bg-[#180d19] text-white font-bold text-xs py-2.5 rounded-xl">
+          I Understand
+        </button>
+      </div>
+    </div>
+
+    <!-- Modal 3: Fee Dues Breakdown Modal -->
+    <div id="modal-dues" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+      <div class="bg-white w-full max-w-[380px] rounded-3xl p-5 shadow-2xl border border-[#ede5d8] space-y-3.5">
+        <div class="flex items-center justify-between border-b border-[#f3ece2] pb-2">
+          <div>
+            <h3 class="text-sm font-extrabold text-slate-900">Sameer Khan — Financial Clearance</h3>
+            <p class="text-[10px] text-slate-500 font-medium">Bursar Ledger • Room 301-C</p>
+          </div>
+          <button type="button" id="btn-close-dues" class="text-slate-400 hover:text-slate-600 text-lg font-bold">✕</button>
+        </div>
+        <div class="space-y-2 text-xs">
+          <div class="flex justify-between py-1 border-b border-[#f3ece2]"><span>October Monthly Room Rent</span><span class="font-bold">₹550.00</span></div>
+          <div class="flex justify-between py-1 border-b border-[#f3ece2]"><span>Utility Surcharge (Late)</span><span class="font-bold">₹70.00</span></div>
+          <div class="flex justify-between py-1.5 font-extrabold text-rose-600 text-sm"><span>Total Overdue Amount</span><span>₹620.00</span></div>
+        </div>
+        <button type="button" id="btn-send-payment-link" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-2.5 rounded-xl">
+          Send Instant UPI / WhatsApp Payment Link
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Client-side Logic Script -->
+  <script src="/js/rejected-requests.js"></script>
+</body>
+</html>
+

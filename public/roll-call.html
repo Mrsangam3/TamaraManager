@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TAAMARA CO-LIVE - Evening Roll Call</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            gold: {
+              50: '#fdfbf7',
+              100: '#fbf2da',
+              200: '#f5e5ba',
+              300: '#edd18e',
+              400: '#e1cb8f',
+              500: '#d4a838',
+              600: '#c59b27',
+              700: '#a6801e',
+              800: '#876717',
+              900: '#6d5212',
+            },
+            brand: {
+              gold: '#c59b27',
+              goldLight: '#fef8ea',
+              goldDark: '#a6801e',
+              border: '#ede4d5',
+            },
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.15); }
+    }
+    .live-dot {
+      animation: pulse-slow 2s infinite ease-in-out;
+    }
+    .font-serif-luxury { font-family: 'Playfair Display', Georgia, serif; }
+  </style>
+</head>
+<body class="bg-[#faf6f0] text-[#1c1917] antialiased min-h-screen flex flex-col font-sans select-none overflow-x-hidden">
+
+  <!-- Mobile / Frame Container -->
+  <div class="w-full max-w-5xl mx-auto space-y-6 pb-12">
+    
+    <!-- Toast Notification Banner -->
+    <div id="toast" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-2.5 rounded-2xl bg-slate-900 text-white text-xs font-semibold shadow-xl flex items-center gap-2 transition duration-300">
+      <span id="toast-text">Action completed</span>
+    </div>
+
+    <!-- 1. Top Header -->
+    <header class="bg-white px-4 py-3.5 border-b border-[#f3ece2] flex items-center justify-between sticky top-0 z-30">
+      <div class="flex items-center gap-3">
+        <!-- Back Button -->
+        <a href="/dashboard.html" id="back-btn" class="w-8 h-8 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-700 transition cursor-pointer">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </a>
+        <div>
+          <h1 class="text-xs font-extrabold text-slate-900 tracking-tight leading-none font-serif-luxury">TAAMARA CO-LIVE</h1>
+          <p class="text-[11px] font-semibold text-slate-500 mt-0.5">Evening Roll Call</p>
+        </div>
+      </div>
+      <!-- Close Button -->
+      <a href="/dashboard.html" id="close-btn" class="w-8 h-8 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-500 hover:text-slate-800 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </a>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 px-4 pt-4 space-y-4">
+
+      <!-- 2. Hero Night Curfew Roll Call Card -->
+      <section class="bg-gradient-to-br from-[#070e1e] via-[#180d19] to-[#180d19] text-white rounded-3xl p-4 sm:p-5 shadow-lg border border-slate-800/80 space-y-3.5 relative overflow-hidden">
+        <!-- Top Status Pill Badges -->
+        <div class="flex items-center justify-between gap-2">
+          <!-- Curfew Live Pill -->
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-500/20 border border-rose-500/40 text-[10px] font-extrabold text-rose-300">
+            <span class="w-1.5 h-1.5 rounded-full bg-rose-500 live-dot"></span>
+            <span>LIVE CURFEW WINDOW</span>
+          </div>
+
+          <!-- Gate Check Time Pill -->
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-800/90 border border-slate-700/70 text-[10px] font-bold text-emerald-400">
+            <span>⏱️ 10:00 PM Gate Check</span>
+          </div>
+        </div>
+
+        <!-- Main Title & Warden Subtitle -->
+        <div>
+          <h2 class="text-base sm:text-lg font-extrabold tracking-tight text-white leading-tight font-serif-luxury">
+            Hostel Night Curfew Roll Call
+          </h2>
+          <p class="text-xs text-slate-400 font-medium mt-0.5">
+            Wing Warden: <span class="text-slate-200 font-semibold">Sunil Deshmukh</span> • Shift #2
+          </p>
+        </div>
+
+        <!-- 4-Box Metric Stats Grid -->
+        <div class="grid grid-cols-4 gap-2 pt-1">
+          <!-- Total -->
+          <div class="bg-slate-800/50 border border-slate-700/60 rounded-2xl p-2.5 text-center flex flex-col justify-center">
+            <span class="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">Total</span>
+            <span id="stat-total" class="text-base sm:text-lg font-black text-white mt-0.5">176</span>
+          </div>
+
+          <!-- Present -->
+          <div class="bg-emerald-950/40 border border-emerald-600/40 rounded-2xl p-2.5 text-center flex flex-col justify-center">
+            <span class="text-[9px] font-bold text-emerald-400 uppercase tracking-wider block">Present</span>
+            <span id="stat-present" class="text-base sm:text-lg font-black text-emerald-400 mt-0.5">162</span>
+          </div>
+
+          <!-- Night Out -->
+          <div class="bg-[#180d19]/80 border border-[#c59b27]/40 rounded-2xl p-2.5 text-center flex flex-col justify-center">
+            <span class="text-[9px] font-bold text-[#edd18e] uppercase tracking-wider block">Night Out</span>
+            <span id="stat-nightout" class="text-base sm:text-lg font-black text-[#d4a838] mt-0.5">8</span>
+          </div>
+
+          <!-- Urgent -->
+          <div class="bg-rose-950/40 border border-rose-600/50 rounded-2xl p-2.5 text-center flex flex-col justify-center">
+            <span class="text-[9px] font-bold text-rose-300 uppercase tracking-wider block">Urgent</span>
+            <span id="stat-urgent" class="text-base sm:text-lg font-black text-rose-400 mt-0.5">6</span>
+          </div>
+        </div>
+
+        <!-- Segmented Tri-Color Progress Bar -->
+        <div class="pt-1 space-y-1">
+          <div class="w-full h-2 rounded-full bg-slate-800 overflow-hidden flex">
+            <!-- Present Segment (~92%) -->
+            <div id="bar-present" class="bg-emerald-500 h-full transition-all duration-500" style="width: 92%;"></div>
+            <!-- Night Out Segment (~4.5%) -->
+            <div id="bar-nightout" class="bg-[#c59b27] h-full transition-all duration-500" style="width: 4.5%;"></div>
+            <!-- Urgent Segment (~3.5%) -->
+            <div id="bar-urgent" class="bg-rose-500 h-full transition-all duration-500" style="width: 3.5%;"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Wing & Floor Filter Bar (Horizontal Scrollable) -->
+      <section class="flex items-center gap-2 overflow-x-auto scroll-smooth py-1 no-scrollbar touch-pan-x" style="scrollbar-width: none;">
+        <!-- Option 1: Block A • Fl 1 -->
+        <button type="button" class="wing-floor-chip shrink-0 px-3.5 py-1.5 rounded-full bg-white border border-[#ede5d8] hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-1.5 shadow-2xs transition cursor-pointer">
+          <span>Block A • Fl 1</span>
+          <span class="px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-600 text-[10px] font-extrabold">38</span>
+        </button>
+
+        <!-- Option 2: Block A • Fl 2 (Active Target) -->
+        <button type="button" class="wing-floor-chip active shrink-0 px-3.5 py-1.5 rounded-full bg-[#180d19] text-white text-xs font-bold flex items-center gap-1.5 shadow-xs transition cursor-pointer">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+          <span>Block A • Fl 2</span>
+          <span class="px-2 py-0.5 rounded-full bg-slate-800 text-slate-200 text-[10px] font-extrabold">24 Beds</span>
+        </button>
+
+        <!-- Option 3: Block B • Fl 1 -->
+        <button type="button" class="wing-floor-chip shrink-0 px-3.5 py-1.5 rounded-full bg-white border border-[#ede5d8] hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-1.5 shadow-2xs transition cursor-pointer">
+          <span>Block B • Fl 1</span>
+          <span class="px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-600 text-[10px] font-extrabold">40</span>
+        </button>
+
+        <!-- Option 4: Block B • Fl 2 -->
+        <button type="button" class="wing-floor-chip shrink-0 px-3.5 py-1.5 rounded-full bg-white border border-[#ede5d8] hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-1.5 shadow-2xs transition cursor-pointer">
+          <span>Block B • Fl 2</span>
+          <span class="px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-600 text-[10px] font-extrabold">36</span>
+        </button>
+      </section>
+
+      <!-- 4. Quick Actions & Search -->
+      <section class="space-y-2.5">
+        <!-- Top Action Bar -->
+        <div class="flex items-center gap-2">
+          <!-- Button: Mark All Remaining Present -->
+          <button
+            type="button"
+            id="btn-mark-all-present"
+            class="flex-1 py-2.5 px-4 bg-[#fdfbf7] hover:bg-[#fbf2da] border border-[#e3d5be]/90 text-[#a6801e] text-xs font-extrabold rounded-2xl flex items-center justify-center gap-2 shadow-2xs transition cursor-pointer"
+          >
+            <!-- Checkmark Icon -->
+            <svg class="w-4 h-4 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Mark All Remaining Present</span>
+          </button>
+
+          <!-- Filter Icon Button -->
+          <button
+            type="button"
+            id="btn-filter-settings"
+            class="w-10 h-10 shrink-0 bg-white border border-[#ede5d8]/90 hover:bg-slate-50 text-slate-700 rounded-2xl flex items-center justify-center shadow-2xs transition cursor-pointer"
+            title="Filter Options"
+          >
+            <!-- Sliders Icon -->
+            <svg class="w-4 h-4 text-slate-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="4" y1="21" x2="4" y2="14"/>
+              <line x1="4" y1="10" x2="4" y2="3"/>
+              <line x1="12" y1="21" x2="12" y2="12"/>
+              <line x1="12" y1="8" x2="12" y2="3"/>
+              <line x1="20" y1="21" x2="20" y2="16"/>
+              <line x1="20" y1="12" x2="20" y2="3"/>
+              <line x1="1" y1="14" x2="7" y2="14"/>
+              <line x1="9" y1="8" x2="15" y2="8"/>
+              <line x1="17" y1="16" x2="23" y2="16"/>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Search Bar with Scanner -->
+        <div class="relative flex items-center">
+          <svg class="w-4 h-4 text-slate-400 absolute left-3.5 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input
+            type="text"
+            id="rollcall-search"
+            placeholder="Search student, room or roll # (e.g. 202-A)"
+            class="w-full pl-9 pr-10 py-2.5 bg-white border border-[#ede5d8]/90 rounded-2xl text-xs placeholder:text-slate-400 font-medium focus:outline-none focus:border-[#c59b27] shadow-2xs transition"
+          >
+          <button
+            type="button"
+            id="btn-scan-qr"
+            class="absolute right-2.5 p-1 text-[#c59b27] hover:text-[#a6801e] cursor-pointer"
+            title="Scan QR / NFC Tag"
+          >
+            <!-- Scan / QR Icon -->
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 7V5a2 2 0 0 1 2-2h2"/>
+              <path d="M17 3h2a2 2 0 0 1 2 2v2"/>
+              <path d="M21 17v2a2 2 0 0 1-2 2h-2"/>
+              <path d="M7 21H5a2 2 0 0 1-2-2v-2"/>
+              <rect width="6" height="6" x="9" y="9" rx="1"/>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- 5. Tenant Roll Call Roster List -->
+      <section id="rollcall-list" class="space-y-3">
+
+        <!-- CARD 1: Karan Patel (Present • Auto Logged) -->
+        <article class="tenant-roll-card bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-xs space-y-3" data-name="Karan Patel" data-room="201-A">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <!-- Avatar with green status dot -->
+              <div class="relative">
+                <div class="w-10 h-10 rounded-full bg-[#fdfbf7] border border-[#ede4d5] flex items-center justify-center font-bold text-xs text-[#c59b27]">
+                  KP
+                </div>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-white absolute bottom-0 right-0"></span>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-xs font-extrabold text-slate-900 leading-tight">Karan Patel</h3>
+                  <span class="text-[10px] text-slate-400 font-semibold">#2021-EE</span>
+                </div>
+                <p class="text-[11px] text-slate-500 font-medium mt-0.5">Room 201-A • Bed 1</p>
+              </div>
+            </div>
+
+            <!-- Status Pill -->
+            <span class="status-pill px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-700 text-[10px] font-extrabold tracking-tight">
+              • PRESENT
+            </span>
+          </div>
+
+          <!-- Bottom Verification Strip -->
+          <div class="p-2.5 bg-slate-50 rounded-xl border border-[#f3ece2] flex items-center justify-between text-[11px] font-semibold text-slate-600">
+            <div class="flex items-center gap-1.5">
+              <span class="text-emerald-600">🛡️</span>
+              <span>Main Turnstile • 09:42 PM</span>
+            </div>
+            <span class="text-slate-400 text-[10px] font-bold">Auto-Logged</span>
+          </div>
+        </article>
+
+        <!-- CARD 2: Rohan Verma (Approved Night Out) -->
+        <article class="tenant-roll-card bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-xs space-y-3" data-name="Rohan Verma" data-room="201-B">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <!-- Avatar with gold status dot -->
+              <div class="relative">
+                <div class="w-10 h-10 rounded-full bg-indigo-50 border border-indigo-100 flex items-center justify-center font-bold text-xs text-indigo-600">
+                  RV
+                </div>
+                <span class="w-2.5 h-2.5 rounded-full bg-[#c59b27] border-2 border-white absolute bottom-0 right-0"></span>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-xs font-extrabold text-slate-900 leading-tight">Rohan Verma</h3>
+                  <span class="text-[10px] text-slate-400 font-semibold">#2021-CS</span>
+                </div>
+                <p class="text-[11px] text-slate-500 font-medium mt-0.5">Room 201-B • Bed 2</p>
+              </div>
+            </div>
+
+            <!-- Status Pill -->
+            <span class="status-pill px-2.5 py-0.5 rounded-full bg-[#fbf2da] text-[#a6801e] text-[10px] font-extrabold tracking-tight">
+              • APPROVED NIGHT OUT
+            </span>
+          </div>
+
+          <!-- Night Out Details Box -->
+          <div class="p-2.5 bg-[#fdfbf7]/70 rounded-xl border border-[#ede4d5] space-y-1.5 text-[11px]">
+            <div class="flex items-center justify-between font-semibold">
+              <span class="text-slate-800">Late Robotics Lab Project</span>
+              <span class="px-2 py-0.5 rounded-md bg-[#f5e5ba]/80 text-[#876717] text-[10px] font-extrabold">Valid until 11:30 PM</span>
+            </div>
+            <div class="flex items-center gap-1.5 text-slate-600 text-[10px] font-medium">
+              <span class="text-[#c59b27]">📱</span>
+              <span>Parent acknowledged via SMS (Mr. S. Verma)</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 3: Kabir Singh (URGENT • UNACCOUNTED) -->
+        <article class="tenant-roll-card bg-white rounded-3xl p-4 border border-rose-200 shadow-sm space-y-3" data-name="Kabir Singh" data-room="202-A">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <!-- Avatar with red alert dot -->
+              <div class="relative">
+                <div class="w-10 h-10 rounded-full bg-rose-50 border border-rose-100 flex items-center justify-center font-bold text-xs text-rose-600">
+                  KS
+                </div>
+                <span class="w-2.5 h-2.5 rounded-full bg-rose-500 border-2 border-white absolute bottom-0 right-0 live-dot"></span>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-xs font-extrabold text-rose-600 leading-tight">Kabir Singh</h3>
+                  <span class="text-[10px] text-rose-400 font-semibold">#2022-ME</span>
+                </div>
+                <p class="text-[11px] text-slate-500 font-medium mt-0.5">Room 202-A • Bed 1</p>
+              </div>
+            </div>
+
+            <!-- Status Pill: Unaccounted -->
+            <span class="status-pill px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700 text-[10px] font-extrabold tracking-tight">
+              • UNACCOUNTED
+            </span>
+          </div>
+
+          <!-- Alert Callout Box -->
+          <div class="p-2.5 bg-rose-50 rounded-xl border border-rose-200/80 space-y-1 text-[11px]">
+            <div class="flex items-center gap-1.5 font-bold text-rose-700 text-[10px]">
+              <span>⚠️</span>
+              <span>No gate log after 06:15 PM campus leave</span>
+            </div>
+            <p class="text-[11px] text-slate-600 font-medium leading-tight">
+              Roommate says he was heading towards Tech City sports arena.
+            </p>
+          </div>
+
+          <!-- 3-Button Action Row -->
+          <div class="grid grid-cols-3 gap-2 pt-0.5">
+            <button
+              type="button"
+              class="btn-call-tenant py-2 px-2.5 bg-[#fdfbf7] hover:bg-[#fbf2da] text-[#a6801e] text-[11px] font-bold rounded-xl flex items-center justify-center gap-1 shadow-2xs transition cursor-pointer"
+            >
+              <span>📞</span>
+              <span>Call Dev</span>
+            </button>
+            <button
+              type="button"
+              class="btn-call-parent py-2 px-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1 shadow-2xs transition cursor-pointer"
+            >
+              <span>👥</span>
+              <span>Parent</span>
+            </button>
+            <button
+              type="button"
+              class="btn-curfew-alert py-2 px-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 text-[11px] font-bold rounded-xl flex items-center justify-center gap-1 shadow-2xs transition cursor-pointer"
+            >
+              <span>💬</span>
+              <span>Curfew Alert</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- CARD 4: Vikram Sen (Manual 3-Way Toggle) -->
+        <article class="tenant-roll-card bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-xs space-y-3" data-name="Vikram Sen" data-room="202-B">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="relative">
+                <div class="w-10 h-10 rounded-full bg-slate-100 border border-[#ede5d8] flex items-center justify-center font-bold text-xs text-slate-700">
+                  VS
+                </div>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-white absolute bottom-0 right-0"></span>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-xs font-extrabold text-slate-900 leading-tight">Vikram Sen</h3>
+                  <span class="text-[10px] text-slate-400 font-semibold">#2022-CV</span>
+                </div>
+                <p class="text-[11px] text-slate-500 font-medium mt-0.5">Room 202-B • Bed 2</p>
+              </div>
+            </div>
+
+            <!-- Status Pill -->
+            <span class="status-pill px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-700 text-[10px] font-extrabold tracking-tight">
+              • PRESENT
+            </span>
+          </div>
+
+          <!-- Interactive 3-Option Segmented Control -->
+          <div class="p-1 bg-slate-100 rounded-2xl flex items-center gap-1 text-xs font-bold">
+            <!-- Option 1: Present (Active) -->
+            <button
+              type="button"
+              class="toggle-status-btn flex-1 py-2 px-2 bg-[#180d19] text-white rounded-xl flex items-center justify-center gap-1.5 shadow-xs transition cursor-pointer"
+              data-status="PRESENT"
+            >
+              <span>☑</span>
+              <span>Present</span>
+            </button>
+            <!-- Option 2: Absent -->
+            <button
+              type="button"
+              class="toggle-status-btn flex-1 py-2 px-2 text-slate-600 hover:text-slate-900 rounded-xl flex items-center justify-center gap-1.5 transition cursor-pointer"
+              data-status="ABSENT"
+            >
+              <span>⊘</span>
+              <span>Absent</span>
+            </button>
+            <!-- Option 3: On Leave -->
+            <button
+              type="button"
+              class="toggle-status-btn flex-1 py-2 px-2 text-slate-600 hover:text-slate-900 rounded-xl flex items-center justify-center gap-1.5 transition cursor-pointer"
+              data-status="ON LEAVE"
+            >
+              <span>✈️</span>
+              <span>On Leave</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- CARD 5: Siddharth Rao (Verified Visual Check) -->
+        <article class="tenant-roll-card bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-xs space-y-3" data-name="Siddharth Rao" data-room="203-A">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="relative">
+                <div class="w-10 h-10 rounded-full bg-slate-100 border border-[#ede5d8] flex items-center justify-center font-bold text-xs text-slate-700">
+                  SR
+                </div>
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-white absolute bottom-0 right-0"></span>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-xs font-extrabold text-slate-900 leading-tight">Siddharth Rao</h3>
+                  <span class="text-[10px] text-slate-400 font-semibold">#2021-EE</span>
+                </div>
+                <p class="text-[11px] text-slate-500 font-medium mt-0.5">Room 203-A • Bed 1</p>
+              </div>
+            </div>
+
+            <!-- Status Pill -->
+            <span class="status-pill px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-700 text-[10px] font-extrabold tracking-tight">
+              • PRESENT
+            </span>
+          </div>
+
+          <!-- Bottom Verification Strip -->
+          <div class="p-2.5 bg-slate-50 rounded-xl border border-[#f3ece2] flex items-center justify-between text-[11px] font-semibold text-slate-600">
+            <div class="flex items-center gap-1.5">
+              <span class="text-[#c59b27]">👤</span>
+              <span>In-Room Visual Check Confirmed</span>
+            </div>
+            <span class="text-slate-400 text-[10px] font-bold">Floor Prefect Verified</span>
+          </div>
+        </article>
+
+        <!-- CARD 6: Dev Malik (URGENT • UNACCOUNTED + WI-FI LOCATE) -->
+        <article class="tenant-roll-card bg-white rounded-3xl p-4 border border-rose-200 shadow-sm space-y-3" data-name="Dev Malik" data-room="203-B">
+          <div class="flex items-start justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <!-- Avatar with red alert dot -->
+              <div class="relative">
+                <div class="w-10 h-10 rounded-full bg-rose-50 border border-rose-100 flex items-center justify-center font-bold text-xs text-rose-600">
+                  DM
+                </div>
+                <span class="w-2.5 h-2.5 rounded-full bg-rose-500 border-2 border-white absolute bottom-0 right-0 live-dot"></span>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h3 class="text-xs font-extrabold text-rose-600 leading-tight">Dev Malik</h3>
+                  <span class="text-[10px] text-rose-400 font-semibold">#2023-BT</span>
+                </div>
+                <p class="text-[11px] text-slate-500 font-medium mt-0.5">Room 203-B • Bed 2</p>
+              </div>
+            </div>
+
+            <!-- Status Pill: Unaccounted -->
+            <span class="status-pill px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700 text-[10px] font-extrabold tracking-tight">
+              • UNACCOUNTED
+            </span>
+          </div>
+
+          <!-- Wi-Fi Tracking Callout Box -->
+          <div class="p-2.5 bg-[#fdfbf7]/80 rounded-xl border border-[#e3d5be]/90 space-y-1 text-[11px]">
+            <div class="flex items-center gap-1.5 font-bold text-[#876717] text-[10px]">
+              <span>📶</span>
+              <span>Last seen in Central Library @ 8:15 PM</span>
+            </div>
+            <p class="text-[11px] text-slate-600 font-medium leading-tight">
+              Phone ringing but unattended. Wi-Fi MAC pinged in Reading Hall 40 mins ago.
+            </p>
+          </div>
+
+          <!-- 2-Button Action Row -->
+          <div class="grid grid-cols-2 gap-2 pt-0.5">
+            <button
+              type="button"
+              class="btn-wifi-ping py-2 px-3 bg-[#fdfbf7] hover:bg-[#fbf2da] text-[#a6801e] text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 shadow-2xs transition cursor-pointer"
+            >
+              <span>📍</span>
+              <span>Locate Wi-Fi Ping</span>
+            </button>
+            <button
+              type="button"
+              class="btn-mark-found py-2 px-3 bg-[#180d19] hover:bg-[#281424] hover:bg-[#c59b27] text-white text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 shadow-xs transition cursor-pointer"
+            >
+              <span>✓</span>
+              <span>Mark Found</span>
+            </button>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- 6. Siren Curfew Broadcast Callout -->
+      <section class="bg-rose-50 rounded-3xl p-4 border border-rose-200/90 shadow-xs space-y-3">
+        <div class="flex items-start gap-3">
+          <div class="w-9 h-9 rounded-full bg-rose-600 text-white flex items-center justify-center text-sm shrink-0 shadow-xs">
+            📢
+          </div>
+          <div>
+            <h4 class="text-xs font-extrabold text-slate-900 leading-tight">6 Tenants Unaccounted For</h4>
+            <p class="text-[11px] text-slate-600 font-medium mt-0.5 leading-tight">
+              Campus gates close completely at 10:30 PM. Dispatch priority curfew broadcast.
+            </p>
+          </div>
+        </div>
+
+        <!-- Siren Button -->
+        <button
+          type="button"
+          id="btn-siren-alert"
+          class="w-full py-3 px-4 bg-[#991b1b] hover:bg-[#7f1d1d] active:bg-[#6b1414] text-white text-xs font-extrabold rounded-2xl flex items-center justify-center gap-2 shadow-md shadow-rose-900/20 transition cursor-pointer"
+        >
+          <!-- Alert Siren Icon -->
+          <span class="live-dot text-sm">🚨</span>
+          <span>Alert 6 Tenants via Siren Push & WhatsApp</span>
+        </button>
+      </section>
+
+    </main>
+
+    <!-- 7. Sticky Bottom Action Footer Bar -->
+    <footer class="mt-6 pt-4 border-t border-[#ede5d8] flex flex-col sm:flex-row items-center justify-end gap-3 w-full bg-white p-4 rounded-2xl shadow-xs">
+      <!-- Status Strip -->
+      <div class="flex items-center justify-between text-[11px] font-extrabold px-0.5">
+        <span class="text-emerald-600 flex items-center gap-1">
+          <span>✓</span>
+          <span id="footer-verified-count">Verified 162 of 176 Residents</span>
+        </span>
+        <span class="text-rose-600" id="footer-pending-count">6 Pending Review</span>
+      </div>
+
+      <!-- Submit Roll Call Button -->
+      <button
+        type="button"
+        id="btn-finalize-rollcall"
+        class="w-full py-3.5 px-4 bg-[#180d19] hover:bg-[#281424] hover:bg-[#c59b27] active:bg-[#a6801e] text-white rounded-2xl text-xs sm:text-sm font-extrabold flex items-center justify-center gap-2 shadow-lg shadow-[#c59b27]/25 transition cursor-pointer"
+      >
+        <!-- Checkbox Document Icon -->
+        <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="9 11 12 14 22 4"></polyline>
+          <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+        </svg>
+        <span id="btn-finalize-text">Finalize & Submit Roll Call (162/176)</span>
+      </button>
+    </footer>
+
+  </div>
+
+  <!-- Client-side JavaScript -->
+  <script src="/js/roll-call.js"></script>
+</body>
+</html>
+

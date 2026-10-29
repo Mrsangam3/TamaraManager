@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TAAMARA CO-LIVE - Resolve Tickets & Grievances</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            gold: {
+              50: '#fdfbf7',
+              100: '#fbf2da',
+              200: '#f5e5ba',
+              300: '#edd18e',
+              400: '#e1cb8f',
+              500: '#d4a838',
+              600: '#c59b27',
+              700: '#a6801e',
+              800: '#876717',
+              900: '#6d5212',
+            },
+            brand: {
+              gold: '#c59b27',
+              goldLight: '#fef8ea',
+              goldDark: '#a6801e',
+              border: '#ede4d5',
+            },
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    @keyframes pulse-slow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.15); }
+    }
+    .live-dot {
+      animation: pulse-slow 2s infinite ease-in-out;
+    }
+    .font-serif-luxury { font-family: 'Playfair Display', Georgia, serif; }
+  </style>
+</head>
+<body class="bg-[#faf6f0] text-[#1c1917] antialiased min-h-screen flex flex-col font-sans select-none overflow-x-hidden">
+
+  <!-- Mobile / Frame Container -->
+  <div class="w-full max-w-5xl mx-auto space-y-6 pb-12">
+    
+    <!-- Toast Notification Banner -->
+    <div id="toast" class="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden px-4 py-2.5 rounded-2xl bg-slate-900 text-white text-xs font-semibold shadow-xl flex items-center gap-2 transition duration-300">
+      <span id="toast-text">Action completed</span>
+    </div>
+
+    <!-- 1. Top Hub Header -->
+    <header class="bg-white px-4 py-3.5 border-b border-[#f3ece2] flex items-center justify-between sticky top-0 z-30">
+      <div class="flex items-center gap-3">
+        <!-- Back Button returning to Operations Hub -->
+        <a href="/operations.html" id="back-btn" class="w-8 h-8 rounded-full hover:bg-slate-100 flex items-center justify-center text-slate-700 transition cursor-pointer">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </a>
+        <div>
+          <span class="text-[9px] font-extrabold text-[#c59b27] uppercase tracking-wider block">TAAMARA HUB</span>
+          <h1 class="text-xs font-extrabold text-slate-900 tracking-tight leading-none mt-0.5 font-serif-luxury">Incident Desk</h1>
+        </div>
+      </div>
+      <!-- Notification Bell -->
+      <button type="button" id="btn-bell" class="w-8 h-8 rounded-full bg-[#fdfbf7] hover:bg-[#fbf2da] text-[#a6801e] flex items-center justify-center transition cursor-pointer relative" title="Notifications">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+        </svg>
+        <span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+      </button>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 px-4 pt-3.5 space-y-3.5">
+
+      <!-- Breadcrumbs & Section Title -->
+      <div>
+        <nav class="text-[10px] font-extrabold uppercase tracking-wider text-slate-400 flex items-center gap-1">
+          <a href="/operations.html" class="hover:text-[#c59b27] transition">OPERATIONS HUB</a>
+          <span>&gt;</span>
+          <span class="text-slate-600">COMPLAINTS &amp; GRIEVANCES DESK</span>
+        </nav>
+        <div class="flex items-center justify-between mt-1">
+          <h2 class="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight leading-tight font-serif-luxury">Resolve Tickets</h2>
+          <!-- Shift Active Badge -->
+          <span class="px-2.5 py-1 rounded-full bg-[#fdfbf7] border border-[#e3d5be]/70 text-[#a6801e] text-[10px] font-extrabold flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#c59b27] live-dot"></span>
+            <span>Shift Active</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- 2. Four Metrics Grid (2x2) -->
+      <section class="grid grid-cols-2 gap-2.5">
+        <!-- Metric 1: Open Tickets -->
+        <div class="bg-white rounded-3xl p-3.5 border border-[#f3ece2] shadow-xs relative">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-500">Open Tickets</span>
+            <svg class="w-4 h-4 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="4" width="18" height="16" rx="2"/>
+              <line x1="7" y1="8" x2="17" y2="8"/>
+              <line x1="7" y1="12" x2="13" y2="12"/>
+            </svg>
+          </div>
+          <div class="flex items-baseline gap-1 mt-2">
+            <span id="metric-open-count" class="text-2xl font-black text-slate-900 leading-none">3</span>
+            <span class="text-[11px] font-bold text-slate-400">in queue</span>
+          </div>
+        </div>
+
+        <!-- Metric 2: Escalated (Red Alert) -->
+        <div class="bg-rose-50/80 rounded-3xl p-3.5 border border-rose-200/80 shadow-xs relative">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-extrabold text-rose-700">Escalated</span>
+            <span class="text-rose-600 font-black text-sm">⚠️</span>
+          </div>
+          <div class="flex items-baseline gap-1 mt-2">
+            <span id="metric-escalated-count" class="text-2xl font-black text-rose-600 leading-none">1</span>
+            <span class="text-[11px] font-extrabold text-rose-700">SLA at risk</span>
+          </div>
+        </div>
+
+        <!-- Metric 3: Resolved Today -->
+        <div class="bg-white rounded-3xl p-3.5 border border-[#f3ece2] shadow-xs relative">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-500">Resolved Today</span>
+            <svg class="w-4 h-4 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="9 12 11 14 15 10"/>
+            </svg>
+          </div>
+          <div class="flex items-baseline gap-1.5 mt-2">
+            <span id="metric-resolved-count" class="text-2xl font-black text-slate-900 leading-none">18</span>
+            <span class="text-[10px] font-extrabold text-emerald-600">+4 vs yest.</span>
+          </div>
+        </div>
+
+        <!-- Metric 4: Avg Resolution -->
+        <div class="bg-white rounded-3xl p-3.5 border border-[#f3ece2] shadow-xs relative">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-500">Avg Resolution</span>
+            <svg class="w-4 h-4 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div class="flex items-baseline gap-1 mt-2">
+            <span class="text-2xl font-black text-slate-900 leading-none">38</span>
+            <span class="text-[11px] font-bold text-slate-400">mins</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. Category Filter Chips (Horizontal Scrollable) -->
+      <section class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5" style="scrollbar-width: none;">
+        <!-- All Active (4) -->
+        <button
+          type="button"
+          data-filter="all"
+          class="ticket-filter active shrink-0 px-3.5 py-1.5 rounded-full bg-[#180d19] text-white text-xs font-bold shadow-xs transition cursor-pointer"
+        >
+          <span>All Active (4)</span>
+        </button>
+
+        <!-- Escalated (1) -->
+        <button
+          type="button"
+          data-filter="escalated"
+          class="ticket-filter shrink-0 px-3.5 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 text-xs font-bold flex items-center gap-1.5 transition cursor-pointer"
+        >
+          <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+          <span>Escalated (1)</span>
+        </button>
+
+        <!-- Plumbing (2) -->
+        <button
+          type="button"
+          data-filter="plumbing"
+          class="ticket-filter shrink-0 px-3.5 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 text-xs font-bold transition cursor-pointer"
+        >
+          <span>Plumbing (2)</span>
+        </button>
+
+        <!-- Network (1) -->
+        <button
+          type="button"
+          data-filter="network"
+          class="ticket-filter shrink-0 px-3.5 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 text-xs font-bold transition cursor-pointer"
+        >
+          <span>Network (1)</span>
+        </button>
+      </section>
+
+      <!-- 4. Ticket Cards Stream -->
+      <section class="space-y-3 pt-0.5">
+
+        <!-- TICKET 1: #HF-1092 - AC Unit Condensation Leakage (Escalated & Hazard) -->
+        <article class="ticket-card bg-white rounded-3xl p-4 border border-rose-100 border-l-4 border-l-rose-500 shadow-sm space-y-3" data-category="escalated" id="ticket-card-1092">
+          <!-- Card Header -->
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-black text-slate-900">#HF-1092</span>
+                <span class="text-slate-300">•</span>
+                <span class="text-xs font-extrabold text-[#c59b27]">Room 304</span>
+              </div>
+              <p class="text-[11px] text-slate-400 font-medium mt-0.5">Block A, Floor 3 • Aditya Verma</p>
+            </div>
+            <!-- SLA in 15m Badge -->
+            <span id="badge-1092" class="px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-700 text-[10px] font-black flex items-center gap-1 shrink-0">
+              <span class="w-1.5 h-1.5 rounded-full bg-rose-600 live-dot"></span>
+              <span>SLA in 15m</span>
+            </span>
+          </div>
+
+          <!-- Hazard Risk Callout Box -->
+          <div class="p-3 bg-rose-50/70 rounded-2xl border border-rose-200/80 space-y-1">
+            <div class="flex items-center gap-1.5 text-xs font-black text-rose-700">
+              <svg class="w-3.5 h-3.5 text-rose-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+              <span>Hazard Risk: Electric + Water</span>
+            </div>
+            <p class="text-[11px] text-slate-700 font-medium leading-relaxed">
+              AC unit condensation overflowing, leaking near desk socket.
+            </p>
+          </div>
+
+          <!-- Technician En Route Box -->
+          <div class="p-2.5 bg-[#fdfbf7]/70 rounded-2xl border border-[#ede4d5] flex items-center justify-between">
+            <div class="flex items-center gap-2 min-w-0">
+              <div class="w-8 h-8 rounded-xl bg-[#fbf2da] text-[#a6801e] flex items-center justify-center font-bold text-xs shrink-0">
+                RM
+              </div>
+              <div class="min-w-0">
+                <h4 class="text-xs font-extrabold text-slate-900 truncate">Rajesh M. (CoolTech)</h4>
+                <p class="text-[10px] font-bold text-[#c59b27] flex items-center gap-1 mt-0.5">
+                  <span>🛵</span>
+                  <span>En Route • 4 min away</span>
+                </p>
+              </div>
+            </div>
+            <!-- Call Technician Button -->
+            <button
+              type="button"
+              id="btn-call-rajesh"
+              class="w-8 h-8 rounded-full bg-white hover:bg-[#fbf2da] border border-[#e3d5be] text-[#a6801e] flex items-center justify-center transition cursor-pointer shrink-0 shadow-2xs"
+              title="Call Rajesh M."
+            >
+              <svg class="w-3.5 h-3.5 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Action Buttons (2 cols) -->
+          <div class="grid grid-cols-2 gap-2 pt-0.5">
+            <button
+              type="button"
+              id="btn-workdone-1092"
+              class="py-2.5 px-3 bg-[#fdfbf7] hover:bg-[#fbf2da] text-[#a6801e] text-xs font-extrabold rounded-xl flex items-center justify-center gap-1.5 transition cursor-pointer"
+            >
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+              <span>Mark Work Done</span>
+            </button>
+            <button
+              type="button"
+              id="btn-resolve-1092"
+              class="py-2.5 px-3 bg-[#180d19] hover:bg-slate-800 text-white text-xs font-extrabold rounded-xl flex items-center justify-center gap-1.5 shadow-2xs transition cursor-pointer"
+            >
+              <svg class="w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              <span>Resolve &amp; Close</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- TICKET 2: #HF-1095 - Bathroom Shower Head Pressure Drop (Plumbing) -->
+        <article class="ticket-card bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-xs space-y-3" data-category="plumbing" id="ticket-card-1095">
+          <!-- Card Header -->
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-black text-slate-900">#HF-1095</span>
+                <span class="text-slate-300">•</span>
+                <span class="text-xs font-extrabold text-[#c59b27]">Room 204</span>
+              </div>
+              <p class="text-[11px] text-slate-400 font-medium mt-0.5">Rahul Sharma • Opened 40m ago</p>
+            </div>
+            <!-- Medium Priority Badge -->
+            <span id="badge-1095" class="px-2.5 py-0.5 rounded-full bg-[#fdfbf7] text-[#a6801e] text-[10px] font-extrabold shrink-0">
+              Medium Priority
+            </span>
+          </div>
+
+          <!-- Issue Details Box -->
+          <div class="flex items-start gap-2.5 p-3 bg-slate-50 rounded-2xl border border-[#f3ece2]">
+            <div class="w-8 h-8 rounded-xl bg-[#fbf2da] text-[#c59b27] flex items-center justify-center shrink-0 mt-0.5">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2v6"/>
+                <path d="M7 8h10"/>
+                <path d="M7 8l-2 5a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4l-2-5"/>
+              </svg>
+            </div>
+            <div class="space-y-0.5 min-w-0">
+              <span class="text-[9px] font-black text-[#c59b27] uppercase tracking-wider block">PLUMBING</span>
+              <p class="text-xs font-extrabold text-slate-900 leading-snug">
+                Bathroom shower head pressure drop and mild drip
+              </p>
+            </div>
+          </div>
+
+          <!-- Action Buttons (2 cols) -->
+          <div class="grid grid-cols-2 gap-2 pt-0.5">
+            <button
+              type="button"
+              id="btn-assign-plumber"
+              class="py-2.5 px-3 bg-[#fdfbf7] hover:bg-[#fbf2da] text-[#a6801e] text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition cursor-pointer"
+            >
+              <svg class="w-3.5 h-3.5 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+              </svg>
+              <span>Assign Plumber</span>
+            </button>
+            <button
+              type="button"
+              id="btn-resolve-1095"
+              class="py-2.5 px-3 bg-[#fdfbf7] hover:bg-[#fbf2da] text-[#a6801e] text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition cursor-pointer"
+            >
+              <svg class="w-3.5 h-3.5 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              <span>Mark Resolved</span>
+            </button>
+          </div>
+        </article>
+
+        <!-- TICKET 3: #HF-1098 - Wi-Fi Mesh Node Dropping Connections (Network) -->
+        <article class="ticket-card bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-xs space-y-3" data-category="network" id="ticket-card-1098">
+          <!-- Card Header -->
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-black text-slate-900">#HF-1098</span>
+                <span class="text-slate-300">•</span>
+                <span class="text-xs font-extrabold text-[#c59b27]">Block B</span>
+              </div>
+              <p class="text-[11px] text-slate-400 font-medium mt-0.5">2nd Floor Corridor • Network Hub</p>
+            </div>
+            <!-- Reboot Triggered Badge -->
+            <span id="badge-1098" class="px-2.5 py-0.5 rounded-full bg-[#fbf2da] text-[#a6801e] text-[10px] font-extrabold flex items-center gap-1 shrink-0">
+              <span class="w-1.5 h-1.5 rounded-full bg-[#c59b27]"></span>
+              <span>Reboot Triggered</span>
+            </span>
+          </div>
+
+          <!-- Issue Details Box -->
+          <div class="flex items-start gap-2.5 p-3 bg-slate-50 rounded-2xl border border-[#f3ece2]">
+            <div class="w-8 h-8 rounded-xl bg-[#fbf2da] text-[#c59b27] flex items-center justify-center shrink-0 mt-0.5">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 20h.01"/>
+                <path d="M2 8.82a15 15 0 0 1 20 0"/>
+                <path d="M5 12.859a10 10 0 0 1 14 0"/>
+                <path d="M8.5 16.429a5 5 0 0 1 7 0"/>
+              </svg>
+            </div>
+            <div class="space-y-0.5 min-w-0">
+              <span class="text-[9px] font-black text-[#c59b27] uppercase tracking-wider block">NETWORK INFRASTRUCTURE</span>
+              <p class="text-xs font-extrabold text-slate-900 leading-snug">
+                Wi-Fi mesh node #04 dropping connections during evening study hours
+              </p>
+            </div>
+          </div>
+
+          <!-- Diagnostics Status Row -->
+          <div class="p-2.5 bg-[#fdfbf7]/50 rounded-2xl border border-[#ede4d5]/70 flex items-center justify-between text-xs">
+            <span class="font-extrabold text-emerald-600 flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 live-dot"></span>
+              <span id="diagnostics-text">Auto-diagnostics running</span>
+            </span>
+            <span id="latency-text" class="font-black text-slate-700">Latency: 28ms</span>
+          </div>
+
+          <!-- Action Buttons (2 cols) -->
+          <div class="grid grid-cols-2 gap-2 pt-0.5">
+            <button
+              type="button"
+              id="btn-test-ping"
+              class="py-2.5 px-3 bg-[#fdfbf7] hover:bg-[#fbf2da] text-[#a6801e] text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition cursor-pointer"
+            >
+              <svg class="w-3.5 h-3.5 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+              <span>Test Ping</span>
+            </button>
+            <button
+              type="button"
+              id="btn-close-1098"
+              class="py-2.5 px-3 bg-[#fdfbf7] hover:bg-[#fbf2da] text-[#a6801e] text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition cursor-pointer"
+            >
+              <svg class="w-3.5 h-3.5 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              <span>Close Ticket</span>
+            </button>
+          </div>
+        </article>
+
+      </section>
+
+      <!-- 5. Grievance SLA Compliance Banner -->
+      <section class="bg-[#fdfbf7]/70 rounded-3xl p-3.5 border border-[#ede4d5] flex items-center justify-between shadow-2xs">
+        <div class="space-y-0.5">
+          <h4 class="text-xs font-extrabold text-slate-900">Grievance SLA Compliance</h4>
+          <p class="text-[11px] font-bold text-emerald-600">96.4% on-target this week</p>
+        </div>
+        <div class="w-8 h-8 rounded-full bg-[#c59b27] text-white flex items-center justify-center font-bold text-xs shadow-xs">
+          ✓
+        </div>
+      </section>
+
+      <!-- 6. Quick Resolution Dispatcher Drawer -->
+      <section class="bg-white rounded-3xl p-4 border border-[#f3ece2] shadow-sm space-y-3">
+        <div class="flex items-center justify-between cursor-pointer" id="toggle-dispatcher-header">
+          <div class="flex items-center gap-2">
+            <span class="text-[#c59b27] font-extrabold">⚡</span>
+            <h3 class="text-xs font-extrabold text-slate-900">Quick Resolution Dispatcher</h3>
+          </div>
+          <span class="text-[10px] font-extrabold text-slate-400 hover:text-[#c59b27] transition" id="toggle-dispatcher-text">Tap to expand</span>
+        </div>
+
+        <div id="dispatcher-drawer" class="space-y-2.5">
+          <!-- Resolution Notes Input -->
+          <div class="relative">
+            <input
+              type="text"
+              id="input-resolution-notes"
+              placeholder="Resolution notes & photo proof required for high..."
+              class="w-full pl-9 pr-3 py-2.5 bg-slate-50 border border-[#ede5d8]/90 rounded-2xl text-xs placeholder:text-slate-400 focus:outline-[#c59b27] focus:bg-white transition"
+            />
+            <span class="absolute left-3 top-3 text-slate-400">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                <circle cx="12" cy="13" r="4"/>
+              </svg>
+            </span>
+          </div>
+
+          <!-- Big Gold Button -->
+          <button
+            type="button"
+            id="btn-log-instant-resolution"
+            class="w-full py-3.5 px-4 bg-[#180d19] hover:bg-[#281424] hover:bg-[#c59b27] active:bg-[#a6801e] text-white rounded-2xl text-xs sm:text-sm font-extrabold flex items-center justify-center gap-2 shadow-lg shadow-[#c59b27]/25 transition cursor-pointer"
+          >
+            <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            <span>+ Log Instant Resolution / Close Selected</span>
+          </button>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 7. Fixed Bottom Navigation Bar -->
+    <nav class="hidden" style="display: none !important;">
+      <!-- 1. Overview -->
+      <a href="/dashboard.html" class="flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"/>
+          <rect x="14" y="3" width="7" height="7"/>
+          <rect x="14" y="14" width="7" height="7"/>
+          <rect x="3" y="14" width="7" height="7"/>
+        </svg>
+        <span class="text-[10px] font-bold">Overview</span>
+      </a>
+
+      <!-- 2. Rooms / Operations -->
+      <a href="/operations.html" class="flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M2 4v16M2 8h18a2 2 0 0 1 2 2v10M2 17h20M6 8v9"/>
+        </svg>
+        <span class="text-[10px] font-bold">Rooms</span>
+      </a>
+
+      <!-- 3. Requests / Tickets (Active) -->
+      <a href="/resolve-tickets.html" class="flex flex-col items-center gap-1 py-1 text-[#c59b27] relative transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+        </svg>
+        <span class="text-[10px] font-black">Requests</span>
+        <span class="absolute -top-0.5 right-2 w-2 h-2 rounded-full bg-[#c59b27]"></span>
+      </a>
+
+      <!-- 4. Tenants -->
+      <a href="/tenants.html" class="flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <span class="text-[10px] font-bold">Tenants</span>
+      </a>
+    </nav>
+
+    <!-- Modal: Assign Plumber -->
+    <div id="modal-assign" class="fixed inset-0 bg-black/50 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+      <div class="bg-white w-full max-w-sm rounded-3xl p-5 shadow-2xl border border-[#f3ece2] space-y-4">
+        <div class="flex items-center justify-between pb-1 border-b border-[#f3ece2]">
+          <h3 class="text-xs font-extrabold text-slate-900 leading-tight">Assign Plumber to Ticket #HF-1095</h3>
+          <button type="button" id="btn-close-assign" class="w-8 h-8 rounded-full hover:bg-slate-100 text-slate-500 flex items-center justify-center text-sm font-bold cursor-pointer">
+            ✕
+          </button>
+        </div>
+
+        <p class="text-xs text-slate-500">
+          Room 204 • Shower head pressure drop. Select technician:
+        </p>
+
+        <div class="space-y-2 text-xs">
+          <label class="flex items-center justify-between p-2.5 rounded-xl border border-[#c59b27] bg-[#fdfbf7]/50 cursor-pointer">
+            <div>
+              <span class="font-bold text-slate-900 block">Ramesh S. (Apex Facility)</span>
+              <span class="text-[10px] text-slate-500">Rating ★ 4.9 • Available now</span>
+            </div>
+            <input type="radio" name="assignee_radio" value="Ramesh S." checked class="accent-[#c59b27]">
+          </label>
+          <label class="flex items-center justify-between p-2.5 rounded-xl border border-[#ede5d8] hover:bg-slate-50 cursor-pointer">
+            <div>
+              <span class="font-bold text-slate-900 block">Vikas K. (In-House Staff)</span>
+              <span class="text-[10px] text-slate-500">Available in 20 mins</span>
+            </div>
+            <input type="radio" name="assignee_radio" value="Vikas K." class="accent-[#c59b27]">
+          </label>
+        </div>
+
+        <button type="button" id="btn-confirm-assign" class="w-full py-2.5 bg-[#c59b27] text-white rounded-xl text-xs font-bold cursor-pointer">
+          Confirm Assignment &amp; Dispatch
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Client-side JavaScript -->
+  <script src="/js/resolve-tickets.js"></script>
+</body>
+</html>
+

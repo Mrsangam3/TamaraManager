@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>TAAMARA CO-LIVE — Campus Occupancy & Rooms Map</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .font-serif-luxury { font-family: 'Playfair Display', Georgia, serif; }
+  </style>
+</head>
+<body class="bg-[#faf6f0] text-[#1c1917] antialiased min-h-screen flex flex-col font-sans select-none overflow-x-hidden">
+
+  <!-- Mobile Frame Container (Max 430px) -->
+  <div class="min-h-screen flex flex-col lg:flex-row w-full bg-[#faf6f0]">
+
+  <!-- Left Sidebar Navigation (Desktop Persistent lg:flex) -->
+    <!-- Left Sidebar Navigation (Desktop Persistent lg:flex) -->
+  <aside id="app-sidebar" class="hidden lg:flex lg:flex-col lg:w-72 lg:fixed lg:inset-y-0 lg:z-40 bg-[#180d19] text-white border-r border-[#261324] shadow-2xl transition-all duration-300">
+    <!-- Brand Header -->
+    <div class="h-20 flex items-center justify-between px-6 border-b border-[#261324] bg-[#140b15]">
+      <a href="/dashboard.html" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#eab308] to-[#b45309] flex items-center justify-center shadow-lg shadow-amber-900/30 border border-amber-300/40 relative">
+          <span class="text-xl font-black font-serif-luxury text-[#180d19]">T</span>
+          <span class="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 border-2 border-[#180d19] rounded-full live-dot"></span>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-base font-bold font-serif-luxury tracking-wide text-white">TAAMARA CO-LIVE</span>
+          </div>
+          <p class="text-[10px] font-semibold text-[#c099b9] tracking-wider uppercase">NANAKRAMGUDA, HYD</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- Live Telemetry / Gate Status Capsule -->
+    <div class="px-4 py-2.5 mx-4 my-3 rounded-2xl bg-[#241223] border border-[#351b33] flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 live-dot"></span>
+        <span class="text-xs font-semibold text-[#f5e6f2]">Biometric Gate Live</span>
+      </div>
+      <span class="px-2 py-0.5 rounded-lg text-[10px] font-bold bg-[#3b1d38] text-[#f5c5e8] border border-[#52294e]">
+        Admin PMS
+      </span>
+    </div>
+
+    <!-- Navigation Menu Items -->
+    <div class="flex-1 overflow-y-auto px-4 py-2 space-y-6 no-scrollbar">
+      <div>
+        <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-[#9d7897] mb-2 font-sans">MANAGEMENT</p>
+        <nav class="space-y-1">
+          <a href="/dashboard.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold text-white bg-[#2d1729] border border-[#5c304f] shadow-md transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-[#eab308]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              <span>Dashboard Overview</span>
+            </div>
+            <span class="text-[10px] font-bold text-[#eab308]">Active</span>
+          </a>
+
+          <a href="/tenants.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span>Residents Directory</span>
+            </div>
+            <span class="text-[10px] px-2 py-0.5 rounded-md bg-[#251221] text-[#e5d5e2] font-bold">68</span>
+          </a>
+
+          <div class="space-y-1">
+            <a href="/occupancy.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+              <div class="flex items-center gap-3">
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+                <span>Rooms &amp; Sharing</span>
+              </div>
+              <span class="text-[10px] px-2 py-0.5 rounded-md bg-[#064e3b] text-[#34d399] font-bold">7 Beds Free</span>
+            </a>
+            <div class="hidden" style="display: none !important;">
+              <div class="flex items-center justify-between py-1 px-2 rounded-lg hover:bg-[#251221] cursor-pointer">
+                <span>› Floor 1 (Ground)</span>
+                <span class="px-1.5 py-0.2 rounded bg-[#351b31] text-[#e0cfdd] font-semibold text-[10px]">86%</span>
+              </div>
+              <div class="flex items-center justify-between py-1 px-2 rounded-lg hover:bg-[#251221] cursor-pointer">
+                <span>› Floor 2 (Premium)</span>
+                <span class="px-1.5 py-0.2 rounded bg-[#064e3b] text-[#34d399] font-semibold text-[10px]">5 Free</span>
+              </div>
+              <div class="flex items-center justify-between py-1 px-2 rounded-lg hover:bg-[#251221] cursor-pointer">
+                <span>› Floor 3 (Penthouse)</span>
+                <span class="px-1.5 py-0.2 rounded bg-[#064e3b] text-[#34d399] font-semibold text-[10px]">7 Free</span>
+              </div>
+              <a href="/occupancy.html" class="block py-1 px-2 text-[#eab308] hover:underline font-bold text-[11px] cursor-pointer">
+                + Add New Room
+              </a>
+            </div>
+          </div>
+
+          <a href="/operations.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+              <span>Operations Control</span>
+            </div>
+          </a>
+
+          <a href="/requests.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4M12 16h4M8 11h.01M8 16h.01"/></svg>
+              <span>Requests Desk</span>
+            </div>
+            <span class="text-[10px] px-2 py-0.5 rounded-md bg-[#991b1b] text-white font-extrabold">3 Active</span>
+          </a>
+        </nav>
+      </div>
+
+      <div>
+        <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-[#9d7897] mb-2 font-sans">COMMS &amp; SAFETY</p>
+        <nav class="space-y-1">
+          <a href="/broadcast.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-[#eab308]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>
+              <span>Broadcast Notice</span>
+            </div>
+          </a>
+
+          <a href="/notifications.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-purple-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+              <span>Notifications</span>
+            </div>
+            <span class="text-[10px] px-2 py-0.5 rounded-md bg-[#701a75] text-[#fae8ff] font-extrabold">4</span>
+          </a>
+
+          <a href="/security-permissions.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <span>Security &amp; Roles</span>
+            </div>
+          </a>
+
+          <a href="/help-support.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-amber-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>Help &amp; Support</span>
+            </div>
+          </a>
+
+          <a href="/more.html" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><circle cx="4" cy="4" r="2"/><circle cx="12" cy="4" r="2"/><circle cx="20" cy="4" r="2"/><circle cx="4" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="20" cy="12" r="2"/><circle cx="4" cy="20" r="2"/><circle cx="12" cy="20" r="2"/><circle cx="20" cy="20" r="2"/></svg>
+              <span>More &amp; Governance</span>
+            </div>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Campus Wings -->
+      <div class="pt-2 border-t border-[#261324]">
+        <p class="px-3 text-[10px] font-bold uppercase tracking-widest text-[#9d7897] mb-2 font-sans">CAMPUS WINGS</p>
+        <div class="grid grid-cols-2 gap-2">
+          <a href="/block-a.html" class="py-2 px-2.5 rounded-xl bg-[#251222] border border-[#381c34] text-[11px] font-bold text-[#d4b8cf] hover:text-white hover:bg-[#341830] text-center transition cursor-pointer">
+            Block A (96) &rarr;
+          </a>
+          <a href="/block-b.html" class="py-2 px-2.5 rounded-xl bg-[#251222] border border-[#381c34] text-[11px] font-bold text-[#d4b8cf] hover:text-white hover:bg-[#341830] text-center transition cursor-pointer">
+            Block B (80) &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Manager Profile Footer -->
+    <div class="p-4 border-t border-[#261324] bg-[#140b15]">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full bg-[#f59e0b] text-[#180d19] font-serif-luxury font-black text-sm flex items-center justify-center border-2 border-[#b45309] shadow-sm">
+            AM
+          </div>
+          <div class="truncate">
+            <p class="text-xs font-bold text-white truncate">Alex Morgan</p>
+            <p class="text-[10px] text-[#c099b9] font-medium">Super Admin • Sunrise</p>
+            <p class="text-[9px] text-[#865d80]">TAAMARA Admin Portal</p>
+          </div>
+        </div>
+        <a href="/logout-confirmation.html" class="p-2 rounded-lg text-[#ad8caa] hover:text-rose-400 hover:bg-[#281424] transition cursor-pointer" title="Sign Out">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </a>
+      </div>
+    </div>
+  </aside>
+  
+  <div class="flex-1 flex flex-col lg:pl-72 min-w-0 bg-[#faf6f0] min-h-screen">
+    <div class="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex-1 space-y-6">
+
+    <!-- 1. Header (Sticky Top) -->
+    <header class="bg-white/95 backdrop-blur-md px-4 py-3 border-b border-[#f3ece2] flex items-center justify-between sticky top-0 z-30">
+      <div class="flex items-center gap-2.5">
+        <a href="/tenants.html" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 transition cursor-pointer" title="Back to Tenants">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </a>
+        <div class="flex flex-col">
+          <span class="text-[9px] font-black tracking-wider text-[#c59b27] uppercase">HOSTELFLOW</span>
+          <h1 class="text-sm font-black text-slate-900 leading-none mt-0.5 font-serif-luxury">Rooms</h1>
+        </div>
+      </div>
+      <button
+        type="button"
+        id="btn-bell"
+        class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition cursor-pointer"
+        title="Notifications"
+      >
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+      </button>
+    </header>
+
+    <!-- Main Content Stream -->
+    <main class="flex-1 px-4 pt-3 space-y-3.5 text-xs">
+
+      <!-- 2. Breadcrumb & Live Sensor Bar -->
+      <section class="flex items-center justify-between px-0.5 text-[11px]">
+        <div class="flex items-center gap-1.5 text-slate-500 font-bold">
+          <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+          <a href="/operations.html" class="hover:text-slate-800 transition">Operations Hub</a>
+          <span class="text-slate-300">›</span>
+          <span class="text-[#c59b27] font-extrabold">Campus Map</span>
+        </div>
+        <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-[10px] font-black border border-emerald-200 flex items-center gap-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>LIVE SENSOR</span>
+        </span>
+      </section>
+
+      <!-- 3. Campus Capacity Card (Dark Slate-900) -->
+      <section class="bg-[#180d19] rounded-3xl p-4 sm:p-5 text-white shadow-xl space-y-3.5 border border-slate-800">
+        <div class="flex items-start justify-between gap-3">
+          <!-- Left: Capacity Percentage -->
+          <div>
+            <div class="flex items-center gap-1.5 text-slate-400 text-[10px] font-extrabold uppercase tracking-wider">
+              <svg class="w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              <span>Campus Capacity</span>
+            </div>
+            <div class="flex items-baseline gap-2 mt-1">
+              <span class="text-3xl font-black text-white tracking-tight">94.3%</span>
+              <span class="px-1.5 py-0.2 rounded-md bg-emerald-950/80 text-emerald-400 text-[11px] font-black flex items-center gap-0.5">
+                <span>↗</span>
+                <span>+2.1%</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Right: Total Inventory -->
+          <div class="text-right">
+            <span class="text-[10px] text-slate-400 font-bold uppercase block">Total Inventory</span>
+            <div class="text-base font-extrabold text-white mt-0.5">
+              166 <span class="text-slate-400 font-medium text-xs">/ 176 Beds</span>
+            </div>
+            <span class="text-[10px] text-slate-400 font-medium block mt-0.5">10 Vacant Property-wide</span>
+          </div>
+        </div>
+
+        <!-- Mint Progress Bar -->
+        <div class="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+          <div class="h-full bg-emerald-400 rounded-full shadow-sm shadow-emerald-400/50" style="width: 94.3%;"></div>
+        </div>
+
+        <!-- Financial Realized vs Potential Yield -->
+        <div class="flex items-center justify-between pt-1 border-t border-slate-800/80 text-xs">
+          <div>
+            <span class="text-[10px] text-slate-400 font-bold block">Current Realized Yield</span>
+            <span class="text-sm font-black text-white mt-0.5 block">₹61,600 <span class="text-[10px] font-normal text-slate-400">/mo</span></span>
+          </div>
+          <div class="text-right">
+            <span class="text-[10px] text-slate-400 font-bold block">Potential Yield</span>
+            <span class="text-sm font-black text-white mt-0.5 block">₹64,800 <span class="text-[10px] font-normal text-slate-400">/mo</span></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Wing Distribution Section -->
+      <section class="space-y-2">
+        <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-wider px-1">
+          Wing Distribution
+        </h3>
+
+        <div class="grid grid-cols-2 gap-2.5">
+          <!-- Block A Card -->
+          <a href="/block-a.html" class="bg-white rounded-2xl p-3 border border-[#f3ece2] shadow-2xs space-y-1.5 hover:border-[#e3d5be] transition cursor-pointer block">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-[#c59b27]"></span>
+                <span class="font-black text-slate-900 text-xs">Block A</span>
+              </div>
+              <span class="px-1.5 py-0.2 rounded-full bg-[#fdfbf7] text-[#a6801e] text-[9px] font-black">94.8%</span>
+            </div>
+            <div class="flex items-center justify-between text-[11px] pt-0.5">
+              <span class="text-slate-500 font-bold">91/96 Filled</span>
+              <span class="text-[#c59b27] font-black">5 Vacant</span>
+            </div>
+          </a>
+
+          <!-- Block B Card -->
+          <a href="/block-b.html" class="bg-white rounded-2xl p-3 border border-[#f3ece2] shadow-2xs space-y-1.5 hover:border-[#e3d5be] transition cursor-pointer block">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-slate-900"></span>
+                <span class="font-black text-slate-900 text-xs">Block B</span>
+              </div>
+              <span class="px-1.5 py-0.2 rounded-full bg-slate-100 text-slate-700 text-[9px] font-black">93.8%</span>
+            </div>
+            <div class="flex items-center justify-between text-[11px] pt-0.5">
+              <span class="text-slate-500 font-bold">75/80 Filled</span>
+              <span class="text-[#c59b27] font-black">5 Vacant</span>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- 5. Quick Match Assist Card -->
+      <section class="bg-[#180d19] hover:bg-[#281424] rounded-3xl p-4 text-white shadow-lg shadow-[#c59b27]/20 space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center text-white">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <h3 class="text-xs font-black tracking-tight">Quick Match Assist</h3>
+          </div>
+          <span class="px-2 py-0.5 rounded-full bg-white/20 text-white text-[9px] font-black">14 Waiting</span>
+        </div>
+
+        <p class="text-[11px] text-[#fbf2da] font-medium leading-relaxed">
+          14 applicants matched with high preference for Double AC &amp; Non-AC vacancies.
+        </p>
+
+        <button
+          type="button"
+          id="btn-auto-match"
+          class="w-full py-2.5 px-4 bg-white hover:bg-slate-50 text-[#c59b27] rounded-2xl text-xs font-black flex items-center justify-center gap-2 shadow-xs transition cursor-pointer"
+        >
+          <svg class="w-4 h-4 text-[#c59b27]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+          <span>Auto-Match 10 Vacant Beds</span>
+        </button>
+      </section>
+
+      <!-- 6. Interactive Floor Map Section -->
+      <section class="space-y-2.5">
+        <div class="flex items-center justify-between px-1">
+          <div>
+            <h3 class="text-sm font-black text-slate-900 leading-tight">Interactive Floor Map</h3>
+            <p class="text-[10px] text-slate-400 font-medium mt-0.5">Tap room clusters for live occupant details</p>
+          </div>
+          <span id="selected-floor-badge" class="text-[10px] font-extrabold text-[#c59b27]">● Floor 2 Selected</span>
+        </div>
+
+        <!-- Floor level pills (horizontal scrollable) -->
+        <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5" style="scrollbar-width: none;">
+          <button type="button" class="floor-tab shrink-0 px-3 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 text-[11px] font-bold transition cursor-pointer" data-floor="ground">
+            Ground Floor (100% Full)
+          </button>
+          <button type="button" class="floor-tab shrink-0 px-3 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 text-[11px] font-bold transition cursor-pointer" data-floor="1">
+            Floor 1 (96% Full)
+          </button>
+          <button type="button" class="floor-tab active shrink-0 px-3 py-1.5 rounded-full bg-[#180d19] text-white text-[11px] font-bold shadow-xs transition cursor-pointer" data-floor="2">
+            Floor 2 (3 Vacant)
+          </button>
+          <button type="button" class="floor-tab shrink-0 px-3 py-1.5 rounded-full bg-white border border-[#ede5d8] text-slate-700 hover:bg-slate-50 text-[11px] font-bold transition cursor-pointer" data-floor="3">
+            Floor 3 (1 Vacant)
+          </button>
+        </div>
+
+        <!-- Floor Grid Visual Container -->
+        <div class="bg-white rounded-3xl p-3.5 border border-[#f3ece2] shadow-2xs space-y-3">
+          <!-- Legend Row -->
+          <div class="flex items-center justify-between text-[10px] font-black text-slate-600 px-1 border-b border-[#f3ece2] pb-2">
+            <span class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span>Occupied (166)</span>
+            </span>
+            <span class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-[#c59b27]"></span>
+              <span>Vacant Ready (8)</span>
+            </span>
+            <span class="flex items-center gap-1.5">
+              <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+              <span>Turnover/Hold (2)</span>
+            </span>
+          </div>
+
+          <!-- Corridor Marker -->
+          <div class="flex items-center justify-between text-[9px] font-extrabold text-slate-400 tracking-wider uppercase px-1">
+            <span>West Wing Corridor</span>
+            <span>Fire Exit 02</span>
+          </div>
+
+          <!-- Room Clusters Grid (3 columns x 2 rows) -->
+          <div class="grid grid-cols-3 gap-2">
+            <!-- Room 201 -->
+            <div class="bg-slate-50 rounded-2xl p-2 border border-[#f3ece2] space-y-1.5 text-center">
+              <div class="flex items-center justify-between text-[11px] px-0.5">
+                <span class="font-black text-slate-900">201</span>
+                <span class="text-[9px] font-extrabold text-emerald-600">2/2 Full</span>
+              </div>
+              <div class="grid grid-cols-2 gap-1">
+                <button type="button" class="room-bed-btn py-1 rounded-lg bg-emerald-600 text-white font-black text-[10px] shadow-2xs cursor-pointer hover:opacity-90" data-room="201-A">A</button>
+                <button type="button" class="room-bed-btn py-1 rounded-lg bg-emerald-600 text-white font-black text-[10px] shadow-2xs cursor-pointer hover:opacity-90" data-room="201-B">B</button>
+              </div>
+            </div>
+
+            <!-- Room 202 -->
+            <div class="bg-slate-50 rounded-2xl p-2 border border-[#f3ece2] space-y-1.5 text-center">
+              <div class="flex items-center justify-between text-[11px] px-0.5">
+                <span class="font-black text-slate-900">202</span>
+                <span class="text-[9px] font-extrabold text-[#c59b27]">1 Open</span>
+              </div>
+              <div class="grid grid-cols-2 gap-1">
+                <button type="button" class="room-bed-btn py-1 rounded-lg bg-emerald-600 text-white font-black text-[10px] shadow-2xs cursor-pointer hover:opacity-90" data-room="202-A">A</button>
+                <button type="button" class="room-bed-btn py-1 rounded-lg bg-[#c59b27] text-white font-black text-[10px] shadow-2xs cursor-pointer hover:opacity-90" data-room="202-B">B</button>
+              </div>
+            </div>
+
+            <!-- Room 203 -->
+            <div class="bg-slate-50 rounded-2xl p-2 border border-[#f3ece2] space-y-1.5 text-center">
+              <div class="flex items-center justify-between text-[11px] px-0.5">
+                <span class="font-black text-slate-900">203</span>
+                <span class="text-[9px] font-extrabold text-[#c59b27]">1 Open</span>
+              </div>
+              <div class="grid grid-cols-2 gap-1">
+                <button type="button" class="room-bed-btn py-1 rounded-lg bg-[#c59b27] text-white font-black text-[10px] shadow-2xs cursor-pointer hover:opacity-90" data-room="203-A">A</button>
+                <button type="button" class="room-bed-btn py-1 rounded-lg bg-amber-500 text-white font-black text-[10px] shadow-2xs cursor-pointer hover:opacity-90" data-room="203-B">B</button>
+              </div>
+            </div>
+
+            <!-- Room 204 -->
+            <div class="bg-slate-50 rounded-2xl p-2 border border-[#f3ece2] space-y-1.5 text-center">
+              <div class="flex items-center justify-between text-[11px] px-0.5">
+                <span class="font-black text-slate-900">204</span>
+                <span class="text-[9px] font-extrabold text-emerald-600">2/2 Full</span>
+              </div>
+              <div class="grid grid-cols-2 gap-1">
+                <button type="button" class="room-bed-btn py-1 rounded-lg bg-emerald-600 text-white font-black text-[10px] shadow-2xs cursor-pointer hover:opacity-90" data-room="204-A">A</button>
+                <button type="button" class="room-bed-btn py-1 rounded-lg bg-emerald-600 text-white font-black text-[10px] shadow-2xs cursor-pointer hover:opacity-90" data-room="204-B">B</button>
+              </div>
+            </div>
+
+            <!-- Room 205 -->
+            <div class="bg-slate-50 rounded-2xl p-2 border border-[#f3ece2] space-y-1.5 text-center">
+              <div class="flex items-center justify-between text-[11px] px-0.5">
+                <span class="font-black text-slate-900">205</span>
+                <span class="text-[9px] font-extrabold text-[#c59b27]">1 Open</span>
+              </div>
+              <div class="grid grid-cols-2 gap-1">
+                <button type="button" class="room-bed-btn py-1 rounded-lg bg-[#c59b27] text-white font-black text-[10px] shadow-2xs cursor-pointer hover:opacity-90" data-room="205-A">A</button>
+                <button type="button" class="room-bed-btn py-1 rounded-lg bg-emerald-600 text-white font-black text-[10px] shadow-2xs cursor-pointer hover:opacity-90" data-room="205-B">B</button>
+              </div>
+            </div>
+
+            <!-- Room 206 -->
+            <div class="bg-slate-50 rounded-2xl p-2 border border-[#f3ece2] space-y-1.5 text-center">
+              <div class="flex items-center justify-between text-[11px] px-0.5">
+                <span class="font-black text-slate-900">206</span>
+                <span class="text-[9px] font-extrabold text-[#c59b27]">1 Open</span>
+              </div>
+              <div class="grid grid-cols-2 gap-1">
+                <button type="button" class="room-bed-btn py-1 rounded-lg bg-[#c59b27] text-white font-black text-[10px] shadow-2xs cursor-pointer hover:opacity-90" data-room="206-A">A</button>
+                <button type="button" class="room-bed-btn py-1 rounded-lg bg-amber-500 text-white font-black text-[10px] shadow-2xs cursor-pointer hover:opacity-90" data-room="206-B">B</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Amenities strip -->
+          <div class="p-2 bg-slate-50 rounded-xl border border-[#f3ece2] flex items-center justify-center gap-2 text-[10px] font-extrabold text-slate-600">
+            <svg class="w-3.5 h-3.5 text-[#c59b27] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+            <span>Central Ventilation &amp; High-Speed WiFi 6 Active</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. Immediate Vacancies Section -->
+      <section class="space-y-2.5">
+        <div class="flex items-center justify-between px-1">
+          <div class="flex items-center gap-1.5">
+            <h3 class="text-xs font-black text-slate-900">Immediate Vacancies</h3>
+            <span class="px-2 py-0.5 rounded-full bg-[#fbf2da] text-[#a6801e] text-[9px] font-black">Floor 2</span>
+          </div>
+          <button type="button" id="btn-see-all-vacancies" class="text-xs font-extrabold text-[#c59b27] hover:text-[#a6801e] cursor-pointer">See all 10</button>
+        </div>
+
+        <div class="space-y-2">
+          <!-- Vacancy 1: Room 202 - Bed B -->
+          <div class="bg-white rounded-2xl p-3 border border-[#f3ece2] shadow-2xs space-y-2">
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h4 class="text-xs font-black text-slate-900">Room 202 - Bed B</h4>
+                  <span class="px-1.5 py-0.2 rounded bg-[#fdfbf7] text-[#a6801e] text-[9px] font-extrabold">Block A</span>
+                </div>
+                <p class="text-[10px] text-slate-500 font-medium mt-0.5">2-Bed Non-AC • South Balcony View</p>
+              </div>
+              <div class="text-right">
+                <span class="text-xs font-black text-slate-900">₹320</span>
+                <span class="text-[9px] text-slate-400 block font-bold leading-none">/month</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-1">
+              <span class="text-[10px] text-emerald-600 font-extrabold flex items-center gap-1">
+                <span>✓</span>
+                <span>Inspected &amp; Sanitized</span>
+              </span>
+              <a href="/assign-bed.html" class="py-1 px-3 bg-[#180d19] hover:bg-[#281424] hover:bg-[#c59b27] text-white text-[11px] font-black rounded-xl shadow-xs transition cursor-pointer">
+                Assign Now &rarr;
+              </a>
+            </div>
+          </div>
+
+          <!-- Vacancy 2: Room 203 - Bed B -->
+          <div class="bg-white rounded-2xl p-3 border border-[#f3ece2] shadow-2xs space-y-2">
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h4 class="text-xs font-black text-slate-900">Room 203 - Bed B</h4>
+                  <span class="px-1.5 py-0.2 rounded bg-[#fdfbf7] text-[#a6801e] text-[9px] font-extrabold">Block A</span>
+                </div>
+                <p class="text-[10px] text-slate-500 font-medium mt-0.5">Premium Climate AC • Quiet Wing</p>
+              </div>
+              <div class="text-right">
+                <span class="text-xs font-black text-slate-900">₹350</span>
+                <span class="text-[9px] text-slate-400 block font-bold leading-none">/month</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-1">
+              <span class="text-[10px] text-emerald-600 font-extrabold flex items-center gap-1">
+                <span>✓</span>
+                <span>Keycard Encoded</span>
+              </span>
+              <a href="/assign-bed.html" class="py-1 px-3 bg-[#180d19] hover:bg-[#281424] hover:bg-[#c59b27] text-white text-[11px] font-black rounded-xl shadow-xs transition cursor-pointer">
+                Assign Now &rarr;
+              </a>
+            </div>
+          </div>
+
+          <!-- Vacancy 3: Room 108 - Bed A -->
+          <div class="bg-white rounded-2xl p-3 border border-[#f3ece2] shadow-2xs space-y-2">
+            <div class="flex items-start justify-between gap-2">
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <h4 class="text-xs font-black text-slate-900">Room 108 - Bed A</h4>
+                  <span class="px-1.5 py-0.2 rounded bg-slate-100 text-slate-700 text-[9px] font-extrabold">Block B</span>
+                </div>
+                <p class="text-[10px] text-slate-500 font-medium mt-0.5">Single Economy Pod • Floor 1</p>
+              </div>
+              <div class="text-right">
+                <span class="text-xs font-black text-slate-900">₹290</span>
+                <span class="text-[9px] text-slate-400 block font-bold leading-none">/month</span>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-1">
+              <span class="text-[10px] text-emerald-600 font-extrabold flex items-center gap-1">
+                <span>✓</span>
+                <span>Express Ready</span>
+              </span>
+              <a href="/assign-bed.html" class="py-1 px-3 bg-[#180d19] hover:bg-[#281424] hover:bg-[#c59b27] text-white text-[11px] font-black rounded-xl shadow-xs transition cursor-pointer">
+                Assign Now &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. Actions & Certificate Section -->
+      <section class="space-y-2 pt-1">
+        <div class="grid grid-cols-2 gap-2">
+          <button
+            type="button"
+            id="btn-export-audit"
+            class="py-2.5 px-3 bg-[#fbf2da]/70 hover:bg-[#fbf2da] text-[#876717] font-black text-xs rounded-2xl flex items-center justify-center gap-1.5 transition cursor-pointer"
+          >
+            <svg class="w-3.5 h-3.5 text-[#a6801e]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span>Export Audit PDF</span>
+          </button>
+          <button
+            type="button"
+            id="btn-dynamic-pricing"
+            class="py-2.5 px-3 bg-[#fbf2da]/70 hover:bg-[#fbf2da] text-[#876717] font-black text-xs rounded-2xl flex items-center justify-center gap-1.5 transition cursor-pointer"
+          >
+            <svg class="w-3.5 h-3.5 text-[#a6801e]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <span>Dynamic Pricing</span>
+          </button>
+        </div>
+
+        <div class="p-2.5 bg-slate-50 rounded-2xl border border-[#f3ece2] flex items-center justify-between text-[10px] text-slate-500 font-medium">
+          <div class="flex items-center gap-2">
+            <svg class="w-4 h-4 text-[#c59b27] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>City Safety &amp; Capacity Certificate Valid until Oct 2025</span>
+          </div>
+          <span class="text-slate-400 font-bold">ⓘ</span>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- 9. Sticky Bottom Navigation Bar (Dashboard, Rooms, Tenants, Requests) -->
+    <nav class="hidden" style="display: none !important;">
+      <a href="/dashboard.html" class="flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect width="7" height="7" x="3" y="3" rx="1.5"/><rect width="7" height="7" x="14" y="3" rx="1.5"/><rect width="7" height="7" x="14" y="14" rx="1.5"/><rect width="7" height="7" x="3" y="14" rx="1.5"/>
+        </svg>
+        <span class="text-[10px] font-medium">Dashboard</span>
+      </a>
+      <a href="/occupancy.html" class="flex flex-col items-center gap-1 py-1 text-[#c59b27] font-bold cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/>
+        </svg>
+        <span class="text-[10px]">Rooms</span>
+      </a>
+      <a href="/tenants.html" class="flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <span class="text-[10px] font-medium">Tenants</span>
+      </a>
+      <a href="/requests.html" class="flex flex-col items-center gap-1 py-1 text-slate-400 hover:text-slate-600 transition cursor-pointer">
+        <div class="relative">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4M12 16h4M8 11h.01M8 16h.01"/>
+          </svg>
+          <span class="w-3.5 h-3.5 rounded-full bg-rose-500 text-white text-[9px] font-bold flex items-center justify-center absolute -top-1 -right-2">3</span>
+        </div>
+        <span class="text-[10px] font-medium">Requests</span>
+      </a>
+    </nav>
+
+    <!-- Toast Notification -->
+    <div
+      id="toast"
+      class="fixed bottom-20 left-1/2 -translate-x-1/2 max-w-[380px] w-auto bg-[#180d19] text-white px-4 py-3 rounded-2xl shadow-2xl text-xs font-bold flex items-center gap-2.5 z-50 hidden transition-all duration-300"
+    >
+      <span class="w-2 h-2 rounded-full bg-[#d4a838]"></span>
+      <span id="toast-text">Action completed successfully</span>
+    </div>
+
+  </div>
+    </div>
+  </div>
+
+  <script src="/js/occupancy.js"></script>
+</body>
+</html>
+
