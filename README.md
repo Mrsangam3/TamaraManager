@@ -70,3 +70,4 @@ tamara-manager/
 ## License
 
 Private repository - Proprietary property management system for TAAMARA CO-LIVE.
+

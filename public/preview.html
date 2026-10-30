@@ -141,7 +141,7 @@
               <svg class="w-4 h-4 text-[#eab308]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
               <span>Dashboard Overview</span>
             </div>
-            <span class="text-[10px] font-bold text-[#eab308]">Active</span>
+            <span class="nav-active-indicator text-[10px] font-bold text-[#eab308]">Active</span>
           </button>
 
           <button type="button" id="sidebar-nav-tenants" class="sidebar-item w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer">
@@ -8399,19 +8399,24 @@
     };
 
     const sidebarParentMap = {
+      login: 'sidebar-nav-dash',
       dash: 'sidebar-nav-dash',
+      urgent: 'sidebar-nav-dash',
+      quickActions: 'sidebar-nav-dash',
       tenants: 'sidebar-nav-tenants',
       onboard: 'sidebar-nav-tenants',
       assignBed: 'sidebar-nav-occupancy',
       occupancy: 'sidebar-nav-occupancy',
-      blockA: 'sidebar-nav-occupancy',
-      blockB: 'sidebar-nav-occupancy',
+      blockA: 'sidebar-nav-blocka',
+      blockB: 'sidebar-nav-blockb',
       ops: 'sidebar-nav-ops',
       schedule: 'sidebar-nav-ops',
       tickets: 'sidebar-nav-ops',
       inspectRooms: 'sidebar-nav-ops',
       roster: 'sidebar-nav-ops',
       menu: 'sidebar-nav-ops',
+      rollcall: 'sidebar-nav-ops',
+      issue: 'sidebar-nav-ops',
       req: 'sidebar-nav-req',
       approved: 'sidebar-nav-req',
       rejected: 'sidebar-nav-req',
@@ -8419,6 +8424,7 @@
       batch: 'sidebar-nav-req',
       filter: 'sidebar-nav-req',
       broadcast: 'sidebar-nav-broadcast',
+      reminders: 'sidebar-nav-broadcast',
       notifications: 'sidebar-nav-notifications',
       security: 'sidebar-nav-security',
       help: 'sidebar-nav-help',
@@ -8447,17 +8453,55 @@
         pills[activeName].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
       }
 
-      // Update sidebar active states
+      // 1. Reset all sidebar items & remove any lingering Active badges
       document.querySelectorAll('.sidebar-item').forEach(el => {
         el.className = 'sidebar-item w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-[#d4b8cf] hover:text-white hover:bg-[#281424] transition cursor-pointer';
+        el.querySelectorAll('.nav-active-indicator, .nav-active-badge').forEach(b => b.remove());
+        el.querySelectorAll('span').forEach(sp => {
+          if (sp.textContent.trim().toLowerCase() === 'active') sp.remove();
+        });
+        const svg = el.querySelector('svg');
+        if (svg) svg.classList.remove('text-[#eab308]');
       });
+
+      // 2. Reset Campus Wings buttons
+      const bABtn = document.getElementById('sidebar-nav-blocka');
+      const bBBtn = document.getElementById('sidebar-nav-blockb');
+      if (bABtn) bABtn.className = 'py-2 px-2.5 rounded-xl bg-[#251222] border border-[#381c34] text-[11px] font-bold text-[#d4b8cf] hover:text-white hover:bg-[#341830] text-center transition cursor-pointer';
+      if (bBBtn) bBBtn.className = 'py-2 px-2.5 rounded-xl bg-[#251222] border border-[#381c34] text-[11px] font-bold text-[#d4b8cf] hover:text-white hover:bg-[#341830] text-center transition cursor-pointer';
+
+      // 3. Highlight the active sidebar item
       const activeSidebarId = sidebarParentMap[activeName];
-      if (activeSidebarId) {
+      if (activeSidebarId === 'sidebar-nav-blocka' && bABtn) {
+        bABtn.className = 'py-2 px-2.5 rounded-xl bg-[#341830] border-2 border-[#eab308] text-[11px] font-extrabold text-white text-center shadow-md transition cursor-pointer';
+      } else if (activeSidebarId === 'sidebar-nav-blockb' && bBBtn) {
+        bBBtn.className = 'py-2 px-2.5 rounded-xl bg-[#341830] border-2 border-[#eab308] text-[11px] font-extrabold text-white text-center shadow-md transition cursor-pointer';
+      } else if (activeSidebarId) {
         const activeSidebarEl = document.getElementById(activeSidebarId);
-        if (activeSidebarEl && activeSidebarEl.classList.contains('sidebar-item')) {
+        if (activeSidebarEl) {
           activeSidebarEl.className = 'sidebar-item w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold text-white bg-[#2d1729] border border-[#5c304f] shadow-md transition cursor-pointer';
+          const svg = activeSidebarEl.querySelector('svg');
+          if (svg) svg.classList.add('text-[#eab308]');
+
+          // Check if it already has a badge (e.g. "68", "3 Active", etc.)
+          const hasCount = activeSidebarEl.querySelector('span:not(.nav-active-indicator)');
+          if (!hasCount) {
+            const activeBadge = document.createElement('span');
+            activeBadge.className = 'nav-active-indicator text-[10px] font-bold text-[#eab308]';
+            activeBadge.textContent = 'Active';
+            activeSidebarEl.appendChild(activeBadge);
+          }
         }
       }
+
+      // 4. Update mobile drawer active item
+      document.querySelectorAll('.mobile-nav-btn').forEach(btn => {
+        if (btn.dataset.target === activeName) {
+          btn.className = 'mobile-nav-btn w-full text-left px-3 py-2 rounded-lg text-xs font-bold text-[#eab308] bg-[#2d1729] border border-[#5c304f]';
+        } else {
+          btn.className = 'mobile-nav-btn w-full text-left px-3 py-2 rounded-lg text-xs font-bold text-slate-300 hover:bg-slate-800';
+        }
+      });
 
       // Update Topbar Breadcrumb
       const breadcrumb = document.getElementById('breadcrumb-screen-name');
